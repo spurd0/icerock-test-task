@@ -1,6 +1,7 @@
 package com.icerockdev.babenko.activities;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
@@ -21,6 +23,9 @@ import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_
 public class HomeActivity extends AppCompatActivity {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private EditText mRequestUrlEditText;
+    private boolean mNeedToShowDialog;
+    private String mDialogError;
+    private boolean mActivityPaused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +74,40 @@ public class HomeActivity extends AppCompatActivity {
         Bundle arguments = new Bundle();
         arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
-        serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
+        //app shows that it`s not finishing but it will crash if i exit app here, i`m sorry =\
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && this.isDestroyed()) || this.isFinishing() || mActivityPaused) {
+            needToShowDialogAfterResume(error);
+        } else try {
+            serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
+        } catch (IllegalStateException ex) {
+            if (BuildConfig.DEBUG)
+                ex.printStackTrace();
+            needToShowDialogAfterResume(error);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        mActivityPaused = true;
+        super.onPause();
+    }
+
+    private void needToShowDialogAfterResume(String error) {
+        mDialogError = error;
+        mNeedToShowDialog = true;
     }
 
     private void gotDataFields(DataField[] data) {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mActivityPaused = false;
+        if (mNeedToShowDialog) {
+            mNeedToShowDialog = false;
+            showErrorDialog(mDialogError);
+        }
+    }
 }
