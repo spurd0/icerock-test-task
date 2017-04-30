@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">IceRockDev Test Task</string>
     <string name="request_fields_button_text">Request data</string>
-    <string name="request_fields_edittext_url_hint">Enter url</string>
+    <string name="request_fields_edittext_url_hint">Enter URL</string>
 </resources>
