@@ -23,13 +23,9 @@ public class DataFieldsManager {
     public void requestDataFields(String Url, final RequestDataFieldsInterface callback) {
         if (BuildConfig.DEBUG)
             Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"; // TODO: 30/04/17 move to unit test
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        NetworkManager service = retrofit.create(NetworkManager.class);
-        Call<DataField[]> data = service.requestDataFields(Url);
+        Call<DataField[]> data = IceRockApplication.getInstance().getRetrofitManager()
+                .getService().requestDataFields(Url);
         data.enqueue(new Callback<DataField[]>() {
             @Override
             public void onResponse(Call<DataField[]> call, Response<DataField[]> response) {
