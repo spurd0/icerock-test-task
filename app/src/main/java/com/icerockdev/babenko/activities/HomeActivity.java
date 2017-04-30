@@ -1,5 +1,6 @@
 package com.icerockdev.babenko.activities;
 
+import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 public class HomeActivity extends AppCompatActivity {
     private EditText mRequestUrlEditText;
@@ -39,5 +41,6 @@ public class HomeActivity extends AppCompatActivity {
             mRequestUrlEditText.setError(getString(R.string.url_error));
             return;
         }
+        Dialog progressDialog = UtilsHelper.createProgressDialog(this);
     }
 }
