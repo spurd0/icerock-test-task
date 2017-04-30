@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 public class HomeActivity extends AppCompatActivity {
@@ -41,6 +42,27 @@ public class HomeActivity extends AppCompatActivity {
             mRequestUrlEditText.setError(getString(R.string.url_error));
             return;
         }
-        Dialog progressDialog = UtilsHelper.createProgressDialog(this);
+        final Dialog progressDialog = UtilsHelper.createProgressDialog(this);
+        DataFieldsManager.getInstance().requestDataFields(url, new DataFieldsManager.RequestDataFieldsInterface() {
+            @Override
+            public void successfulResponse(String data) {
+                progressDialog.dismiss();
+                gotDataFields(data);
+            }
+
+            @Override
+            public void errorResponse(String error) {
+                progressDialog.dismiss();
+                showErrorDialog(error);
+            }
+        });
+    }
+
+    private void showErrorDialog(String error) {
+
+    }
+
+    private void gotDataFields(String data) {
+
     }
 }
