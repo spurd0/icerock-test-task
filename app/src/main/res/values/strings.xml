@@ -2,4 +2,5 @@
     <string name="app_name">IceRockDev Test Task</string>
     <string name="request_fields_button_text">Request data</string>
     <string name="request_fields_edittext_url_hint">Enter URL</string>
+    <string name="url_error">Please check URL</string>
 </resources>
