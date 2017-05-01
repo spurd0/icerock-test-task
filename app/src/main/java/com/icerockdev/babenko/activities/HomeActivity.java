@@ -153,6 +153,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void checkAndDismissProgressDialog() {
+        if (this.isFinishing())
+            return;
         ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
                 findFragmentByTag(PROGRESS_DIALOG_TAG);
         if (progressDialogFragment != null)
