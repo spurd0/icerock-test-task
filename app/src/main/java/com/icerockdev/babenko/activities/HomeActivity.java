@@ -1,6 +1,10 @@
 package com.icerockdev.babenko.activities;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -15,19 +19,23 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_ERROR_KEY;
+import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
+    private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.PROGRESS_DIALOG_TAG";
     private static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_MESSAGE_KEY";
     private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
     private boolean mActivityPaused;
+    private BroadcastReceiver mRequestFieldsReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +63,9 @@ public class HomeActivity extends AppCompatActivity {
             mRequestUrlEditText.setError(getString(R.string.url_error));
             return;
         }
-        final Dialog progressDialog = UtilsHelper.createProgressDialog(this);
-        IceRockApplication.getInstance().getDataFieldsManager().requestDataFields(url, new DataFieldsManager.RequestDataFieldsInterface() {
-            @Override
-            public void successfulResponse(DataField[] data) {
-                progressDialog.dismiss();
-                gotDataFields(data);
-            }
-
-            @Override
-            public void errorResponse(String error) {
-                progressDialog.dismiss();
-                showErrorDialog(error);
-            }
-        });
+        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
+        IceRockApplication.getInstance().getDataFieldsManager().requestDataFields(url);
     }
 
     private void showErrorDialog(String error) {
@@ -106,8 +103,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        registerRequestFieldsReceiver();
         mActivityPaused = false;
         checkForErrors();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterRequestFieldsReceiver();
+        super.onDestroy();
     }
 
     private void checkForErrors() {
@@ -117,5 +121,27 @@ public class HomeActivity extends AppCompatActivity {
             prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "").apply();
             showErrorDialog(dialogErrorMessage);
         }
+    }
+
+    private void registerRequestFieldsReceiver() {
+        mRequestFieldsReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
+                        findFragmentByTag(PROGRESS_DIALOG_TAG);
+                if (progressDialogFragment != null)
+                    progressDialogFragment.dismiss();
+                String error = intent.getStringExtra(RESPONSE_ERROR_KEY);
+                if (error.isEmpty())
+                    gotDataFields((DataField[]) intent.getSerializableExtra(RESPONSE_VALUE_KEY));
+                else showErrorDialog(error);
+            }
+        };
+        this.registerReceiver(mRequestFieldsReceiver, new IntentFilter(DataFieldsManager.RESPONSE_ACTION));
+    }
+
+    private void unregisterRequestFieldsReceiver() {
+        if (mRequestFieldsReceiver != null)
+            this.unregisterReceiver(mRequestFieldsReceiver);
     }
 }

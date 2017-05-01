@@ -1,13 +1,12 @@
-package com.icerockdev.babenko.utils;
+package com.icerockdev.babenko.fragments;
 
-
-import android.app.Activity;
 import android.app.Dialog;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-
 import android.view.ContextThemeWrapper;
 import android.view.Window;
 import android.widget.ProgressBar;
@@ -15,21 +14,23 @@ import android.widget.ProgressBar;
 import com.icerockdev.babenko.R;
 
 /**
- * Created by Roman Babenko on 30/04/17.
+ * Created by Roman Babenko on 01/05/17.
  */
 
-public class UtilsHelper {
-    public static Dialog createProgressDialog(Activity activity) {
-        final Context dialogContext = new ContextThemeWrapper(activity, R.style.AppTheme);
+public class ProgressDialogFragment extends DialogFragment {
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Context dialogContext = new ContextThemeWrapper(getContext(), R.style.AppTheme);
         Dialog dialog = new Dialog(dialogContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.progress_dialog);
         ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress_bar);
-        progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,
+        progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getContext(),
                 R.color.progress_dialog_color), android.graphics.PorterDuff.Mode.MULTIPLY);
-        dialog.setCancelable(false);
+        setCancelable(false);
         return dialog;
     }
 }
