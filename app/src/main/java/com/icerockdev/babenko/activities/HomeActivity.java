@@ -10,6 +10,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.Button;
@@ -19,13 +20,13 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.data.RequestStateMessage;
 import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
-import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_ERROR_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY;
 
 public class HomeActivity extends AppCompatActivity {
@@ -97,7 +98,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void gotDataFields(DataField[] data) {
-
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Data field count is " + data.length);
     }
 
     @Override
@@ -131,10 +133,10 @@ public class HomeActivity extends AppCompatActivity {
                         findFragmentByTag(PROGRESS_DIALOG_TAG);
                 if (progressDialogFragment != null)
                     progressDialogFragment.dismiss();
-                String error = intent.getStringExtra(RESPONSE_ERROR_KEY);
-                if (error.isEmpty())
-                    gotDataFields((DataField[]) intent.getSerializableExtra(RESPONSE_VALUE_KEY));
-                else showErrorDialog(error);
+                RequestStateMessage message = intent.getParcelableExtra(RESPONSE_VALUE_KEY);
+                if (message.isSuccess())
+                    gotDataFields(message.getDataFields());
+                else showErrorDialog(message.getErrorMessage());
             }
         };
         this.registerReceiver(mRequestFieldsReceiver, new IntentFilter(DataFieldsManager.RESPONSE_ACTION));
