@@ -1,6 +1,8 @@
 package com.icerockdev.babenko.managers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.icerockdev.babenko.BuildConfig;
@@ -19,6 +21,7 @@ import retrofit2.Response;
 
 public class DataFieldsManager {
     private static final String TAG = "DataFieldsManager";
+    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
     public static final String RESPONSE_ACTION = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_ACTION";
     public static final String RESPONSE_VALUE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY";
     private RequestStateMessage mStateMessage;
@@ -40,6 +43,8 @@ public class DataFieldsManager {
                     mStateMessage.setSuccess(false);
                     mStateMessage.setErrorMessage(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
+                    saveError(IceRockApplication.getInstance()
+                            .getString(R.string.request_data_fields_error_list_empty));
                 } else {
                     mStateMessage.setSuccess(true);
                     mStateMessage.setDataFields(response.body());
@@ -54,14 +59,20 @@ public class DataFieldsManager {
                 mStateMessage.setFinished(true);
                 mStateMessage.setSuccess(false);
                 mStateMessage.setErrorMessage(t.getLocalizedMessage());
+                saveError(t.getLocalizedMessage());
                 Intent intent = new Intent(RESPONSE_ACTION);
                 intent.putExtra(RESPONSE_VALUE_KEY, mStateMessage);
                 IceRockApplication.getInstance().sendBroadcast(intent);
                 if (BuildConfig.DEBUG)
                     Log.e(TAG, "Request error " + t.getLocalizedMessage());
             }
-
         });
+    }
+
+    private void saveError(String error) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(IceRockApplication.getInstance());
+        prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, error).apply();
     }
 
     public RequestStateMessage getStateMessage() {

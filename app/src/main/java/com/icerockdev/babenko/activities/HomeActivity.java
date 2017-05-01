@@ -1,6 +1,5 @@
 package com.icerockdev.babenko.activities;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,11 +27,11 @@ import com.icerockdev.babenko.model.DataField;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY;
+import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.PROGRESS_DIALOG_TAG";
-    private static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_MESSAGE_KEY";
     private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
     private boolean mActivityPaused;
@@ -74,27 +73,23 @@ public class HomeActivity extends AppCompatActivity {
         Bundle arguments = new Bundle();
         arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
-        //app shows that it`s not finishing but it will crash if i exit app here, i`m sorry =\
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && this.isDestroyed()) || this.isFinishing() || mActivityPaused) {
-            needToShowDialogAfterResume(error);
+            return;
         } else try {
             serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
         } catch (IllegalStateException ex) {
             if (BuildConfig.DEBUG)
                 ex.printStackTrace();
-            needToShowDialogAfterResume(error);
+            return;
         }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "").apply();
     }
 
     @Override
     protected void onPause() {
         mActivityPaused = true;
         super.onPause();
-    }
-
-    private void needToShowDialogAfterResume(String error) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); // i don`t trust saveinstancestate
-        prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, error).apply();
     }
 
     private void gotDataFields(DataField[] data) {
@@ -134,10 +129,8 @@ public class HomeActivity extends AppCompatActivity {
     private void checkForErrors() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String dialogErrorMessage = prefs.getString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
-        if (!dialogErrorMessage.isEmpty()) {
-            prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "").apply();
+        if (!dialogErrorMessage.isEmpty())
             showErrorDialog(dialogErrorMessage);
-        }
     }
 
     private void registerRequestFieldsReceiver() {
