@@ -25,6 +25,7 @@ import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
 
+import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
@@ -95,6 +96,9 @@ public class HomeActivity extends AppCompatActivity {
     private void gotDataFields(DataField[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
+        Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
+        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
+        startActivity(dataFieldsIntent);
     }
 
     @Override
