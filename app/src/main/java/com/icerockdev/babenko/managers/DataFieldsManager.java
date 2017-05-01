@@ -21,7 +21,7 @@ public class DataFieldsManager {
     private static final String TAG = "DataFieldsManager";
     public static final String RESPONSE_ACTION = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_ACTION";
     public static final String RESPONSE_VALUE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY";
-    private RequestStateMessage mStateMessage = new RequestStateMessage();
+    private RequestStateMessage mStateMessage;
 
     public void requestDataFields(String Url) {
         if (BuildConfig.DEBUG)
@@ -29,6 +29,7 @@ public class DataFieldsManager {
 
         final Call<DataField[]> data = IceRockApplication.getInstance().getRetrofitManager()
                 .getService().requestDataFields(Url);
+        mStateMessage = new RequestStateMessage();
         mStateMessage.setFinished(false);
         data.enqueue(new Callback<DataField[]>() {
             @Override
@@ -61,5 +62,9 @@ public class DataFieldsManager {
             }
 
         });
+    }
+
+    public RequestStateMessage getStateMessage() {
+        return mStateMessage;
     }
 }

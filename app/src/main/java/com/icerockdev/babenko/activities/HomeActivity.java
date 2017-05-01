@@ -107,13 +107,28 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
         registerRequestFieldsReceiver();
         mActivityPaused = false;
-        checkForErrors();
+        checkForRequestProgress();
     }
 
     @Override
     protected void onDestroy() {
         unregisterRequestFieldsReceiver();
         super.onDestroy();
+    }
+
+    private void checkForRequestProgress() {
+        RequestStateMessage message = IceRockApplication.getInstance().getDataFieldsManager().getStateMessage();
+        if (message == null || message.isFinished()) {
+            checkAndDismissProgressDialog();
+            checkForErrors();
+        } else {
+            ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
+                    findFragmentByTag(PROGRESS_DIALOG_TAG);
+            if (progressDialogFragment == null) {
+                progressDialogFragment = new ProgressDialogFragment();
+                progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
+            }
+        }
     }
 
     private void checkForErrors() {
@@ -129,10 +144,7 @@ public class HomeActivity extends AppCompatActivity {
         mRequestFieldsReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
-                        findFragmentByTag(PROGRESS_DIALOG_TAG);
-                if (progressDialogFragment != null)
-                    progressDialogFragment.dismiss();
+                checkAndDismissProgressDialog();
                 RequestStateMessage message = intent.getParcelableExtra(RESPONSE_VALUE_KEY);
                 if (message.isSuccess())
                     gotDataFields(message.getDataFields());
@@ -145,5 +157,12 @@ public class HomeActivity extends AppCompatActivity {
     private void unregisterRequestFieldsReceiver() {
         if (mRequestFieldsReceiver != null)
             this.unregisterReceiver(mRequestFieldsReceiver);
+    }
+
+    private void checkAndDismissProgressDialog() {
+        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
+                findFragmentByTag(PROGRESS_DIALOG_TAG);
+        if (progressDialogFragment != null)
+            progressDialogFragment.dismiss();
     }
 }

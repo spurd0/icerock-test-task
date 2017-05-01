@@ -10,8 +10,8 @@ import com.icerockdev.babenko.model.DataField;
  */
 
 public class RequestStateMessage implements Parcelable {
-    private boolean mFinished;
-    private boolean mSuccess;
+    private boolean mFinished = true;
+    private boolean mSuccess = false;
     private String mErrorMessage;
     private DataField[] mDataFields;
 
