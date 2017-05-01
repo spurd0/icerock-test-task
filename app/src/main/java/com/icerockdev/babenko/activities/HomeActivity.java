@@ -19,7 +19,7 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
-import com.icerockdev.babenko.data.RequestStateMessage;
+import com.icerockdev.babenko.model.RequestStateMessage;
 import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.managers.DataFieldsManager;

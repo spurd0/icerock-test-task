@@ -1,9 +1,7 @@
-package com.icerockdev.babenko.data;
+package com.icerockdev.babenko.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.icerockdev.babenko.model.DataField;
 
 /**
  * Created by Roman Babenko on 01/05/17.
