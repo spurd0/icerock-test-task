@@ -134,6 +134,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void registerRequestFieldsReceiver() {
+        if (mRequestFieldsReceiver != null)
+            return;
         mRequestFieldsReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
