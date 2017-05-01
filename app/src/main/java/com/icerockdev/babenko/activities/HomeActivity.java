@@ -22,9 +22,12 @@ import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_
 
 public class HomeActivity extends AppCompatActivity {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
+    private static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_MESSAGE_KEY";
+    private static final String SERVER_ERROR_DIALOG_NEED_TO_SHOW_KEY = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_NEED_TO_SHOW_KEY";
+    private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
-    private boolean mNeedToShowDialog;
-    private String mDialogError;
+    private boolean mNeedToShowErrorDialog;
+    private String mDialogErrorMessage;
     private boolean mActivityPaused;
 
     @Override
@@ -93,8 +96,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void needToShowDialogAfterResume(String error) {
-        mDialogError = error;
-        mNeedToShowDialog = true;
+        mDialogErrorMessage = error;
+        mNeedToShowErrorDialog = true;
     }
 
     private void gotDataFields(DataField[] data) {
@@ -105,9 +108,22 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mActivityPaused = false;
-        if (mNeedToShowDialog) {
-            mNeedToShowDialog = false;
-            showErrorDialog(mDialogError);
+        if (mNeedToShowErrorDialog) {
+            mNeedToShowErrorDialog = false;
+            showErrorDialog(mDialogErrorMessage);
         }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, mDialogErrorMessage);
+        outState.putBoolean(SERVER_ERROR_DIALOG_NEED_TO_SHOW_KEY, mNeedToShowErrorDialog);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mDialogErrorMessage = savedInstanceState.getString(SERVER_ERROR_DIALOG_MESSAGE_KEY);
+        mNeedToShowErrorDialog = savedInstanceState.getBoolean(SERVER_ERROR_DIALOG_NEED_TO_SHOW_KEY);
     }
 }
