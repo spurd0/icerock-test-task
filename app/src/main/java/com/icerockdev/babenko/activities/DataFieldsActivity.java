@@ -5,9 +5,11 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.model.DataField;
 
 /**
@@ -29,5 +31,8 @@ public class DataFieldsActivity extends AppCompatActivity {
         }
         if (BuildConfig.DEBUG)
             Log.d(TAG, "DataFields length is " + dataFields.length);
+        ListView fieldsListView = (ListView) findViewById(R.id.dataFieldsListView);
+        DataFieldsAdapter adapter = new DataFieldsAdapter(this, R.layout.data_field_element, dataFields);
+        fieldsListView.setAdapter(adapter);
     }
 }
