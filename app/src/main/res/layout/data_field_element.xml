@@ -11,14 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/data_field_element_value_margin_horizontal"
+        android:layout_marginRight="@dimen/data_field_element_value_margin_horizontal"
         android:layout_marginTop="@dimen/data_field_element_value_margin_vertical"
+        android:layout_marginBottom="@dimen/data_field_element_value_margin_vertical"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/dataFieldCounter"
-        android:layout_marginRight="@dimen/data_field_element_value_margin_horizontal" />
+        app:layout_constraintRight_toLeftOf="@+id/data_field_element_guideline"
+/>
 
     <TextView
         android:id="@+id/dataFieldCounter"
@@ -31,6 +33,14 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/dataFieldValue"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/data_field_element_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/data_field_element_guideline"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 </android.support.constraint.ConstraintLayout>
