@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
 
+import java.util.List;
+
 /**
  * Created by Roman Babenko on 01/05/17.
  */
@@ -22,7 +24,7 @@ import com.icerockdev.babenko.model.DataField;
 public class DataFieldsAdapter extends ArrayAdapter<DataField> {
     private Context mContext;
 
-    public DataFieldsAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull DataField[] objects) {
+    public DataFieldsAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<DataField> objects) {
         super(context, resource, objects);
         mContext = context;
     }
