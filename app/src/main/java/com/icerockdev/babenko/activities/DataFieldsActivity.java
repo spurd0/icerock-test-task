@@ -30,19 +30,23 @@ public class DataFieldsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
-        initViews();
         getIntentData();
-        initListView();
+        initViews();
     }
 
     protected void initViews() {
         mFieldsLV = (ListView) findViewById(R.id.dataFieldsListView);
+        initListView();
     }
 
-    private void initListView() {
+    private void initListView() throws NullPointerException {
+        if (mDataFieldsList == null)
+            throw new NullPointerException("FieldsListIsNull");
         DataFieldsAdapter adapter = new DataFieldsAdapter(this, R.layout.data_field_element, mDataFieldsList);
         mFieldsLV.setAdapter(adapter);
-        mFieldsLV.addFooterView(new Button(this));
+        final Button submitButton = new Button(this);
+        submitButton.setText(getString(R.string.submit_fields_button_text));
+        mFieldsLV.addFooterView(submitButton);
     }
 
     private void getIntentData() {
