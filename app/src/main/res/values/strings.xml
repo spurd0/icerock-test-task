@@ -6,4 +6,5 @@
     <string name="request_data_fields_error">Network error</string>
     <string name="request_data_fields_error_list_empty">List is empty</string>
     <string name="submit_fields_button_text">Submit</string>
+    <string name="data_field_incorrect_format">Please check values.</string>
 </resources>

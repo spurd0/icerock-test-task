@@ -5,13 +5,19 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.ArrayList;
 
@@ -44,9 +50,49 @@ public class DataFieldsActivity extends AppCompatActivity {
             throw new NullPointerException("FieldsListIsNull");
         DataFieldsAdapter adapter = new DataFieldsAdapter(this, R.layout.data_field_element, mDataFieldsList);
         mFieldsLV.setAdapter(adapter);
-        final Button submitButton = new Button(this);
+        addFooterToListView();
+        addHeaderToListView();
+    }
+
+    private void addFooterToListView() {
+        LinearLayout footer = new LinearLayout(this);
+        Button submitButton = new Button(this);
         submitButton.setText(getString(R.string.submit_fields_button_text));
-        mFieldsLV.addFooterView(submitButton);
+        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout
+                .LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        buttonLayoutParams.setMargins(UtilsHelper.convertDpToPx(this, getResources()
+                .getDimension(R.dimen.data_field_element_footer_margin_horizontal)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_footer_margin_vertical)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_footer_margin_horizontal)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_footer_margin_vertical)));
+        submitButton.setLayoutParams(buttonLayoutParams);
+        footer.addView(submitButton);
+        mFieldsLV.addFooterView(footer);
+    }
+
+    private void addHeaderToListView() {
+        RelativeLayout header = new RelativeLayout(this);
+        TextView errorTv = new TextView(this);
+        errorTv.setText(getString(R.string.data_field_incorrect_format));
+        RelativeLayout.LayoutParams errorTvLayoutParams = new RelativeLayout
+                .LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        errorTvLayoutParams.setMargins(UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_header_margin_horizontal)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_header_margin_vertical)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_header_margin_horizontal)),
+                UtilsHelper.convertDpToPx(this, getResources()
+                        .getDimension(R.dimen.data_field_element_header_margin_vertical)));
+        errorTvLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+        errorTvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        errorTv.setLayoutParams(errorTvLayoutParams);
+        // TODO: 03/05/17 set color & hide it 
+        header.addView(errorTv);
+        mFieldsLV.addHeaderView(header);
     }
 
     private void getIntentData() {

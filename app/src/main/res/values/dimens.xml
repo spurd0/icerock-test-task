@@ -5,4 +5,8 @@
     <dimen name="data_field_element_value_margin_vertical">10dp</dimen>
     <dimen name="data_field_element_counter_margin_horizontal">5dp</dimen>
     <dimen name="data_field_element_counter_margin_vertical">10dp</dimen>
+    <dimen name="data_field_element_footer_margin_vertical">5dp</dimen>
+    <dimen name="data_field_element_footer_margin_horizontal">5dp</dimen>
+    <dimen name="data_field_element_header_margin_vertical">5dp</dimen>
+    <dimen name="data_field_element_header_margin_horizontal">5dp</dimen>
 </resources>
