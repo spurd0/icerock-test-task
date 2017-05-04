@@ -1,12 +1,12 @@
 package com.icerockdev.babenko.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +31,7 @@ public class DataFieldsActivity extends AppCompatActivity {
 
     private ArrayList<DataField> mDataFieldsList;
     private ListView mFieldsLV;
+    private RelativeLayout mHeader;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class DataFieldsActivity extends AppCompatActivity {
     }
 
     private void addHeaderToListView() {
-        RelativeLayout header = new RelativeLayout(this);
+        mHeader = new RelativeLayout(this);
         TextView errorTv = new TextView(this);
         errorTv.setText(getString(R.string.data_field_incorrect_format));
         RelativeLayout.LayoutParams errorTvLayoutParams = new RelativeLayout
@@ -90,9 +91,14 @@ public class DataFieldsActivity extends AppCompatActivity {
         errorTvLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
         errorTvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         errorTv.setLayoutParams(errorTvLayoutParams);
-        // TODO: 03/05/17 set color & hide it 
-        header.addView(errorTv);
-        mFieldsLV.addHeaderView(header);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            errorTv.setTextColor(getColor(R.color.errorTextColor));
+        } else {
+            errorTv.setTextColor(getResources().getColor(R.color.errorTextColor));
+        }
+        mHeader.addView(errorTv);
+        mHeader.setVisibility(View.GONE);
+        mFieldsLV.addHeaderView(mHeader);
     }
 
     private void getIntentData() {

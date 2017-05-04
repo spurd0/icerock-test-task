@@ -29,7 +29,7 @@ public class ProgressDialogFragment extends DialogFragment {
         dialog.setContentView(R.layout.progress_dialog);
         ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.progress_bar);
         progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getContext(),
-                R.color.progress_dialog_color), android.graphics.PorterDuff.Mode.MULTIPLY);
+                R.color.progressDialogColor), android.graphics.PorterDuff.Mode.MULTIPLY);
         setCancelable(false);
         return dialog;
     }
