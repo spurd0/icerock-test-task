@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.URLUtil;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.icerockdev.babenko.BuildConfig;
@@ -47,18 +46,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initViews() {
         mRequestUrlEditText = (EditText) findViewById(R.id.fieldsRequestUrlEditText);
-        Button requestFieldsButton = (Button) findViewById(R.id.getFieldsButton);
         mRequestUrlEditText.setText(ApplicationConstants.URL_START);
         mRequestUrlEditText.setSelection(mRequestUrlEditText.getText().length());
-        requestFieldsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestDataFields();
-            }
-        });
     }
 
-    private void requestDataFields() {
+    public void requestDataFieldsButtonClicked(View v) {
         String url = mRequestUrlEditText.getText().toString();
         if (!URLUtil.isValidUrl(url)) {
             mRequestUrlEditText.setError(getString(R.string.url_error));

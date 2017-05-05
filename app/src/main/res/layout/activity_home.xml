@@ -35,7 +35,8 @@
             app:layout_constraintTop_toBottomOf="@+id/fieldsRequestUrlEditText"
             app:layout_constraintRight_toRightOf="@+id/fieldsRequestUrlEditText"
             app:layout_constraintLeft_toLeftOf="@+id/fieldsRequestUrlEditText"
-            android:layout_marginTop="@dimen/request_fields_button_margin_top"/>
+            android:layout_marginTop="@dimen/request_fields_button_margin_top"
+            android:onClick="requestDataFieldsButtonClicked"/>
     </android.support.constraint.ConstraintLayout>
 
 
