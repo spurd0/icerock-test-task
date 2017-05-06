@@ -42,7 +42,10 @@ public class HomePresenter extends BasePresenter<HomeView> {
             public void successResponse(DataField[] response) {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
-                    getView().gotDataFields(response);
+                    if (response.length != 0)
+                        getView().gotDataFields(response);
+                    else getView().showErrorDialog(IceRockApplication.getInstance()
+                            .getString(R.string.request_data_fields_error_list_empty));
                 }
             }
         });
