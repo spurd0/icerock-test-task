@@ -20,6 +20,8 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Roman Babenko on 01/05/17.
@@ -30,7 +32,8 @@ public class DataFieldsActivity extends AppCompatActivity {
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY";
 
     private ArrayList<DataField> mDataFieldsList;
-    private ListView mFieldsLV;
+    private DataFieldsAdapter mFieldsAdapter;
+    private ListView mFieldsLv;
     private TextView mHeaderErrorTv;
 
     @Override
@@ -42,15 +45,15 @@ public class DataFieldsActivity extends AppCompatActivity {
     }
 
     protected void initViews() {
-        mFieldsLV = (ListView) findViewById(R.id.dataFieldsListView);
         initListView();
     }
 
     private void initListView() throws NullPointerException {
+        mFieldsLv = (ListView) findViewById(R.id.dataFieldsListView);
         if (mDataFieldsList == null)
             throw new NullPointerException("FieldsListIsNull");
-        DataFieldsAdapter adapter = new DataFieldsAdapter(this, R.layout.data_field_element, mDataFieldsList);
-        mFieldsLV.setAdapter(adapter);
+        mFieldsAdapter = new DataFieldsAdapter(this, R.layout.data_field_element, mDataFieldsList);
+        mFieldsLv.setAdapter(mFieldsAdapter);
         addFooterToListView();
         addHeaderToListView();
     }
@@ -70,8 +73,14 @@ public class DataFieldsActivity extends AppCompatActivity {
                 UtilsHelper.convertDpToPx(this, getResources()
                         .getDimension(R.dimen.data_field_element_footer_margin_vertical)));
         submitButton.setLayoutParams(buttonLayoutParams);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitButtonPressed();
+            }
+        });
         footer.addView(submitButton);
-        mFieldsLV.addFooterView(footer);
+        mFieldsLv.addFooterView(footer);
     }
 
     private void addHeaderToListView() {
@@ -98,8 +107,13 @@ public class DataFieldsActivity extends AppCompatActivity {
         }
         headerLayout.addView(mHeaderErrorTv);
         mHeaderErrorTv.setVisibility(View.GONE);
-        mFieldsLV.addHeaderView(headerLayout);
+        mFieldsLv.addHeaderView(headerLayout);
     }
+
+    private void submitButtonPressed() {
+        HashMap<String, String> fieldsValues = mFieldsAdapter.getFieldValues();
+        for (Map.Entry<String, String> value : fieldsValues.entrySet())
+            Log.d(TAG, value.getValue());
     }
 
     private void getIntentData() {
