@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     }
 
     @Override
-    public String getUrl() {
+    public String getUrlFromForm() {
         return mRequestUrlEditText.getText().toString();
     }
 

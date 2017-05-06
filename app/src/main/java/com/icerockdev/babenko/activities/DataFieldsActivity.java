@@ -62,8 +62,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     private void submitButtonPressed() {
     }
 
-
-
     public void showError(String error) {
         mHeaderErrorTv.setVisibility(View.VISIBLE);
         mHeaderErrorTv.setText("Test");

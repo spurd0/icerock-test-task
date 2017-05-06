@@ -7,7 +7,7 @@ import com.icerockdev.babenko.model.DataField;
  */
 
 public interface HomeView extends BaseView {
-    String getUrl();
+    String getUrlFromForm();
 
     void showProgressDialog();
 

@@ -21,7 +21,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
     private DataFieldsManager mManager = IceRockApplication.getInstance().getDataFieldsManager();
 
     public void requestDataClicked() {
-        String url = getView().getUrl();
+        String url = getView().getUrlFromForm();
         if (!URLUtil.isValidUrl(url)) {
             getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
             return;
