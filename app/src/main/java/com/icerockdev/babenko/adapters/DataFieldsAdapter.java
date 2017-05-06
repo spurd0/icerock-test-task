@@ -11,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,26 +46,32 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.data_field_element, parent, false);
-            holder.characterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
-            holder.fieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
+            holder.mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
+            holder.mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
             convertView.setTag(holder);
-            holder.fieldValue.addTextChangedListener(new DataFieldsTextWatcher(holder.fieldValue));
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.fieldValue.setTag(dataElement.getId());
-        holder.characterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
-        holder.fieldValue.setText(dataElement.getDefault_value());
-        holder.fieldValue.setHint(dataElement.getType()); // remade hint
+        
+        if (holder.mTextWatcher != null)
+            holder.mFieldValue.removeTextChangedListener(holder.mTextWatcher);
+        holder.mTextWatcher = new DataFieldsTextWatcher(holder.mFieldValue);
+        holder.mFieldValue.setTag(dataElement.getId());
+        holder.mFieldValue.addTextChangedListener(holder.mTextWatcher);
+
+        holder.mCharacterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
+        holder.mFieldValue.setText(dataElement.getDefault_value());
+        holder.mFieldValue.setHint(dataElement.getType()); // remade hint
         return convertView;
     }
 
-    static class ViewHolder {
-        private EditText fieldValue;
-        private TextView characterCounter;
+    private static class ViewHolder {
+        private EditText mFieldValue;
+        private TextView mCharacterCounter;
+        private TextWatcher mTextWatcher;
     }
 
-    class DataFieldsTextWatcher implements TextWatcher {
+    private class DataFieldsTextWatcher implements TextWatcher {
 
         private View view;
 
