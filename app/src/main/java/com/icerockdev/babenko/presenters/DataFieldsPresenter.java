@@ -1,11 +1,8 @@
 package com.icerockdev.babenko.presenters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Parcelable;
-import android.util.Log;
 
-import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.model.DataField;
 
@@ -25,7 +22,9 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
         for (Parcelable aData : data) {
             dataFieldsList.add((DataField) aData);
         }
+        if (getView() != null)
         getView().gotFieldsData( dataFieldsList);
+        // TODO: 06/05/17 else save it
     }
 
 }

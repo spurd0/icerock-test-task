@@ -33,7 +33,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
         mPresenter = new DataFieldsPresenter();
-        mPresenter.attachView(this);
         initViews();
         requestFieldsData();
     }
@@ -77,5 +76,18 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     public void hideError() {
         mHeaderErrorTv.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 06/05/17 check for errors & add base activity.
+        mPresenter.attachView(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mPresenter.detachView();
     }
 }
