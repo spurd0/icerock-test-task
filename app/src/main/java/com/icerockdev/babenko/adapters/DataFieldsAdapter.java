@@ -52,10 +52,10 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
+
         if (holder.mTextWatcher != null)
             holder.mFieldValue.removeTextChangedListener(holder.mTextWatcher);
-        holder.mTextWatcher = new DataFieldsTextWatcher(holder.mFieldValue);
+        holder.mTextWatcher = new DataFieldsTextWatcher(holder.mFieldValue, dataElement.getDefault_value());
         holder.mFieldValue.setTag(dataElement.getId());
         holder.mFieldValue.addTextChangedListener(holder.mTextWatcher);
 
@@ -73,10 +73,12 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
 
     private class DataFieldsTextWatcher implements TextWatcher {
 
-        private View view;
+        private View mView;
+        private String mValue;
 
-        private DataFieldsTextWatcher(View view) {
-            this.view = view;
+        private DataFieldsTextWatcher(View view, String value) {
+            this.mView = view;
+            this.mValue = value;
         }
 
         @Override
@@ -86,12 +88,12 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            mValue = s.toString();
         }
 
         public void afterTextChanged(Editable editable) {
             String textData = editable.toString();
-            DataFieldsAdapter.this.mFieldValues.put(view.getTag().toString(), textData);
+            DataFieldsAdapter.this.mFieldValues.put(mView.getTag().toString(), textData);
         }
     }
 }

@@ -33,7 +33,7 @@ public class DataFieldsActivity extends AppCompatActivity {
 
     private ArrayList<DataField> mDataFieldsList;
     private DataFieldsAdapter mFieldsAdapter;
-    private ListView mFieldsLv;
+    private ListView mFieldsLv; // TODO: 06/05/17 MOVE TO ViewGroup 
     private TextView mHeaderErrorTv;
 
     @Override
