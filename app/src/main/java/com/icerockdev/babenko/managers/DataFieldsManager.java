@@ -32,9 +32,9 @@ public class DataFieldsManager {
             public void onResponse(Call<DataField[]> call, Response<DataField[]> response) {
                 if (response.body() == null) {
                     saveError(IceRockApplication.getInstance()
-                            .getString(R.string.request_data_fields_error_list_empty));
-                    callback.failedResponse("List is null"); // TODO: 06/05/17 move to string res // TODO: 06/05/17 list is null, remade
-                } else {
+                            .getString(R.string.request_data_fields_error_null));
+                    callback.failedResponse(IceRockApplication.getInstance()
+                            .getString(R.string.request_data_fields_error_null));
                     callback.successResponse(response.body());
                 }
             }
