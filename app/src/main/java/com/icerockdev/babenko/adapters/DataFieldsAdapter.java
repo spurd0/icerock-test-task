@@ -42,6 +42,7 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder holder = null;
+        DataField dataElement = getItem(position);
         if (convertView == null) {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) mContext
@@ -54,9 +55,8 @@ public class DataFieldsAdapter extends ArrayAdapter<DataField> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        DataField dataElement = getItem(position);
+        holder.fieldValue.setTag(dataElement.getId());
         holder.characterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
-        holder.fieldValue.setTag(position);
         holder.fieldValue.setText(dataElement.getDefault_value());
         holder.fieldValue.setHint(dataElement.getType()); // remade hint
         return convertView;
