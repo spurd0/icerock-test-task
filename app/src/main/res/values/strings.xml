@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">IceRockDev Test Task</string>
+
+    <!--Home screen actions-->
     <string name="request_fields_button_text">Request data</string>
     <string name="request_fields_edittext_url_hint">Enter URL</string>
     <string name="url_error">Please check URL</string>
     <string name="request_data_fields_error">Network error</string>
     <string name="request_data_fields_error_list_empty">Server returned empty list</string>
     <string name="request_data_fields_error_null">Server returned null</string>
+
+    <!--Fields list actions-->
     <string name="submit_fields_button_text">Submit</string>
     <string name="data_field_incorrect_format">Please check values.</string>
 </resources>
