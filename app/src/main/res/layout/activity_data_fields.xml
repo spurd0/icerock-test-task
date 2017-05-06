@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ListView
+    <ScrollView
+        android:id="@+id/dataFieldsScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dataFieldsListView"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/dataFieldsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/validationErrorTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/errorTextColor"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/dataFieldsEditTextContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitFieldsButton"
+                android:text="@string/submit_fields_button_text"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
