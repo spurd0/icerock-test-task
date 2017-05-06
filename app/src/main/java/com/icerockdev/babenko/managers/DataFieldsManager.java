@@ -22,11 +22,9 @@ import retrofit2.Response;
 public class DataFieldsManager {
     private static final String TAG = "DataFieldsManager";
     public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
-    public static final String RESPONSE_ACTION = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_ACTION";
-    public static final String RESPONSE_VALUE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY";
     private RequestStateMessage mStateMessage;
 
-    public void requestDataFields(String Url) {
+    public void requestDataFields(String Url, final DataFieldsCallback callback) {
         if (BuildConfig.DEBUG)
             Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"; // TODO: 30/04/17 move to unit test
 
@@ -38,20 +36,18 @@ public class DataFieldsManager {
             @Override
             public void onResponse(Call<DataField[]> call, Response<DataField[]> response) {
                 mStateMessage.setFinished(true);
-                Intent intent = new Intent(RESPONSE_ACTION);
                 if (response.body() == null) {
-                    mStateMessage.setSuccess(false);
+                    mStateMessage.setSuccess(false); // TODO: 06/05/17 list is null, remade
                     mStateMessage.setErrorMessage(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
                     saveError(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
+                    callback.failedResponse("List is null"); // // TODO: 06/05/17 move to string res
                 } else {
                     mStateMessage.setSuccess(true);
                     mStateMessage.setDataFields(response.body());
-
+                    callback.successResponse(response.body());
                 }
-                intent.putExtra(RESPONSE_VALUE_KEY, mStateMessage);
-                IceRockApplication.getInstance().sendBroadcast(intent);
             }
 
             @Override
@@ -60,9 +56,7 @@ public class DataFieldsManager {
                 mStateMessage.setSuccess(false);
                 mStateMessage.setErrorMessage(t.getLocalizedMessage());
                 saveError(t.getLocalizedMessage());
-                Intent intent = new Intent(RESPONSE_ACTION);
-                intent.putExtra(RESPONSE_VALUE_KEY, mStateMessage);
-                IceRockApplication.getInstance().sendBroadcast(intent);
+                callback.failedResponse(t.getLocalizedMessage());
                 if (BuildConfig.DEBUG)
                     Log.e(TAG, "Request error " + t.getLocalizedMessage());
             }
@@ -77,5 +71,10 @@ public class DataFieldsManager {
 
     public RequestStateMessage getStateMessage() {
         return mStateMessage;
+    }
+
+    public interface DataFieldsCallback {
+        void failedResponse(String error);
+        void successResponse(DataField[] response);
     }
 }

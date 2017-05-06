@@ -11,31 +11,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.EditText;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.model.RequestStateMessage;
 import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.presenters.HomePresenter;
 
 import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
-import static com.icerockdev.babenko.managers.DataFieldsManager.RESPONSE_VALUE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HomeView{
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.PROGRESS_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
     private boolean mActivityPaused;
-    private BroadcastReceiver mRequestFieldsReceiver;
+    private HomePresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void requestDataFieldsButtonClicked(View v) {
-        String url = mRequestUrlEditText.getText().toString();
-        if (!URLUtil.isValidUrl(url)) {
-            mRequestUrlEditText.setError(getString(R.string.url_error));
-            return;
-        }
-        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
-        IceRockApplication.getInstance().getDataFieldsManager().requestDataFields(url);
+
     }
 
     private void showErrorDialog(String error) {
@@ -85,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    private void gotDataFields(DataField[] data) {
+    public void gotDataFields(DataField[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
         Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
@@ -96,15 +89,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerRequestFieldsReceiver();
         mActivityPaused = false;
         checkForRequestProgress();
-    }
-
-    @Override
-    protected void onDestroy() {
-        unregisterRequestFieldsReceiver();
-        super.onDestroy();
     }
 
     private void checkForRequestProgress() {
@@ -129,27 +115,6 @@ public class HomeActivity extends AppCompatActivity {
             showErrorDialog(dialogErrorMessage);
     }
 
-    private void registerRequestFieldsReceiver() {
-        if (mRequestFieldsReceiver != null)
-            return;
-        mRequestFieldsReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                checkAndDismissProgressDialog();
-                RequestStateMessage message = intent.getParcelableExtra(RESPONSE_VALUE_KEY);
-                if (message.isSuccess())
-                    gotDataFields(message.getDataFields());
-                else showErrorDialog(message.getErrorMessage());
-            }
-        };
-        this.registerReceiver(mRequestFieldsReceiver, new IntentFilter(DataFieldsManager.RESPONSE_ACTION));
-    }
-
-    private void unregisterRequestFieldsReceiver() {
-        if (mRequestFieldsReceiver != null)
-            this.unregisterReceiver(mRequestFieldsReceiver);
-    }
-
     private void checkAndDismissProgressDialog() {
         if (this.isFinishing())
             return;
@@ -157,5 +122,31 @@ public class HomeActivity extends AppCompatActivity {
                 findFragmentByTag(PROGRESS_DIALOG_TAG);
         if (progressDialogFragment != null)
             progressDialogFragment.dismiss();
+    }
+
+    @Override
+    public String getUrl() {
+        return null;
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
+
+    @Override
+    public void showUrlError(String error) {
+        mRequestUrlEditText.setError(error);
     }
 }
