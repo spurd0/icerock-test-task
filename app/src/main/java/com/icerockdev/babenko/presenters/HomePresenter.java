@@ -28,7 +28,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
             @Override
             public void failedResponse(String error) {
                 getView().dismissProgressDialog();
-                getView().showErrorMessage(error);
+                getView().showErrorDialog(error);
             }
 
             @Override

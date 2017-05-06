@@ -13,7 +13,7 @@ public interface HomeView {
 
     void dismissProgressDialog();
 
-    void showErrorMessage(String message);
+    void showErrorDialog(String message);
 
     void showUrlError(String error);
 
