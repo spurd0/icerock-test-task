@@ -31,7 +31,7 @@ public class DataFieldsActivity extends AppCompatActivity {
 
     private ArrayList<DataField> mDataFieldsList;
     private ListView mFieldsLV;
-    private RelativeLayout mHeader;
+    private TextView mHeaderErrorTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,9 +75,9 @@ public class DataFieldsActivity extends AppCompatActivity {
     }
 
     private void addHeaderToListView() {
-        mHeader = new RelativeLayout(this);
-        TextView errorTv = new TextView(this);
-        errorTv.setText(getString(R.string.data_field_incorrect_format));
+        RelativeLayout headerLayout = new RelativeLayout(this);
+        mHeaderErrorTv = new TextView(this);
+        mHeaderErrorTv.setText(getString(R.string.data_field_incorrect_format));
         RelativeLayout.LayoutParams errorTvLayoutParams = new RelativeLayout
                 .LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         errorTvLayoutParams.setMargins(UtilsHelper.convertDpToPx(this, getResources()
@@ -90,15 +90,16 @@ public class DataFieldsActivity extends AppCompatActivity {
                         .getDimension(R.dimen.data_field_element_header_margin_vertical)));
         errorTvLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
         errorTvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        errorTv.setLayoutParams(errorTvLayoutParams);
+        mHeaderErrorTv.setLayoutParams(errorTvLayoutParams);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            errorTv.setTextColor(getColor(R.color.errorTextColor));
+            mHeaderErrorTv.setTextColor(getColor(R.color.errorTextColor));
         } else {
-            errorTv.setTextColor(getResources().getColor(R.color.errorTextColor));
+            mHeaderErrorTv.setTextColor(getResources().getColor(R.color.errorTextColor));
         }
-        mHeader.addView(errorTv);
-        mHeader.setVisibility(View.GONE);
-        mFieldsLV.addHeaderView(mHeader);
+        headerLayout.addView(mHeaderErrorTv);
+        mHeaderErrorTv.setVisibility(View.GONE);
+        mFieldsLV.addHeaderView(headerLayout);
+    }
     }
 
     private void getIntentData() {
