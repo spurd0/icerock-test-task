@@ -43,7 +43,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
                 boolean emptyList = response.length == 0;
                 if (getView() != null) {
                     getView().dismissProgressDialog();
-                    if (emptyList)
+                    if (!emptyList)
                         getView().gotDataFields(response);
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
