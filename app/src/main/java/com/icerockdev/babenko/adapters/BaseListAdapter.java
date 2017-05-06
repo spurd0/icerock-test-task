@@ -16,10 +16,12 @@ public abstract class BaseListAdapter<Object> {
     protected Context mContext;
     private List<Object> mObjects;
     private ViewGroup mViewGroup;
+    private ViewGroup mParent;
 
-    public BaseListAdapter(@NonNull Context context, @NonNull List<Object> objects) {
+    public BaseListAdapter(@NonNull Context context, @NonNull List<Object> objects, ViewGroup parent) {
         mContext = context;
         mObjects = objects;
+        mParent = parent; // sorry i don`t know how original adapter get it :(
     }
 
     public void attachAdapter(ViewGroup viewGroup) {
@@ -29,7 +31,7 @@ public abstract class BaseListAdapter<Object> {
 
     private void addElements() {
         for (int i = 0; i < mObjects.size(); i++) {
-            mViewGroup.addView(getView(i));
+            mViewGroup.addView(getView(i, mParent));
         }
     }
 
@@ -37,6 +39,6 @@ public abstract class BaseListAdapter<Object> {
         return mObjects.get(position);
     }
 
-    protected abstract View getView(int position);
+    protected abstract View getView(int position, ViewGroup parent);
 
 }

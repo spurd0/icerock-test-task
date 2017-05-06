@@ -50,7 +50,7 @@ public class DataFieldsActivity extends AppCompatActivity {
         ArrayList<DataField> dataFieldsList = getIntentData();
         if (dataFieldsList == null)
             throw new NullPointerException("FieldsListIsNull");
-        DataFieldsAdapter adapter = new DataFieldsAdapter(this, dataFieldsList);
+        DataFieldsAdapter adapter = new DataFieldsAdapter(this, dataFieldsList, mDataFieldsContainer);
         adapter.attachAdapter(mDataFieldsContainer);
     }
 

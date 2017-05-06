@@ -27,17 +27,17 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
     private HashMap<String, String> mFieldValues = new HashMap<String, String>();
 
-    public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields) {
-        super(context, dataFields);
+    public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields, ViewGroup parent) {
+        super(context, dataFields, parent);
     }
 
     @NonNull
     @Override
-    public View getView(int position) {
+    public View getView(int position, ViewGroup parent) {
         DataField dataElement = getItem(position);
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View convertView = inflater.inflate(R.layout.data_field_element, null, false);
+            View convertView = inflater.inflate(R.layout.data_field_element, parent, false);
         TextView mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
         EditText mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
 
