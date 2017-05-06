@@ -27,14 +27,18 @@ public class HomePresenter extends BasePresenter<HomeView> {
         mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
             @Override
             public void failedResponse(String error) {
-                getView().dismissProgressDialog();
-                getView().showErrorDialog(error);
+                if (getView() != null) {
+                    getView().dismissProgressDialog();
+                    getView().showErrorDialog(error);
+                }
             }
 
             @Override
             public void successResponse(DataField[] response) {
-                getView().dismissProgressDialog();
-                getView().gotDataFields(response);
+                if (getView() != null) {
+                    getView().dismissProgressDialog();
+                    getView().gotDataFields(response);
+                }
             }
         });
     }
