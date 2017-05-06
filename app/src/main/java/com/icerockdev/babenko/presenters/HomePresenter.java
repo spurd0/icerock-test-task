@@ -7,6 +7,9 @@ import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.utils.UtilsHelper;
+
+import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
 
 /**
@@ -27,6 +30,8 @@ public class HomePresenter extends BasePresenter<HomeView> {
         mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
             @Override
             public void failedResponse(String error) {
+                UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(),
+                        SERVER_ERROR_DIALOG_MESSAGE_KEY, error);
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     getView().showErrorDialog(error);

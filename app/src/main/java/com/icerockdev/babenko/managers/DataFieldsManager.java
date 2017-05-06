@@ -31,17 +31,13 @@ public class DataFieldsManager {
             @Override
             public void onResponse(Call<DataField[]> call, Response<DataField[]> response) {
                 if (response.body() == null) {
-                    saveError(IceRockApplication.getInstance()
-                            .getString(R.string.request_data_fields_error_null));
                     callback.failedResponse(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_null));
-                    callback.successResponse(response.body());
-                }
+                } else callback.successResponse(response.body());
             }
 
             @Override
             public void onFailure(Call<DataField[]> call, Throwable t) {
-                saveError(t.getLocalizedMessage());
                 callback.failedResponse(t.getLocalizedMessage());
                 if (BuildConfig.DEBUG)
                     Log.e(TAG, "Request error " + t.getLocalizedMessage());
@@ -49,14 +45,9 @@ public class DataFieldsManager {
         });
     }
 
-    private void saveError(String error) {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(IceRockApplication.getInstance());
-        prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, error).apply();
-    }
-
     public interface DataFieldsCallback {
         void failedResponse(String error);
+
         void successResponse(DataField[] response);
     }
 }

@@ -17,12 +17,13 @@ import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
-public class HomeActivity extends AppCompatActivity implements HomeView{
+public class HomeActivity extends AppCompatActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.PROGRESS_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
@@ -53,8 +54,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "").apply();
+        UtilsHelper.saveStringToSharedPreferences(this, SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
     }
 
     @Override
