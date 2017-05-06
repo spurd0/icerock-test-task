@@ -30,12 +30,11 @@ public class HomePresenter extends BasePresenter<HomeView> {
         mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
             @Override
             public void failedResponse(String error) {
-                UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(),
-                        SERVER_ERROR_DIALOG_MESSAGE_KEY, error);
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     getView().showErrorDialog(error);
-                }
+                } else UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(),
+                        SERVER_ERROR_DIALOG_MESSAGE_KEY, error);
             }
 
             @Override
