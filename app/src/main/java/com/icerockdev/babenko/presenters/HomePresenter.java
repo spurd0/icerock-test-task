@@ -40,13 +40,17 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
             @Override
             public void successResponse(DataField[] response) {
+                boolean emptyList = response.length == 0;
                 if (getView() != null) {
                     getView().dismissProgressDialog();
-                    if (response.length != 0)
+                    if (emptyList)
                         getView().gotDataFields(response);
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
-                }
+                } else if (emptyList)
+                    UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(),
+                            SERVER_ERROR_DIALOG_MESSAGE_KEY, IceRockApplication.getInstance()
+                                    .getString(R.string.request_data_fields_error_list_empty));
             }
         });
     }
