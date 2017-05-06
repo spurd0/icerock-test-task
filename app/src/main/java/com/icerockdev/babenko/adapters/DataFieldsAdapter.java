@@ -23,53 +23,34 @@ import java.util.List;
  * Created by Roman Babenko on 01/05/17.
  */
 
-public class DataFieldsAdapter extends ArrayAdapter<DataField> {
-    private Context mContext;
+public class DataFieldsAdapter extends BaseListAdapter<DataField> {
+
     private HashMap<String, String> mFieldValues = new HashMap<String, String>();
 
-    public DataFieldsAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<DataField> objects) {
-        super(context, resource, objects);
-        mContext = context;
-    }
-
-    public HashMap<String, String> getFieldValues() {
-        return mFieldValues;
+    public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields) {
+        super(context, dataFields);
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder holder = null;
+    public View getView(int position) {
         DataField dataElement = getItem(position);
-        if (convertView == null) {
-            holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.data_field_element, parent, false);
-            holder.mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
-            holder.mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+            View convertView = inflater.inflate(R.layout.data_field_element, null, false);
+        TextView mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
+        EditText mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
 
-        if (holder.mTextWatcher != null)
-            holder.mFieldValue.removeTextChangedListener(holder.mTextWatcher);
-        holder.mTextWatcher = new DataFieldsTextWatcher(holder.mFieldValue, dataElement.getDefault_value());
-        holder.mFieldValue.setTag(dataElement.getId());
-        holder.mFieldValue.addTextChangedListener(holder.mTextWatcher);
+        DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mFieldValue, dataElement.getDefault_value());
+        mFieldValue.setTag(dataElement.getId());
+        mFieldValue.addTextChangedListener(textWatcher);
 
-        holder.mCharacterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
-        holder.mFieldValue.setText(dataElement.getDefault_value());
-        holder.mFieldValue.setHint(dataElement.getType()); // remade hint
+        mCharacterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
+        mFieldValue.setText(dataElement.getDefault_value());
+        mFieldValue.setHint(dataElement.getType()); // remade hint
         return convertView;
     }
 
-    private static class ViewHolder {
-        private EditText mFieldValue;
-        private TextView mCharacterCounter;
-        private TextWatcher mTextWatcher;
-    }
 
     private class DataFieldsTextWatcher implements TextWatcher {
 

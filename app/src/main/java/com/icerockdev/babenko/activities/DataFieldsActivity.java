@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
@@ -27,7 +28,6 @@ public class DataFieldsActivity extends AppCompatActivity {
     private static final String TAG = "DataFieldsActivity";
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY";
 
-    private ArrayList<DataField> mDataFieldsList;
     private LinearLayout mDataFieldsContainer;
     private TextView mHeaderErrorTv;
 
@@ -41,8 +41,20 @@ public class DataFieldsActivity extends AppCompatActivity {
 
     protected void initViews() {
         mDataFieldsContainer = (LinearLayout) findViewById(R.id.dataFieldsEditTextContainer);
-        initDataFieldsEt();
         mHeaderErrorTv = (TextView) findViewById(R.id.validationErrorTv);
+        initDataFieldsEt();
+        initSubmitButton();
+    }
+
+    private void initDataFieldsEt() throws NullPointerException {
+        ArrayList<DataField> dataFieldsList = getIntentData();
+        if (dataFieldsList == null)
+            throw new NullPointerException("FieldsListIsNull");
+        DataFieldsAdapter adapter = new DataFieldsAdapter(this, dataFieldsList);
+        adapter.attachAdapter(mDataFieldsContainer);
+    }
+
+    private void initSubmitButton() {
         Button submitButton = (Button) findViewById(R.id.submitFieldsButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,34 +62,28 @@ public class DataFieldsActivity extends AppCompatActivity {
                 submitButtonPressed();
             }
         });
-        showError("Test");
-    }
-
-    private void initDataFieldsEt() throws NullPointerException {
-        if (mDataFieldsList == null)
-            throw new NullPointerException("FieldsListIsNull");
-        for (DataField field : mDataFieldsList) {
-            EditText fieldEt = new EditText(this);
-            fieldEt.setText(field.getDefault_value());
-            mDataFieldsContainer.addView(fieldEt);
-        }
     }
 
     private void submitButtonPressed() {
     }
 
-    private void getIntentData() {
+    private ArrayList<DataField> getIntentData() {
         Parcelable[] data = getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY);
-        mDataFieldsList = new ArrayList<>();
+        ArrayList<DataField> dataFieldsList = new ArrayList<>();
         for (Parcelable aData : data) {
-            mDataFieldsList.add((DataField) aData);
+            dataFieldsList.add((DataField) aData);
         }
         if (BuildConfig.DEBUG)
-            Log.d(TAG, "DataFields length is " + mDataFieldsList.size());
+            Log.d(TAG, "DataFields length is " + dataFieldsList.size());
+        return dataFieldsList;
     }
 
     private void showError(String error) {
         mHeaderErrorTv.setVisibility(View.VISIBLE);
         mHeaderErrorTv.setText("Test");
+    }
+
+    private void hideError() {
+        mHeaderErrorTv.setVisibility(View.GONE);
     }
 }
