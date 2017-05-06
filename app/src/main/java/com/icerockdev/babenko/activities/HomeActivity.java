@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         mRequestUrlEditText = (EditText) findViewById(R.id.fieldsRequestUrlEditText);
         mRequestUrlEditText.setText(ApplicationConstants.URL_START);
         mRequestUrlEditText.setSelection(mRequestUrlEditText.getText().length());
-        mPresenter.attachView(this);
     }
 
     public void requestDataFieldsButtonClicked(View v) {
@@ -61,6 +60,14 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
     @Override
     protected void onPause() {
         super.onPause();
+        mPresenter.detachView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.attachView(this);
+        checkForErrors();
     }
 
     public void gotDataFields(DataField[] data) {
