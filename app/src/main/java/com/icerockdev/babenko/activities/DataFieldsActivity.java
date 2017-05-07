@@ -81,7 +81,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO: 06/05/17 check for errors & add base activity.
         mPresenter.attachView(this);
     }
 

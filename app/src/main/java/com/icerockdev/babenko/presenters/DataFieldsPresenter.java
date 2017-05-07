@@ -23,8 +23,7 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
             dataFieldsList.add((DataField) aData);
         }
         if (getView() != null)
-        getView().gotFieldsData( dataFieldsList);
-        // TODO: 06/05/17 else save it
+            getView().gotFieldsData(dataFieldsList);
     }
 
 }
