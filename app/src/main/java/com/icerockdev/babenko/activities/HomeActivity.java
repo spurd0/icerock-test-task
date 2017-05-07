@@ -1,10 +1,8 @@
 package com.icerockdev.babenko.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,9 +10,9 @@ import android.widget.EditText;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
-import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
 import com.icerockdev.babenko.utils.UtilsHelper;
@@ -67,7 +65,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     protected void onResume() {
         super.onResume();
         mPresenter.attachView(this);
-        checkForErrors();
+        mPresenter.checkForErrors(this);
     }
 
     public void gotDataFields(DataField[] data) {
@@ -76,13 +74,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
         dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
         startActivity(dataFieldsIntent);
-    }
-
-    private void checkForErrors() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String dialogErrorMessage = prefs.getString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
-        if (!dialogErrorMessage.isEmpty())
-            showErrorDialog(dialogErrorMessage);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.icerockdev.babenko.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.webkit.URLUtil;
 
 import com.icerockdev.babenko.IceRockApplication;
@@ -52,6 +55,14 @@ public class HomePresenter extends BasePresenter<HomeView> {
                                     .getString(R.string.request_data_fields_error_list_empty));
             }
         });
+    }
+
+    public void checkForErrors(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String dialogErrorMessage = prefs.getString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
+        if (!dialogErrorMessage.isEmpty())
+            if (getView() != null)
+                getView().showErrorDialog(dialogErrorMessage);
     }
 
 }
