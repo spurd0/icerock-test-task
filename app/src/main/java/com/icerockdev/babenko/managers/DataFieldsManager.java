@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.EditText;
 
 import com.icerockdev.babenko.BuildConfig;
@@ -14,10 +15,19 @@ import com.icerockdev.babenko.model.DataFieldResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UnknownFormatConversionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
+import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
+import static com.icerockdev.babenko.data.ApplicationConstants.PHONE;
+import static com.icerockdev.babenko.data.ApplicationConstants.TEXT;
+import static com.icerockdev.babenko.data.ApplicationConstants.URL;
 
 /**
  * Created by Roman Babenko on 30/04/17.
@@ -58,7 +68,7 @@ public class DataFieldsManager {
     }
 
     public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields
-            , DataFieldsCheckerCallback callback){
+            , DataFieldsCheckerCallback callback) {
         List<Integer> errorList = new ArrayList<Integer>();
         for (int i = 0; i < fieldValues.size(); i++) {
             int key = fieldValues.keyAt(i);
@@ -75,7 +85,23 @@ public class DataFieldsManager {
     }
 
     private boolean isFieldDataCorrect(String data, String type) {
-        return false;
+        switch (type) {
+            case TEXT:
+                int length = data.length();
+                return (length > 10 && length < 30);
+            case EMAIL:
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(data).matches();
+            case PHONE:
+                Pattern phonePattern = Pattern.compile("^[+7]{2}\\d{10}$");
+                return phonePattern.matcher(data).matches();
+            case NUMBER:
+                Pattern numberPattern = Pattern.compile("^\\d{1,5}$");
+                return numberPattern.matcher(data).matches();
+            case URL:
+                return URLUtil.isValidUrl(data);
+            default:
+                throw new UnknownFormatConversionException("Unknown type");
+        }
     }
 
     public interface DataFieldsCheckerCallback {

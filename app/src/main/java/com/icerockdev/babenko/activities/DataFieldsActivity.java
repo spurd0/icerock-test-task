@@ -2,12 +2,9 @@ package com.icerockdev.babenko.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +15,6 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.DataFieldsPresenter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -93,7 +89,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     public void fieldsSuccessfullyChecked() {
         finish();
     }
-
 
     public void hideError() {
         mHeaderErrorTv.setVisibility(View.GONE);
