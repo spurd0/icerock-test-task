@@ -48,7 +48,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         String value = dataElement.getValue();
 
         mFieldValue.setText(value);
-        mFieldValue.setHint(dataElement.getType()); // remade hint
+        mFieldValue.setHint(UtilsHelper.getInputHint(dataElement.getType(), mContext));
         mFieldValue.setInputType(UtilsHelper.getInputType(dataElement.getType()));
 
         mCharacterCounter.setText(String.valueOf(value.length()));

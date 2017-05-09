@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.TypedValue;
 
+import com.icerockdev.babenko.R;
+
 import java.util.UnknownFormatConversionException;
 
 import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
@@ -46,6 +48,23 @@ public class UtilsHelper {
                 return InputType.TYPE_CLASS_NUMBER;
             case URL:
                 return InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS;
+            default:
+                throw new UnknownFormatConversionException("Unknown type");
+        }
+    }
+
+    public static String getInputHint(String type, Context context) {
+        switch (type) {
+            case TEXT:
+                return context.getString(R.string.data_field_text_hint);
+            case EMAIL:
+                return context.getString(R.string.data_field_email_hint);
+            case PHONE:
+                return context.getString(R.string.data_field_phone_hint);
+            case NUMBER:
+                return context.getString(R.string.data_field_number_hint);
+            case URL:
+                return context.getString(R.string.data_field_url_hint);
             default:
                 throw new UnknownFormatConversionException("Unknown type");
         }

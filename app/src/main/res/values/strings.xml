@@ -12,4 +12,11 @@
     <!--Fields list actions-->
     <string name="submit_fields_button_text">Submit</string>
     <string name="data_field_incorrect_format">Please check values.</string>
+
+    <!--Data fields edit text hints-->
+    <string name="data_field_text_hint">Please enter text</string>
+    <string name="data_field_email_hint">Please enter email</string>
+    <string name="data_field_phone_hint">Please enter phone</string>
+    <string name="data_field_number_hint">Please enter number</string>
+    <string name="data_field_url_hint">Please enter URL</string>
 </resources>
