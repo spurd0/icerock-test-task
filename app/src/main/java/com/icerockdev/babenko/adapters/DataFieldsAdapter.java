@@ -1,7 +1,9 @@
 package com.icerockdev.babenko.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.SparseArrayCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +26,7 @@ import java.util.List;
 public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
     private SparseArrayCompat<EditText> mFieldValues = new SparseArrayCompat<EditText>();
+    private Drawable mDefaultBackground;
 
     public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields, ViewGroup parent) {
         super(context, dataFields, parent);
@@ -38,6 +41,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         View convertView = inflater.inflate(R.layout.data_field_element, parent, false);
         TextView mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
         EditText mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
+        mDefaultBackground = mFieldValue.getBackground();
 
         DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mFieldValue, mCharacterCounter,
                 dataElement);
@@ -61,12 +65,18 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
     }
 
     public void updateErrorsViews(List<Integer> errorList) {
-        for (int j = 0; j < mFieldValues.size(); j++)
+        for (int j = 0; j < mFieldValues.size(); j++) {
             mFieldValues.get(mFieldValues.keyAt(j)).setError(null);
+            mFieldValues.get(mFieldValues.keyAt(j)).setBackground(mDefaultBackground);
+        }
         for (int i : errorList)
             for (int j = 0; j < mFieldValues.size(); j++)
-                if (((int) mFieldValues.get(mFieldValues.keyAt(j)).getTag()) == i)
-                    mFieldValues.get(mFieldValues.keyAt(j)).setError(mContext.getString(R.string.data_field_incorrect_format));
+                if (((int) mFieldValues.get(mFieldValues.keyAt(j)).getTag()) == i) {
+                    mFieldValues.get(mFieldValues.keyAt(j))
+                            .setError(mContext.getString(R.string.data_field_incorrect_format));
+                    mFieldValues.get(mFieldValues.keyAt(j))
+                            .setBackgroundColor(ContextCompat.getColor(mContext, R.color.errorTextColor));
+                }
     }
 
     private class DataFieldsTextWatcher implements TextWatcher {
