@@ -12,7 +12,7 @@ import java.util.List;
 public interface DataFieldsView extends BaseView {
     void hideError();
 
-    void showError(String error);
+    void showError();
 
     void gotFieldsData(ArrayList<DataField> dataFields);
 

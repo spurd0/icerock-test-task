@@ -63,12 +63,14 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     private void submitButtonPressed() {
+        hideError();
         mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), mDataFields);
     }
 
-    public void showError(String error) {
+    public void showError() {
         mHeaderErrorTv.setVisibility(View.VISIBLE);
-        mHeaderErrorTv.setText("Test");
+        mHeaderErrorTv.setText(getText(R.string.data_field_incorrect_format));
+        mHeaderErrorTv.requestFocus();
     }
 
     @Override
@@ -82,7 +84,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     @Override
     public void displayFieldsError(List<Integer> errorList) {
-        //// TODO: 09/05/17 display error in the top
+        showError();
         mDataFieldsAdapter.updateErrorsViews(errorList);
     }
 
