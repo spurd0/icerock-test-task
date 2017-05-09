@@ -10,6 +10,7 @@ import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.DataFieldResponse;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
@@ -41,7 +42,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
             }
 
             @Override
-            public void successResponse(DataField[] response) {
+            public void successResponse(DataFieldResponse[] response) {
                 boolean emptyList = response.length == 0;
                 if (getView() != null) {
                     getView().dismissProgressDialog();

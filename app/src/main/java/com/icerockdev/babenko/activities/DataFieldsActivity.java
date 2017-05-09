@@ -71,19 +71,10 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     public void gotFieldsData(ArrayList<DataField> dataFields) {
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
-        dataFields = prepareDataFields(dataFields);
         DataFieldsAdapter adapter = new DataFieldsAdapter(this, dataFields, mDataFieldsContainer);
         adapter.attachAdapter(mDataFieldsContainer);
     }
 
-    private ArrayList<DataField> prepareDataFields(ArrayList<DataField> dataFields) { // TODO: 09/05/17 add another list
-        for (DataField field : dataFields) {
-            field.setValue("");
-            if (!field.getDefaultValue().isEmpty())
-                field.setValue(field.getDefaultValue());
-        }
-        return dataFields;
-    }
 
     public void hideError() {
         mHeaderErrorTv.setVisibility(View.GONE);

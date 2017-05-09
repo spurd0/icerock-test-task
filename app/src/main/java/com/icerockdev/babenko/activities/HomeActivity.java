@@ -14,8 +14,11 @@ import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.DataFieldResponse;
 import com.icerockdev.babenko.presenters.HomePresenter;
 import com.icerockdev.babenko.utils.UtilsHelper;
+
+import java.util.ArrayList;
 
 import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
@@ -70,12 +73,20 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         mPresenter.checkForErrors(this);
     }
 
-    public void gotDataFields(DataField[] data) {
+    public void gotDataFields(DataFieldResponse[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
+        DataField[] convertedData = prepareDataFields(data);
         Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
-        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
+        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, convertedData);
         startActivity(dataFieldsIntent);
+    }
+
+    private DataField[] prepareDataFields(DataFieldResponse[] data) {
+        DataField[] convertedData = new DataField[data.length];
+        for (int i = 0; i < data.length; i++)
+            convertedData[i] = new DataField(data[i]);
+        return convertedData;
     }
 
     @Override

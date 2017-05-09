@@ -8,6 +8,7 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.DataFieldResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,11 +26,11 @@ public class DataFieldsManager {
         if (BuildConfig.DEBUG)
             Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"; // TODO: 30/04/17 move to unit test
 
-        final Call<DataField[]> data = IceRockApplication.getInstance().getRetrofitManager()
+        final Call<DataFieldResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
                 .getService().requestDataFields(Url);
-        data.enqueue(new Callback<DataField[]>() {
+        data.enqueue(new Callback<DataFieldResponse[]>() {
             @Override
-            public void onResponse(Call<DataField[]> call, Response<DataField[]> response) {
+            public void onResponse(Call<DataFieldResponse[]> call, Response<DataFieldResponse[]> response) {
                 if (response.body() == null) {
                     callback.failedResponse(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_null));
@@ -37,7 +38,7 @@ public class DataFieldsManager {
             }
 
             @Override
-            public void onFailure(Call<DataField[]> call, Throwable t) {
+            public void onFailure(Call<DataFieldResponse[]> call, Throwable t) {
                 callback.failedResponse(t.getLocalizedMessage());
                 if (BuildConfig.DEBUG)
                     Log.e(TAG, "Request error " + t.getLocalizedMessage());
@@ -48,6 +49,6 @@ public class DataFieldsManager {
     public interface DataFieldsCallback {
         void failedResponse(String error);
 
-        void successResponse(DataField[] response);
+        void successResponse(DataFieldResponse[] response);
     }
 }
