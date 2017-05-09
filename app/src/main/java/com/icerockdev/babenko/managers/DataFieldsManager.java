@@ -67,8 +67,8 @@ public class DataFieldsManager {
         void successResponse(DataFieldResponse[] response);
     }
 
-    public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields
-            , DataFieldsCheckerCallback callback) {
+    public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields,
+                            DataFieldsCheckerCallback callback) {
         List<Integer> errorList = new ArrayList<Integer>();
         for (int i = 0; i < fieldValues.size(); i++) {
             int key = fieldValues.keyAt(i);
@@ -85,6 +85,8 @@ public class DataFieldsManager {
     }
 
     private boolean isFieldDataCorrect(String data, String type) {
+        if (data.isEmpty())
+            return false;
         switch (type) {
             case TEXT:
                 int length = data.length();
