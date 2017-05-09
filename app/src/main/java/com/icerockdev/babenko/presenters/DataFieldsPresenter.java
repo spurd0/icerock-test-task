@@ -2,11 +2,16 @@ package com.icerockdev.babenko.presenters;
 
 import android.app.Activity;
 import android.os.Parcelable;
+import android.support.v4.util.SparseArrayCompat;
+import android.widget.EditText;
 
+import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
+import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 
@@ -25,5 +30,21 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
         if (getView() != null)
             getView().gotFieldsData(dataFieldsList);
     }
+
+    public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields) {
+        IceRockApplication.getInstance().getDataFieldsManager().checkFields(fieldValues, dataFields,
+                new DataFieldsManager.DataFieldsCheckerCallback() {
+                    @Override
+                    public void successResponse() {
+
+                    }
+
+                    @Override
+                    public void failedResponse(List<Integer> errorList) {
+                        getView().displayFieldsError(errorList);
+                    }
+                });
+    }
+
 
 }

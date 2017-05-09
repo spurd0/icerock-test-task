@@ -2,6 +2,7 @@ package com.icerockdev.babenko.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.util.SparseArrayCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
-    private HashMap<String, String> mFieldValues = new HashMap<String, String>();
+    private SparseArrayCompat<EditText> mFieldValues = new SparseArrayCompat<EditText>();
 
     public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields, ViewGroup parent) {
         super(context, dataFields, parent);
@@ -49,10 +50,14 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         mFieldValue.setHint(dataElement.getType()); // remade hint
 
         mCharacterCounter.setText(String.valueOf(value.length()));
+        mFieldValues.put((Integer) mFieldValue.getTag(), mFieldValue);
 
         return convertView;
     }
 
+    public SparseArrayCompat<EditText> getFieldValues() {
+        return mFieldValues; //not so good solution if we use some view with recycling methods
+    }
 
     private class DataFieldsTextWatcher implements TextWatcher {
 
@@ -78,8 +83,6 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         }
 
         public void afterTextChanged(Editable editable) {
-            String textData = editable.toString();
-            DataFieldsAdapter.this.mFieldValues.put(mView.getTag().toString(), textData);
         }
     }
 }

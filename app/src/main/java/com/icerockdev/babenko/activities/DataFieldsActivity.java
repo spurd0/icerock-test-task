@@ -2,9 +2,12 @@ package com.icerockdev.babenko.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +18,8 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.DataFieldsPresenter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Roman Babenko on 01/05/17.
@@ -27,6 +32,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     private LinearLayout mDataFieldsContainer;
     private TextView mHeaderErrorTv;
     private DataFieldsPresenter mPresenter;
+    private DataFieldsAdapter mDataFieldsAdapter;
+    private ArrayList<DataField> mDataFields;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +67,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     private void submitButtonPressed() {
+        mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), mDataFields);
     }
 
     public void showError(String error) {
@@ -71,8 +79,14 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     public void gotFieldsData(ArrayList<DataField> dataFields) {
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
-        DataFieldsAdapter adapter = new DataFieldsAdapter(this, dataFields, mDataFieldsContainer);
-        adapter.attachAdapter(mDataFieldsContainer);
+        mDataFields = dataFields;
+        mDataFieldsAdapter = new DataFieldsAdapter(this, mDataFields, mDataFieldsContainer);
+        mDataFieldsAdapter.attachAdapter(mDataFieldsContainer);
+    }
+
+    @Override
+    public void displayFieldsError(List<Integer> errorList) {
+
     }
 
 

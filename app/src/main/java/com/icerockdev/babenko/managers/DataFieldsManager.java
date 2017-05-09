@@ -2,13 +2,18 @@ package com.icerockdev.babenko.managers;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.model.DataFieldResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,5 +55,32 @@ public class DataFieldsManager {
         void failedResponse(String error);
 
         void successResponse(DataFieldResponse[] response);
+    }
+
+    public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields
+            , DataFieldsCheckerCallback callback){
+        List<Integer> errorList = new ArrayList<Integer>();
+        for (int i = 0; i < fieldValues.size(); i++) {
+            int key = fieldValues.keyAt(i);
+            EditText fieldValue = fieldValues.get(key);
+            for (DataField dataField : dataFields)
+                if (dataField.getId() == key) {
+                    if (!isFieldDataCorrect(fieldValue.getText().toString(), dataField.getType()))
+                        errorList.add(key);
+                }
+        }
+        if (errorList.isEmpty())
+            callback.successResponse();
+        else callback.failedResponse(errorList);
+    }
+
+    private boolean isFieldDataCorrect(String data, String type) {
+        return false;
+    }
+
+    public interface DataFieldsCheckerCallback {
+        void successResponse();
+
+        void failedResponse(List<Integer> errorList);
     }
 }
