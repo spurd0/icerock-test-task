@@ -15,7 +15,6 @@ import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -59,6 +58,15 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
     public SparseArrayCompat<EditText> getFieldValues() {
         return mFieldValues; //not so good solution if we use some view with recycling methods
+    }
+
+    public void updateErrorsViews(List<Integer> errorList) {
+        for (int j = 0; j < mFieldValues.size(); j++)
+            mFieldValues.get(mFieldValues.keyAt(j)).setError(null);
+        for (int i : errorList)
+            for (int j = 0; j < mFieldValues.size(); j++)
+                if (((int) mFieldValues.get(mFieldValues.keyAt(j)).getTag()) == i)
+                    mFieldValues.get(mFieldValues.keyAt(j)).setError(mContext.getString(R.string.data_field_incorrect_format));
     }
 
     private class DataFieldsTextWatcher implements TextWatcher {

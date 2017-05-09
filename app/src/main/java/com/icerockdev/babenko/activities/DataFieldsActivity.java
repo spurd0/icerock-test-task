@@ -82,7 +82,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     @Override
     public void displayFieldsError(List<Integer> errorList) {
-
+        //// TODO: 09/05/17 display error in the top
+        mDataFieldsAdapter.updateErrorsViews(errorList);
     }
 
     @Override
