@@ -33,6 +33,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
         mPresenter = new DataFieldsPresenter();
+        mPresenter.attachView(this);
         initViews();
         requestFieldsData();
     }
@@ -43,7 +44,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         initSubmitButton();
     }
 
-    private void requestFieldsData(){
+    private void requestFieldsData() {
         mPresenter.requestFieldsData(this);
     }
 
@@ -81,7 +82,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
+        if (mPresenter.getView() == null)
+            mPresenter.attachView(this);
     }
 
     @Override

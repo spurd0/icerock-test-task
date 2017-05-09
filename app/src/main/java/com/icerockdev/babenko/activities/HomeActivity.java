@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mPresenter = new HomePresenter();
+        mPresenter.attachView(this);
         initViews();
     }
 
@@ -64,7 +65,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(this);
+        if (mPresenter.getView() == null)
+            mPresenter.attachView(this);
         mPresenter.checkForErrors(this);
     }
 
