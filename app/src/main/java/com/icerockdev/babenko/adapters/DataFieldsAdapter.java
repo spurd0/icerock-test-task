@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
         mFieldValue.setText(value);
         mFieldValue.setHint(dataElement.getType()); // remade hint
+        mFieldValue.setInputType(UtilsHelper.getInputType(dataElement.getType()));
 
         mCharacterCounter.setText(String.valueOf(value.length()));
         mFieldValues.put((Integer) mFieldValue.getTag(), mFieldValue);
