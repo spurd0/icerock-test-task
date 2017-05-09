@@ -36,14 +36,20 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
                 new DataFieldsManager.DataFieldsCheckerCallback() {
                     @Override
                     public void successResponse() {
-
+                        fieldsAreCorrect();
                     }
 
                     @Override
                     public void failedResponse(List<Integer> errorList) {
-                        getView().displayFieldsError(errorList);
+                        if (getView() != null)
+                            getView().displayFieldsError(errorList);
                     }
                 });
+    }
+
+    private void fieldsAreCorrect() {
+        if (getView() != null)
+            getView().fieldsSuccessfullyChecked();
     }
 
 

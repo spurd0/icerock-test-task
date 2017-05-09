@@ -89,6 +89,11 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     }
 
+    @Override
+    public void fieldsSuccessfullyChecked() {
+        finish();
+    }
+
 
     public void hideError() {
         mHeaderErrorTv.setVisibility(View.GONE);

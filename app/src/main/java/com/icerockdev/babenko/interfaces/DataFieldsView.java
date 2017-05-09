@@ -17,4 +17,6 @@ public interface DataFieldsView extends BaseView {
     void gotFieldsData(ArrayList<DataField> dataFields);
 
     void displayFieldsError(List<Integer> errorList);
+
+    void fieldsSuccessfullyChecked();
 }
