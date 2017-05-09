@@ -43,9 +43,13 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         mFieldValue.setTag(dataElement.getId());
         mFieldValue.addTextChangedListener(textWatcher);
 
-        mCharacterCounter.setText(String.valueOf(dataElement.getDefaultValue().length()));
-        mFieldValue.setText(dataElement.getDefaultValue());
+        String value = dataElement.getValue();
+
+        mFieldValue.setText(value);
         mFieldValue.setHint(dataElement.getType()); // remade hint
+
+        mCharacterCounter.setText(String.valueOf(value.length()));
+
         return convertView;
     }
 
@@ -69,7 +73,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mValue.setDefaultValue(s.toString());
+            mValue.setValue(s.toString());
             mCounterTv.setText(String.valueOf(s.toString().length()));
         }
 

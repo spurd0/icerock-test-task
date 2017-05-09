@@ -12,12 +12,14 @@ public class DataField implements Parcelable {
     private String type;
     private String placeholder;
     private String default_value;
+    private String mValue;
 
     protected DataField(Parcel in) {
         id = in.readInt();
         type = in.readString();
         placeholder = in.readString();
         default_value = in.readString();
+        mValue = in.readString();
     }
 
     public static final Creator<DataField> CREATOR = new Creator<DataField>() {
@@ -48,14 +50,18 @@ public class DataField implements Parcelable {
         return default_value;
     }
 
-    public void setDefaultValue(String defaultValue) {
-        this.default_value = defaultValue;
+    public void setValue(String value) {
+        this.mValue = value;
+    }
+
+    public String getValue() {
+        return mValue;
     }
 
     @Override
     public String toString() {
         return "Id is " + id + " type is " + type + " placeholder is " + placeholder +
-                " default_value is " + default_value;
+                " default_value is " + default_value + " current is " + mValue;
     }
 
     @Override
@@ -69,5 +75,6 @@ public class DataField implements Parcelable {
         dest.writeString(type);
         dest.writeString(placeholder);
         dest.writeString(default_value);
+        dest.writeString(mValue);
     }
 }
