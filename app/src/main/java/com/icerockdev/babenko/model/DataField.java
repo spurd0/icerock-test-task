@@ -44,8 +44,12 @@ public class DataField implements Parcelable {
         return placeholder;
     }
 
-    public String getDefault_value() {
+    public String getDefaultValue() {
         return default_value;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.default_value = defaultValue;
     }
 
     @Override

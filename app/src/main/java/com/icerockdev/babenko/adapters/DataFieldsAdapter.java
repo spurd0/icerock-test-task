@@ -1,15 +1,12 @@
 package com.icerockdev.babenko.adapters;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,18 +32,19 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
     @Override
     public View getView(int position, ViewGroup parent) {
         DataField dataElement = getItem(position);
-            LayoutInflater inflater = (LayoutInflater) mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View convertView = inflater.inflate(R.layout.data_field_element, parent, false);
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View convertView = inflater.inflate(R.layout.data_field_element, parent, false);
         TextView mCharacterCounter = (TextView) convertView.findViewById(R.id.dataFieldCounter);
         EditText mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
 
-        DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mFieldValue, dataElement.getDefault_value());
+        DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mFieldValue, mCharacterCounter,
+                dataElement);
         mFieldValue.setTag(dataElement.getId());
         mFieldValue.addTextChangedListener(textWatcher);
 
-        mCharacterCounter.setText(String.valueOf(dataElement.getDefault_value().length()));
-        mFieldValue.setText(dataElement.getDefault_value());
+        mCharacterCounter.setText(String.valueOf(dataElement.getDefaultValue().length()));
+        mFieldValue.setText(dataElement.getDefaultValue());
         mFieldValue.setHint(dataElement.getType()); // remade hint
         return convertView;
     }
@@ -54,12 +52,14 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
     private class DataFieldsTextWatcher implements TextWatcher {
 
-        private View mView;
-        private String mValue;
+        private EditText mView;
+        private DataField mValue;
+        private TextView mCounterTv;
 
-        private DataFieldsTextWatcher(View view, String value) {
-            this.mView = view;
+        private DataFieldsTextWatcher(EditText fieldValueEt, TextView counter, DataField value) {
+            this.mView = fieldValueEt;
             this.mValue = value;
+            this.mCounterTv = counter;
         }
 
         @Override
@@ -69,7 +69,8 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mValue = s.toString();
+            mValue.setDefaultValue(s.toString());
+            mCounterTv.setText(String.valueOf(s.toString().length()));
         }
 
         public void afterTextChanged(Editable editable) {
