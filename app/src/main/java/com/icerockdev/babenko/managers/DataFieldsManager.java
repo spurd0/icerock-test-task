@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
+import android.util.Patterns;
 import android.webkit.URLUtil;
 import android.widget.EditText;
 
@@ -100,7 +101,7 @@ public class DataFieldsManager {
                 Pattern numberPattern = Pattern.compile("^\\d{1,5}$");
                 return numberPattern.matcher(data).matches();
             case URL:
-                return URLUtil.isValidUrl(data);
+                return Patterns.WEB_URL.matcher(data).matches();
             default:
                 throw new UnknownFormatConversionException("Unknown type");
         }

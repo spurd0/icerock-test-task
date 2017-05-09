@@ -3,6 +3,7 @@ package com.icerockdev.babenko.presenters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Patterns;
 import android.webkit.URLUtil;
 
 import com.icerockdev.babenko.IceRockApplication;
@@ -26,7 +27,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
     public void requestDataClicked() {
         String url = getView().getUrlFromForm();
-        if (!URLUtil.isValidUrl(url)) {
+        if (!Patterns.WEB_URL.matcher(url).matches()) {
             getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
             return;
         }
