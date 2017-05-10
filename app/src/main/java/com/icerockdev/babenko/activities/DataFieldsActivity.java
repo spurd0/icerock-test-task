@@ -1,5 +1,6 @@
 package com.icerockdev.babenko.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -90,7 +91,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     @Override
     public void fieldsSuccessfullyChecked() {
-        finish();
+        Intent intent = new Intent(this, ImagesActivity.class);
+        startActivity(intent);
     }
 
     public void hideError() {
