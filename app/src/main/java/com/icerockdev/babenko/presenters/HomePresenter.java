@@ -25,12 +25,11 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
     private DataFieldsManager mManager = IceRockApplication.getInstance().getDataFieldsManager();
 
-    public void requestDataClicked() {
-        String url = getView().getUrlFromForm();
         if (!Patterns.WEB_URL.matcher(url).matches()) {
             getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
             return;
         }
+    public void requestDataClicked(String url) {
         getView().showProgressDialog();
         mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
             @Override

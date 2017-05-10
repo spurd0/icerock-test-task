@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     }
 
     public void requestDataFieldsButtonClicked(View v) {
-        mPresenter.requestDataClicked();
+        mPresenter.requestDataClicked(mRequestUrlEditText.getText().toString());
     }
 
     public void showErrorDialog(String error) {
@@ -79,11 +79,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
         dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
         startActivity(dataFieldsIntent);
-    }
-
-    @Override
-    public String getUrlFromForm() {
-        return mRequestUrlEditText.getText().toString();
     }
 
     @Override
