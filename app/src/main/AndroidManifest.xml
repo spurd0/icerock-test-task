@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.DataFieldsActivity"></activity>
+        <activity android:name=".activities.ImagesActivity"></activity>
     </application>
 
 </manifest>
