@@ -1,5 +1,7 @@
 package com.icerockdev.babenko.managers;
 
+import com.icerockdev.babenko.interfaces.NetworkApi;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -8,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitManager {
-    private NetworkManager mService;
+    private NetworkApi mService;
 
     public RetrofitManager() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -16,10 +18,10 @@ public class RetrofitManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        mService = retrofit.create(NetworkManager.class);
+        mService = retrofit.create(NetworkApi.class);
     }
 
-    public NetworkManager getService() {
+    public NetworkApi getService() {
         return mService;
     }
 }
