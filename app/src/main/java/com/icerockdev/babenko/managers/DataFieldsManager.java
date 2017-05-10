@@ -40,7 +40,7 @@ public class DataFieldsManager {
 
     public void requestDataFields(String Url, final DataFieldsCallback callback) {
         if (BuildConfig.DEBUG)
-            Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"; // TODO: 30/04/17 move to unit test
+            Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c";
 
         final Call<DataFieldResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
                 .getService().requestDataFields(Url);

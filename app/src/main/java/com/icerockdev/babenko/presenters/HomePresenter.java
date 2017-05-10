@@ -3,6 +3,7 @@ package com.icerockdev.babenko.presenters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Patterns;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
@@ -25,12 +26,10 @@ public class HomePresenter extends BasePresenter<HomeView> {
     private DataFieldsManager mManager = IceRockApplication.getInstance().getDataFieldsManager();
 
     public void requestDataClicked(String url) {
-//        if (!Patterns.WEB_URL.matcher(url).matches()) {
-//            getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
-//            return;
-//        }
-        if (BuildConfig.DEBUG)
-            url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c";
+        if (!Patterns.WEB_URL.matcher(url).matches()) {
+            getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
+            return;
+        }
         getView().showProgressDialog();
         mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
             @Override
