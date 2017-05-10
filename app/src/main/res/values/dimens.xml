@@ -9,4 +9,11 @@
     <dimen name="data_field_element_footer_margin_horizontal">5dp</dimen>
     <dimen name="data_field_element_header_margin_vertical">5dp</dimen>
     <dimen name="data_field_element_header_margin_horizontal">5dp</dimen>
+    <dimen name="image_element_picture_margin_horizontal">5dp</dimen>
+    <dimen name="image_element_picture_margin_vertical">10dp</dimen>
+    <dimen name="image_element_id_margin_horizontal">5dp</dimen>
+    <dimen name="image_element_id_margin_vertical">5dp</dimen>
+    <dimen name="image_element_id_text_size">12sp</dimen>
+    <dimen name="image_element_title_margin_horizontal">5dp</dimen>
+    <dimen name="image_element_title_margin_vertical">5dp</dimen>
 </resources>
