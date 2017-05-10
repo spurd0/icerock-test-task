@@ -73,20 +73,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         mPresenter.checkForErrors(this);
     }
 
-    public void gotDataFields(DataFieldResponse[] data) {
+    public void gotDataFields(DataField[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
-        DataField[] convertedData = prepareDataFields(data);
         Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
-        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, convertedData);
+        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
         startActivity(dataFieldsIntent);
-    }
-
-    private DataField[] prepareDataFields(DataFieldResponse[] data) {
-        DataField[] convertedData = new DataField[data.length];
-        for (int i = 0; i < data.length; i++)
-            convertedData[i] = new DataField(data[i]);
-        return convertedData;
     }
 
     @Override

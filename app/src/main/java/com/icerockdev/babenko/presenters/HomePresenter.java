@@ -48,7 +48,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     if (!emptyList)
-                        getView().gotDataFields(response);
+                        getView().gotDataFields(prepareDataFields(response));
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
                 } else if (emptyList)
@@ -57,6 +57,13 @@ public class HomePresenter extends BasePresenter<HomeView> {
                                     .getString(R.string.request_data_fields_error_list_empty));
             }
         });
+    }
+
+    private DataField[] prepareDataFields(DataFieldResponse[] data) {
+        DataField[] convertedData = new DataField[data.length];
+        for (int i = 0; i < data.length; i++)
+            convertedData[i] = new DataField(data[i]);
+        return convertedData;
     }
 
     public void checkForErrors(Context context) {
