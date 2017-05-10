@@ -7,7 +7,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.ImagesView;
+import com.icerockdev.babenko.model.ImageResponse;
 import com.icerockdev.babenko.presenters.ImagesPresenter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -35,5 +38,25 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView{
 
     private void requestPictures() {
         mPresenter.requestPictures();
+    }
+
+    @Override
+    public void showErrorDialog(String message) {
+        
+    }
+
+    @Override
+    public void showProgressDialog() {
+
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+
+    }
+
+    @Override
+    public void gotImagesList(ArrayList<ImageResponse> images) {
+
     }
 }
