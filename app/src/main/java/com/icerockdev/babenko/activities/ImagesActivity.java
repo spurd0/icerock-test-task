@@ -1,13 +1,14 @@
 package com.icerockdev.babenko.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
@@ -34,6 +35,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     private static final String TAG = "ImagesActivity";
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
+    private TextView mListIsEmptyErrorTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     private void initViews() {
         mImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         mImagesRecyclerView.setHasFixedSize(true);
+        mListIsEmptyErrorTv = (TextView) findViewById(R.id.imagesListEmptyTv);
     }
 
     private void requestPictures() {
@@ -78,6 +81,12 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
     }
 
+    @Override
+    public void showListIsEmptyError() {
+        mListIsEmptyErrorTv.setVisibility(View.VISIBLE);
+        mImagesRecyclerView.setVisibility(View.GONE);
+    }
+
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
@@ -91,6 +100,8 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
                 startActivity(intent);
             }
         });
+        mListIsEmptyErrorTv.setVisibility(View.GONE);
+        mImagesRecyclerView.setVisibility(View.VISIBLE);
         mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mImagesRecyclerView.setAdapter(adapter);
     }

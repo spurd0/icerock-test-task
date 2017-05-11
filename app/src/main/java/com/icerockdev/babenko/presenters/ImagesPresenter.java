@@ -32,7 +32,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                     if (BuildConfig.DEBUG)
                         Log.d(TAG, "Images list length is " + images.length);
                     if (images.length == 0) {
-                        getView().showErrorDialog("List is empty"); // TODO: 5/11/2017 show it in other way
+                        getView().showListIsEmptyError();
                         return;
                     }
                     getView().gotImagesList(convertImagesList(images));

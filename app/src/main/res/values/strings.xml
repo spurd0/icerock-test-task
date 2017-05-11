@@ -19,4 +19,7 @@
     <string name="data_field_phone_hint">Please enter phone</string>
     <string name="data_field_number_hint">Please enter number</string>
     <string name="data_field_url_hint">Please enter URL</string>
+
+    <!--Images list screen-->
+    <string name="images_list_is_empty">Images list is empty</string>
 </resources>

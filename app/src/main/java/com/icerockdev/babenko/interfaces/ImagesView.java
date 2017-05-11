@@ -12,6 +12,8 @@ import java.util.List;
 public interface ImagesView extends BaseView {
     void showErrorDialog(String message); // TODO: 10/05/17 move to base class
 
+    void showListIsEmptyError();
+
     void showProgressDialog();
 
     void dismissProgressDialog();
