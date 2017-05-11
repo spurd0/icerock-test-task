@@ -41,8 +41,17 @@ public class ImagesManager {
         });
     }
 
+    public void requestPicture(String url, ImageLoadingCallback callback) {
+
+    }
+
     public interface ImagesCallback{
         void successResponse(ImageResponse[] images);
         void failedResponse(String error);
+    }
+
+    public interface ImageLoadingCallback{
+        void successResponse();
+        void failedResponse();
     }
 }
