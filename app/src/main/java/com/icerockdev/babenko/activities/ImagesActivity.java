@@ -11,6 +11,8 @@ import android.util.Log;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.ImagesAdapter;
+import com.icerockdev.babenko.fragments.ProgressDialogFragment;
+import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.model.ImageItem;
@@ -18,11 +20,15 @@ import com.icerockdev.babenko.presenters.ImagesPresenter;
 
 import java.util.ArrayList;
 
+import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+
 /**
  * Created by Roman Babenko on 10/05/17.
  */
 
-public class ImagesActivity extends AppCompatActivity implements ImagesView{
+public class ImagesActivity extends AppCompatActivity implements ImagesView {
+    private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.ImagesActivity.SERVER_ERROR_DIALOG_TAG";
+    private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.ImagesActivity.PROGRESS_DIALOG_TAG";
     private static final String TAG = "ImagesActivity";
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
@@ -48,19 +54,28 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView{
     }
 
     @Override
-    public void showErrorDialog(String message) {
-
-    }
-
-    @Override
     public void showProgressDialog() {
-
+        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
     }
 
     @Override
     public void dismissProgressDialog() {
-
+        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
+                findFragmentByTag(PROGRESS_DIALOG_TAG);
+        if (progressDialogFragment != null)
+            progressDialogFragment.dismiss();
     }
+
+    @Override
+    public void showErrorDialog(String error) {
+        ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString(DIALOG_MESSAGE_KEY, error);
+        serverErrorDialogFragment.setArguments(arguments);
+        serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
+    }
+
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
@@ -71,7 +86,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView{
                     Log.d(TAG, "Image for view is " + imageUrl);
             }
         });
-                mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mImagesRecyclerView.setAdapter(adapter);
     }
 }

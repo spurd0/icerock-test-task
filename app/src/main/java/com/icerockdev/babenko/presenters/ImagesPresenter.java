@@ -23,14 +23,16 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
 
     public void requestPictures() {
+        getView().showProgressDialog(); // TODO: 5/11/2017 same as in the homeactivity, think about it
         IceRockApplication.getInstance().getImagesManager().requestPicturesList(new ImagesManager.ImagesCallback() {
             @Override
             public void successResponse(ImageResponse[] images) {
                 if (getView() != null) {
+                    getView().dismissProgressDialog();
                     if (BuildConfig.DEBUG)
                         Log.d(TAG, "Images list length is " + images.length);
                     if (images.length == 0) {
-                        getView().showErrorDialog("List is empty");
+                        getView().showErrorDialog("List is empty"); // TODO: 5/11/2017 show it in other way
                         return;
                     }
                     getView().gotImagesList(convertImagesList(images));
@@ -43,6 +45,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
             @Override
             public void failedResponse(String error) {
                 if (getView() != null) {
+                    getView().dismissProgressDialog();
                     getView().showErrorDialog(error);
                 } else {
                     // TODO: 10/05/17 record error

@@ -8,5 +8,5 @@ import com.icerockdev.babenko.model.ImageItem;
 
 public interface ImagesListCallback {
 
-    void itemClicked(int id);
+    void itemClicked(String imageUrl);
 }
