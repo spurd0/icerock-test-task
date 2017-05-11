@@ -1,11 +1,15 @@
 package com.icerockdev.babenko.managers;
 
+import android.app.Activity;
+import android.net.Uri;
 import android.util.Log;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.ImageResponse;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,17 +45,9 @@ public class ImagesManager {
         });
     }
 
-    public void requestPicture(String url, ImageLoadingCallback callback) {
-
-    }
-
     public interface ImagesCallback{
         void successResponse(ImageResponse[] images);
         void failedResponse(String error);
     }
 
-    public interface ImageLoadingCallback{
-        void successResponse();
-        void failedResponse();
-    }
 }

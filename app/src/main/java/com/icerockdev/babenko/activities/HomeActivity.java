@@ -14,11 +14,8 @@ import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.DataFieldResponse;
 import com.icerockdev.babenko.presenters.HomePresenter;
 import com.icerockdev.babenko.utils.UtilsHelper;
-
-import java.util.ArrayList;
 
 import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;

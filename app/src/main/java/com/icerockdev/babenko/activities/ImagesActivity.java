@@ -21,8 +21,8 @@ import com.icerockdev.babenko.presenters.ImagesPresenter;
 
 import java.util.ArrayList;
 
+import static com.icerockdev.babenko.activities.FullScreenImageActivity.IMAGE_URL_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
-import static com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY;
 
 /**
  * Created by Roman Babenko on 10/05/17.
