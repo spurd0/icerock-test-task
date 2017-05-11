@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".activities.DataFieldsActivity"></activity>
         <activity android:name=".activities.ImagesActivity"></activity>
+        <activity android:name=".activities.FullScreenImageActivity"></activity>
     </application>
 
 </manifest>
