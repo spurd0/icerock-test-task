@@ -70,7 +70,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
-            mPicasso.load(item.getThumbnailUrl()).into(mImageView); // TODO: 5/11/2017 add temp image
+            mPicasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark).into(mImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
