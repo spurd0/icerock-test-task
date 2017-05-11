@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.icerockdev.babenko.data.ApplicationConstants.REUEST_IMAGES_URL;
+import static com.icerockdev.babenko.data.ApplicationConstants.REQUEST_IMAGES_URL;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -22,7 +22,7 @@ public class ImagesManager {
 
     public void requestPicturesList(final ImagesCallback callback) {
         final Call<ImageResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
-                .getService().requestImages(REUEST_IMAGES_URL);
+                .getService().requestImages(REQUEST_IMAGES_URL);
         data.enqueue(new Callback<ImageResponse[]>() {
             @Override
             public void onResponse(Call<ImageResponse[]> call, Response<ImageResponse[]> response) {

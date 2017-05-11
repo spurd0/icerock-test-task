@@ -11,5 +11,5 @@ public class ApplicationConstants {
     public static final String PHONE = "PHONE";
     public static final String NUMBER = "NUMBER";
     public static final String URL = "URL";
-    public static final String REUEST_IMAGES_URL = "https://jsonplaceholder.typicode.com/photos";
+    public static final String REQUEST_IMAGES_URL = "https://jsonplaceholder.typicode.com/photos";
 }
