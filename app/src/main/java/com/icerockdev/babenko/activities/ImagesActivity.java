@@ -1,11 +1,14 @@
 package com.icerockdev.babenko.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.ImagesAdapter;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
  */
 
 public class ImagesActivity extends AppCompatActivity implements ImagesView{
-
+    private static final String TAG = "ImagesActivity";
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
 
@@ -63,11 +66,12 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView{
     public void gotImagesList(ArrayList<ImageItem> images) {
         ImagesAdapter adapter = new ImagesAdapter(this, images, new ImagesListCallback() {
             @Override
-            public void itemClicked(int id) {
-
+            public void itemClicked(String imageUrl) {
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Image for view is " + imageUrl);
             }
         });
-        mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mImagesRecyclerView.setAdapter(adapter);
     }
 }

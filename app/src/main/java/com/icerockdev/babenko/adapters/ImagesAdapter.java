@@ -59,42 +59,24 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private ImageView mImageView;
         private TextView mId;
         private TextView mTitle;
-
-
-//        private int mId;
-//        private int mAlbumId;
-//        private String mTitle;
-//        private String mUrl;
-//        private String mThumbnailUrl;
-//        private ImagesListCallback mCallback;
-//        private View mItemView;
+        private String mBigPictureUrl;
 
         public ImagesItemHolder(View itemView) {
             super(itemView);
             this.mId = (TextView) itemView.findViewById(R.id.pictureElementId);
             this.mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             this.mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
-
-
-//            this.mAlbumId = item.getAlbumId();
-//            this.mId =item.getId();
-//            this.mTitle = item.getTitle();
-//            this. mUrl = item.getUrl();
-//            this.mThumbnailUrl = item.getThumbnailUrl();
-//            this.mCallback = callback;
-//            this.mItemView = itemView;
         }
 
         public void updateView(ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
+            mBigPictureUrl = item.getUrl(); // i don`t know if it`s good idea to place it here
             mPicasso.load(item.getThumbnailUrl()).into(mImageView);
-            //mImageView.setImage(item.getId());
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callback.itemClicked(Integer.valueOf(mId.getText().toString()));
+                    callback.itemClicked(mBigPictureUrl);
                 }
             });
         }
