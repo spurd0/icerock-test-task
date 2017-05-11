@@ -14,7 +14,6 @@ import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.presenters.ImagesPresenter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -62,7 +61,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView{
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
-        ImagesAdapter adapter = new ImagesAdapter(images, new ImagesListCallback() {
+        ImagesAdapter adapter = new ImagesAdapter(this, images, new ImagesListCallback() {
             @Override
             public void itemClicked(int id) {
 
