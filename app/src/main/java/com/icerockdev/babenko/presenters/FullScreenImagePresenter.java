@@ -7,4 +7,5 @@ import com.icerockdev.babenko.interfaces.FullScreenImageView;
  */
 
 public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView> {
+    public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY";
 }

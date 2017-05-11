@@ -1,5 +1,6 @@
 package com.icerockdev.babenko.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.icerockdev.babenko.presenters.ImagesPresenter;
 import java.util.ArrayList;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -84,6 +86,9 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
             public void itemClicked(String imageUrl) {
                 if (BuildConfig.DEBUG)
                     Log.d(TAG, "Image for view is " + imageUrl);
+                Intent intent = new Intent(ImagesActivity.this, FullScreenImageActivity.class);
+                intent.putExtra(IMAGE_URL_KEY, imageUrl);
+                startActivity(intent);
             }
         });
         mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
