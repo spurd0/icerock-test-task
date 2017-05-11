@@ -36,10 +36,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                         return;
                     }
                     getView().gotImagesList(convertImagesList(images));
-                } else {
-                    // TODO: 10/05/17 record response
                 }
-
             }
 
             @Override
@@ -47,8 +44,6 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     getView().showErrorDialog(error);
-                } else {
-                    // TODO: 10/05/17 record error
                 }
             }
         });
