@@ -37,7 +37,6 @@ public class FullScreenImageActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: 5/11/2017 make fullscreen
         setContentView(R.layout.activity_full_screen_image);
         initViews();
         requestImage();
