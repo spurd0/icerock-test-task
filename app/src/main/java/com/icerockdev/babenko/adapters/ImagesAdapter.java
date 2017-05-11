@@ -59,7 +59,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private ImageView mImageView;
         private TextView mId;
         private TextView mTitle;
-        private String mBigPictureUrl;
 
         public ImagesItemHolder(View itemView) {
             super(itemView);
@@ -68,15 +67,14 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
             this.mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
         }
 
-        public void updateView(ImageItem item, final ImagesListCallback callback) {
+        public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
-            mBigPictureUrl = item.getUrl(); // i don`t know if it`s good idea to place it here
             mPicasso.load(item.getThumbnailUrl()).into(mImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callback.itemClicked(mBigPictureUrl);
+                    callback.itemClicked(item.getUrl());
                 }
             });
         }
