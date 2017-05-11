@@ -43,7 +43,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         EditText mFieldValue = (EditText) convertView.findViewById(R.id.dataFieldValue);
         mDefaultBackground = mFieldValue.getBackground();
 
-        DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mFieldValue, mCharacterCounter,
+        DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mCharacterCounter,
                 dataElement);
         mFieldValue.setTag(dataElement.getId());
         mFieldValue.addTextChangedListener(textWatcher);
@@ -80,13 +80,10 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
     }
 
     private class DataFieldsTextWatcher implements TextWatcher {
-
-        private EditText mView;
         private DataField mValue;
         private TextView mCounterTv;
 
-        private DataFieldsTextWatcher(EditText fieldValueEt, TextView counter, DataField value) {
-            this.mView = fieldValueEt;
+        private DataFieldsTextWatcher(TextView counter, DataField value) {
             this.mValue = value;
             this.mCounterTv = counter;
         }
