@@ -8,10 +8,12 @@ import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.ImagesManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.model.ImageResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -31,9 +33,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                         getView().showErrorDialog("List is empty");
                         return;
                     }
-                    ArrayList<ImageResponse> imagesList = new ArrayList<>();
-                    Collections.addAll(imagesList, images);
-                    getView().gotImagesList(imagesList);
+                    getView().gotImagesList(convertImagesList(images));
                 } else {
                     // TODO: 10/05/17 record response
                 }
@@ -49,6 +49,14 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                 }
             }
         });
+    }
+
+    private ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
+        ArrayList<ImageItem> result = new ArrayList<>();
+        for (ImageResponse imageResponse : images) {
+            result.add(new ImageItem(imageResponse));
+        }
+        return result;
     }
 
 
