@@ -46,6 +46,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         DataFieldsTextWatcher textWatcher = new DataFieldsTextWatcher(mCharacterCounter,
                 dataElement);
         mFieldValue.setTag(dataElement.getId());
+        mFieldValue.setId(dataElement.getId());
         mFieldValue.addTextChangedListener(textWatcher);
 
         String value = dataElement.getValue();
