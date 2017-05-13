@@ -45,7 +45,6 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         mPresenter = new ImagesPresenter();
         mPresenter.attachView(this);
         requestPictures();
-
     }
 
     private void initViews() {
@@ -87,6 +86,11 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         mImagesRecyclerView.setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onPause() {
+        mPresenter.detachView();
+        super.onPause();
+    }
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
