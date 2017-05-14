@@ -12,11 +12,11 @@ public class ImageItem {
     private String mThumbnailUrl;
 
     public ImageItem(ImageResponse imageResponse) { // TODO: 14/05/17 remade
-        this.mAlbumId = imageResponse.getAlbumId();
-        this.mId = imageResponse.getId();
-        this.mTitle = imageResponse.getTitle();
-        this.mUrl = imageResponse.getUrl();
-        this.mThumbnailUrl = imageResponse.getThumbnailUrl();
+        mAlbumId = imageResponse.getAlbumId();
+        mId = imageResponse.getId();
+        mTitle = imageResponse.getTitle();
+        mUrl = imageResponse.getUrl();
+        mThumbnailUrl = imageResponse.getThumbnailUrl();
     }
 
     public int getAlbumId() {

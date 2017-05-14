@@ -23,10 +23,10 @@ public class DataField implements Parcelable {
     }
 
     public DataField(DataFieldResponse data) {
-        this.mId = data.getId();
-        this.mType = data.getType();
-        this.mPlaceholder = data.getPlaceholder();
-        this.mDefaultValue = data.getDefaultValue();
+        mId = data.getId();
+        mType = data.getType();
+        mPlaceholder = data.getPlaceholder();
+        mDefaultValue = data.getDefaultValue();
         mValue = data.getDefaultValue();
     }
 
@@ -59,7 +59,7 @@ public class DataField implements Parcelable {
     }
 
     public void setValue(String value) {
-        this.mValue = value;
+        mValue = value;
     }
 
     public String getValue() {

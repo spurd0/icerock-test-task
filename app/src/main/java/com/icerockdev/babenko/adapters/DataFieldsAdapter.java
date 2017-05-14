@@ -85,8 +85,8 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         private TextView mCounterTv;
 
         private DataFieldsTextWatcher(TextView counter, DataField value) {
-            this.mValue = value;
-            this.mCounterTv = counter;
+            mValue = value;
+            mCounterTv = counter;
         }
 
         @Override

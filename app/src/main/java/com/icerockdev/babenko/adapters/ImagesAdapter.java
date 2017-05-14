@@ -30,8 +30,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
 
 
     public ImagesAdapter(ArrayList<ImageItem> imageList, ImagesListCallback callback) {
-        this.mCallback = callback;
-        this.mImageList = imageList;
+        mCallback = callback;
+        mImageList = imageList;
     }
 
     @Override
@@ -58,10 +58,10 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
 
         public ImagesItemHolder(View itemView, Context context) {
             super(itemView);
-            this.mId = (TextView) itemView.findViewById(R.id.pictureElementId);
-            this.mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
-            this.mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
-            this.mContext = context;
+            mId = (TextView) itemView.findViewById(R.id.pictureElementId);
+            mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
+            mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
+            mContext = context;
         }
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
