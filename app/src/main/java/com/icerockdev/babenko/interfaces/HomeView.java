@@ -7,7 +7,7 @@ import com.icerockdev.babenko.model.DataField;
  */
 
 public interface HomeView extends BaseView {
-    void showProgressDialog(); // TODO: 10/05/17 move to base class
+    void showProgressDialog();
 
     void dismissProgressDialog();
 

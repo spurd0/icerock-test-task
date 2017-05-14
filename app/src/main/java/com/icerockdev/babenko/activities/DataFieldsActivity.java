@@ -37,7 +37,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
         mPresenter = new DataFieldsPresenter();
-        mPresenter.attachView(this);
         initViews();
         requestFieldsData(); // TODO: 13/05/17 move to presenter
     }

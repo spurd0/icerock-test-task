@@ -23,7 +23,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
 
     public void requestPictures() {
-        getView().showProgressDialog(); // TODO: 5/11/2017 same as in the homeactivity, think about it
+        getView().showProgressDialog();
         IceRockApplication.getInstance().getImagesManager().requestPicturesList(new ImagesManager.ImagesCallback() {
             @Override
             public void successResponse(ImageResponse[] images) {

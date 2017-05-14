@@ -43,7 +43,6 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         setContentView(R.layout.activity_images);
         initViews();
         mPresenter = new ImagesPresenter();
-        mPresenter.attachView(this);
         requestPictures(); // TODO: 13/05/17 move to presenter
     }
 
