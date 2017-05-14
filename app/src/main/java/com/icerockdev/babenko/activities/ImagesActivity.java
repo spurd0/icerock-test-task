@@ -28,9 +28,8 @@ import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_
  * Created by Roman Babenko on 10/05/17.
  */
 
-public class ImagesActivity extends AppCompatActivity implements ImagesView {
+public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.ImagesActivity.SERVER_ERROR_DIALOG_TAG";
-    private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.ImagesActivity.PROGRESS_DIALOG_TAG";
     private static final String TAG = "ImagesActivity";
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
@@ -45,24 +44,14 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         initViews();
     }
 
+    @Override
+    protected void setDialogFragmentTag() {
+        mDialogTag = "com.icerockdev.babenko.activities.ImagesActivity.PROGRESS_DIALOG_TAG";
+    }
+
     private void initViews() {
         mImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         mListIsEmptyErrorTv = (TextView) findViewById(R.id.imagesListEmptyTv);
-    }
-
-    @Override
-    public void showProgressDialog() {
-        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        getSupportFragmentManager().beginTransaction().add(progressDialogFragment, PROGRESS_DIALOG_TAG).commit();
-        getSupportFragmentManager().executePendingTransactions();
-    }
-
-    @Override
-    public void dismissProgressDialog() {
-        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
-                findFragmentByTag(PROGRESS_DIALOG_TAG);
-        if (progressDialogFragment != null)
-            progressDialogFragment.dismiss();
     }
 
     @Override

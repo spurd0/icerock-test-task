@@ -19,7 +19,7 @@ import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
  * Created by Roman Babenko on 5/11/2017.
  */
 
-public class FullScreenImageActivity extends AppCompatActivity implements FullScreenImageView, View.OnTouchListener {
+public class FullScreenImageActivity extends BaseProgressActivity implements FullScreenImageView, View.OnTouchListener {
     public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY";
 
     private ImageView mImageView;
@@ -47,6 +47,11 @@ public class FullScreenImageActivity extends AppCompatActivity implements FullSc
         setContentView(R.layout.activity_full_screen_image);
         mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY));
         initViews();
+    }
+
+    @Override
+    protected void setDialogFragmentTag() {
+        mDialogTag = "com.icerockdev.babenko.activities.FullScreenImageActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {
@@ -131,9 +136,10 @@ public class FullScreenImageActivity extends AppCompatActivity implements FullSc
     }
 
     @Override
-    public void hideProgressDialog() {
+    public void dismissProgressDialog() {
 
     }
+
 
     @Override
     public void makeImageVisible() {

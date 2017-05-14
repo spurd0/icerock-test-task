@@ -1,7 +1,6 @@
 package com.icerockdev.babenko.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -9,7 +8,6 @@ import android.widget.EditText;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
-import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.model.DataField;
@@ -19,9 +17,8 @@ import com.icerockdev.babenko.utils.UtilsHelper;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
-public class HomeActivity extends AppCompatActivity implements HomeView {
+public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
-    private static final String PROGRESS_DIALOG_TAG = "com.icerockdev.babenko.activities.PROGRESS_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
     private HomePresenter mPresenter;
@@ -32,6 +29,11 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         setContentView(R.layout.activity_home);
         mPresenter = new HomePresenter(this);
         initViews();
+    }
+
+    @Override
+    protected void setDialogFragmentTag() {
+        mDialogTag = "com.icerockdev.babenko.activities.HomeActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {
@@ -57,20 +59,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
         DataFieldsActivity.startActivity(this, data);
-    }
-
-    @Override
-    public void showProgressDialog() {
-        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
-    }
-
-    @Override
-    public void dismissProgressDialog() {
-        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
-                findFragmentByTag(PROGRESS_DIALOG_TAG);
-        if (progressDialogFragment != null)
-            progressDialogFragment.dismiss();
     }
 
     @Override

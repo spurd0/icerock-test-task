@@ -9,14 +9,10 @@ import java.util.List;
  * Created by Roman Babenko on 10/05/17.
  */
 
-public interface ImagesView extends BaseView {
+public interface ImagesView extends ProgressBaseView {
     void showErrorDialog(String message);
 
     void showListIsEmptyError();
-
-    void showProgressDialog();
-
-    void dismissProgressDialog();
 
     void gotImagesList(ArrayList<ImageItem> imageItems);
 }

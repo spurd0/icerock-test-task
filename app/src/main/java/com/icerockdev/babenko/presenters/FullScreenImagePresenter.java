@@ -31,13 +31,16 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
                 new Callback() {
                     @Override
                     public void onSuccess() {
-                        if (getView() != null)
+                        if (getView() != null) {
+                            getView().dismissProgressDialog();
                             getView().makeImageVisible();
+                        }
                     }
 
                     @Override
                     public void onError() {
-
+                        if (getView() != null)
+                            getView().dismissProgressDialog();
                     }
                 });
     }
