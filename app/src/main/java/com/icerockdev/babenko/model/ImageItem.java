@@ -11,12 +11,16 @@ public class ImageItem {
     private String mUrl;
     private String mThumbnailUrl;
 
-    public ImageItem(ImageResponse imageResponse) { // TODO: 14/05/17 remade
-        mAlbumId = imageResponse.getAlbumId();
-        mId = imageResponse.getId();
-        mTitle = imageResponse.getTitle();
-        mUrl = imageResponse.getUrl();
-        mThumbnailUrl = imageResponse.getThumbnailUrl();
+    public ImageItem(int albumId,
+                     int id,
+                     String title,
+                     String url,
+                     String thumbnailUrl) {
+        mAlbumId = albumId;
+        mId = id;
+        mTitle = title;
+        mUrl = url;
+        mThumbnailUrl = thumbnailUrl;
     }
 
     public int getAlbumId() {

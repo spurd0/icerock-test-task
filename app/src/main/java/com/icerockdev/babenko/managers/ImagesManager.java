@@ -61,7 +61,8 @@ public class ImagesManager {
     private ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
         ArrayList<ImageItem> result = new ArrayList<>();
         for (ImageResponse imageResponse : images) {
-            result.add(new ImageItem(imageResponse));
+            result.add(new ImageItem(imageResponse.getAlbumId(), imageResponse.getId(),
+                    imageResponse.getTitle(), imageResponse.getUrl(), imageResponse.getThumbnailUrl()));
         }
         return result;
     }

@@ -11,23 +11,23 @@ public class DataField implements Parcelable {
     private int mId;
     private String mType;
     private String mPlaceholder;
-    private String mDefaultValue;
     private String mValue;
 
     protected DataField(Parcel in) {
         mId = in.readInt();
         mType = in.readString();
         mPlaceholder = in.readString();
-        mDefaultValue = in.readString();
         mValue = in.readString();
     }
 
-    public DataField(DataFieldResponse data) {
-        mId = data.getId();
-        mType = data.getType();
-        mPlaceholder = data.getPlaceholder();
-        mDefaultValue = data.getDefaultValue();
-        mValue = data.getDefaultValue();
+    public DataField(int id,
+                     String type,
+                     String placeholder,
+                     String defaultValue) {
+        mId = id;
+        mType = type;
+        mPlaceholder = placeholder;
+        mValue = defaultValue;
     }
 
     public static final Creator<DataField> CREATOR = new Creator<DataField>() {
@@ -54,10 +54,6 @@ public class DataField implements Parcelable {
         return mPlaceholder;
     }
 
-    public String getDefaultValue() {
-        return mDefaultValue;
-    }
-
     public void setValue(String value) {
         mValue = value;
     }
@@ -69,7 +65,7 @@ public class DataField implements Parcelable {
     @Override
     public String toString() {
         return "Id is " + mId + " type is " + mType + " placeholder is " + mPlaceholder +
-                " defaultValue is " + mDefaultValue + " current is " + mValue;
+                " current is " + mValue;
     }
 
     @Override
@@ -82,7 +78,6 @@ public class DataField implements Parcelable {
         dest.writeInt(mId);
         dest.writeString(mType);
         dest.writeString(mPlaceholder);
-        dest.writeString(mDefaultValue);
         dest.writeString(mValue);
     }
 }

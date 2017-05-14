@@ -68,7 +68,9 @@ public class DataFieldsManager {
     private DataField[] convertDataFields(DataFieldResponse[] data) {
         DataField[] convertedData = new DataField[data.length];
         for (int i = 0; i < data.length; i++)
-            convertedData[i] = new DataField(data[i]);
+            convertedData[i] = new DataField(data[i].getId(), data[i].getType(),
+                    data[i].getPlaceholder(),
+                    data[i].getDefaultValue());
         return convertedData;
     }
 
