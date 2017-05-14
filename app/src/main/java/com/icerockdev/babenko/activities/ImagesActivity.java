@@ -62,7 +62,8 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     public void dismissProgressDialog() {
         ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
                 findFragmentByTag(PROGRESS_DIALOG_TAG);
-        progressDialogFragment.dismiss();
+        if (progressDialogFragment != null)
+            progressDialogFragment.dismiss();
     }
 
     @Override
