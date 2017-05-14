@@ -22,20 +22,26 @@ import java.util.List;
 public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
 
-    public void requestPictures() {
+    @Override
+    public void attachView(ImagesView imagesView) {
+        super.attachView(imagesView);
+        requestPictures();
+    }
+
+    private void requestPictures() {
         getView().showProgressDialog();
         IceRockApplication.getInstance().getImagesManager().requestPicturesList(new ImagesManager.ImagesCallback() {
             @Override
-            public void successResponse(ImageResponse[] images) {
+            public void successResponse(ArrayList<ImageItem> images) {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     if (BuildConfig.DEBUG)
-                        Log.d(TAG, "Images list length is " + images.length);
-                    if (images.length == 0) {
+                        Log.d(TAG, "Images list length is " + images.size());
+                    if (images.size() == 0) {
                         getView().showListIsEmptyError();
                         return;
                     }
-                    getView().gotImagesList(convertImagesList(images));
+                    getView().gotImagesList(images);
                 }
             }
 
@@ -48,14 +54,5 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
             }
         });
     }
-
-    private ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
-        ArrayList<ImageItem> result = new ArrayList<>();
-        for (ImageResponse imageResponse : images) {
-            result.add(new ImageItem(imageResponse));
-        }
-        return result;
-    }
-
 
 }

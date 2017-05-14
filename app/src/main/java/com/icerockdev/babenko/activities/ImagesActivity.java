@@ -36,14 +36,14 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
     private TextView mListIsEmptyErrorTv;
+    private ArrayList<ImageItem> mImagesList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        initViews();
         mPresenter = new ImagesPresenter();
-        requestPictures(); // TODO: 13/05/17 move to presenter
+        initViews();
     }
 
     private void initViews() {
@@ -51,22 +51,18 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         mListIsEmptyErrorTv = (TextView) findViewById(R.id.imagesListEmptyTv);
     }
 
-    private void requestPictures() {
-        mPresenter.requestPictures();
-    }
-
     @Override
     public void showProgressDialog() {
         ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), PROGRESS_DIALOG_TAG);
+        getSupportFragmentManager().beginTransaction().add(progressDialogFragment, PROGRESS_DIALOG_TAG).commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     @Override
     public void dismissProgressDialog() {
         ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
                 findFragmentByTag(PROGRESS_DIALOG_TAG);
-        if (progressDialogFragment != null)
-            progressDialogFragment.dismiss();
+        progressDialogFragment.dismiss();
     }
 
     @Override
@@ -98,7 +94,10 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
-        ImagesAdapter adapter = new ImagesAdapter(images, new ImagesListCallback() {
+        if (mImagesList != null)
+            return;
+        mImagesList = images;
+        ImagesAdapter adapter = new ImagesAdapter(mImagesList, new ImagesListCallback() {
             @Override
             public void itemClicked(String imageUrl) {
                 if (BuildConfig.DEBUG)
