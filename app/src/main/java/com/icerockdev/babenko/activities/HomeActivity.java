@@ -1,6 +1,5 @@
 package com.icerockdev.babenko.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,7 +16,6 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
-import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
@@ -32,7 +30,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mPresenter = new HomePresenter();
+        mPresenter = new HomePresenter(this);
         initViews();
     }
 

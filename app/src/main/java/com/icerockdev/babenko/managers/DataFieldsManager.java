@@ -53,7 +53,7 @@ public class DataFieldsManager {
                 if (response.body() == null) {
                     callback.failedResponse(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_null));
-                } else callback.successResponse(response.body());
+                } else callback.successResponse(convertDataFields(response.body()));
             }
 
             @Override
@@ -65,10 +65,17 @@ public class DataFieldsManager {
         });
     }
 
+    private DataField[] convertDataFields(DataFieldResponse[] data) {
+        DataField[] convertedData = new DataField[data.length];
+        for (int i = 0; i < data.length; i++)
+            convertedData[i] = new DataField(data[i]);
+        return convertedData;
+    }
+
     public interface DataFieldsCallback {
         void failedResponse(String error);
 
-        void successResponse(DataFieldResponse[] response);
+        void successResponse(DataField[] response);
     }
 
     public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields,

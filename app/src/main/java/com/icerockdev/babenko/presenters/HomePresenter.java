@@ -24,6 +24,17 @@ import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIA
 public class HomePresenter extends BasePresenter<HomeView> {
 
     private DataFieldsManager mManager = IceRockApplication.getInstance().getDataFieldsManager();
+    private Context mContext;
+
+    public HomePresenter(Context context) {
+        mContext = context;
+    }
+
+    @Override
+    public void attachView(HomeView homeView) {
+        super.attachView(homeView);
+        checkForErrors(mContext);
+    }
 
     public void requestDataClicked(String url) {
         if (!Patterns.WEB_URL.matcher(url).matches()) {
@@ -42,12 +53,12 @@ public class HomePresenter extends BasePresenter<HomeView> {
             }
 
             @Override
-            public void successResponse(DataFieldResponse[] response) {
+            public void successResponse(DataField[] response) {
                 boolean emptyList = response.length == 0;
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     if (!emptyList)
-                        getView().gotDataFields(prepareDataFields(response));
+                        getView().gotDataFields(response);
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
                 } else if (emptyList)
@@ -58,16 +69,10 @@ public class HomePresenter extends BasePresenter<HomeView> {
         });
     }
 
-    private DataField[] prepareDataFields(DataFieldResponse[] data) {
-        DataField[] convertedData = new DataField[data.length];
-        for (int i = 0; i < data.length; i++)
-            convertedData[i] = new DataField(data[i]);
-        return convertedData;
-    }
 
     public void checkForErrors(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String dialogErrorMessage = prefs.getString(SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
+        String dialogErrorMessage = UtilsHelper.getStringFromSharedPreferences(context,
+                SERVER_ERROR_DIALOG_MESSAGE_KEY);
         if (!dialogErrorMessage.isEmpty())
             if (getView() != null)
                 getView().showErrorDialog(dialogErrorMessage);
