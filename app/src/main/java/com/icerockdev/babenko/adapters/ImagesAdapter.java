@@ -3,9 +3,7 @@ package com.icerockdev.babenko.adapters;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -67,7 +65,13 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
-            Picasso.with(mContext).load(item.getThumbnailUrl()).error(R.drawable.question_mark)
+            Picasso picasso = new Picasso.Builder(mContext).listener(new Picasso.Listener() {
+                @Override
+                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                    if (BuildConfig.DEBUG) exception.printStackTrace();
+                }
+            }).downloader(new OkHttpDownloader(mContext)).build();
+            picasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark)
                     .placeholder(R.drawable.question_mark).into(mImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
