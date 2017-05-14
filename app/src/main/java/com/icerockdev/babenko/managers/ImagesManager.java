@@ -71,4 +71,15 @@ public class ImagesManager {
         void failedResponse(String error);
     }
 
+    public void requestImage(ImageView targetIv, String imageUrl,
+                             com.squareup.picasso.Callback imageCallback) {
+        Picasso picasso = new Picasso.Builder(IceRockApplication.getInstance()).listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                if (BuildConfig.DEBUG) exception.printStackTrace();
+            }
+        }).downloader(new OkHttpDownloader(IceRockApplication.getInstance())).build();
+        picasso.load(imageUrl).into(targetIv, imageCallback);
+    }
+
 }

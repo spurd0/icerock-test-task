@@ -2,7 +2,6 @@ package com.icerockdev.babenko.activities;
 
 import android.graphics.Matrix;
 import android.graphics.PointF;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,95 +9,82 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.squareup.picasso.OkHttpDownloader;
-import com.squareup.picasso.Picasso;
+import com.icerockdev.babenko.interfaces.FullScreenImageView;
+import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
 
 /**
  * Created by Roman Babenko on 5/11/2017.
  */
 
-public class FullScreenImageActivity extends AppCompatActivity implements View.OnTouchListener {
+public class FullScreenImageActivity extends AppCompatActivity implements FullScreenImageView, View.OnTouchListener {
     public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY";
 
     private ImageView mImageView;
+    private FullScreenImagePresenter mPresenter;
 
-    Matrix matrix = new Matrix();
-    Matrix savedMatrix = new Matrix();
-    static final int NONE = 0;
-    static final int DRAG = 1;
-    static final int ZOOM = 2;
-    int mode = NONE;
-    PointF start = new PointF();
-    PointF mid = new PointF();
-    float oldDist = 1f;
+    private Matrix mMatrix = new Matrix();
+    private Matrix mSavedMatrix = new Matrix();
+    private static final int NONE = 0;
+    private static final int DRAG = 1;
+    private static final int ZOOM = 2;
+    private int mMode = NONE;
+    private PointF mStart = new PointF();
+    private PointF mMid = new PointF();
+    private float mOldDist = 1f;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
+        mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY));
         initViews();
-        requestImage();
     }
 
     private void initViews() {
         mImageView = (ImageView) findViewById(R.id.fullScreenImageView);
-    }
-
-    private void requestImage() {
-        String imageUrl = getIntent().getStringExtra(IMAGE_URL_KEY);
-        if (imageUrl == null)
-            throw new NullPointerException("Image url is null");
-        Picasso picasso = new Picasso.Builder(this).listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                if (BuildConfig.DEBUG) exception.printStackTrace();
-            }
-        }).downloader(new OkHttpDownloader(this)).build();
-        picasso.load(imageUrl).into(mImageView);
         mImageView.setOnTouchListener(this);
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {  // just code from stackoverflow
+    public boolean onTouch(View v, MotionEvent event) {
         ImageView view = (ImageView) v;
 
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                savedMatrix.set(matrix);
-                start.set(event.getX(), event.getY());
-                mode = DRAG;
+                mSavedMatrix.set(mMatrix);
+                mStart.set(event.getX(), event.getY());
+                mMode = DRAG;
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                oldDist = spacing(event);
-                if (oldDist > 10f) {
-                    savedMatrix.set(matrix);
-                    midPoint(mid, event);
-                    mode = ZOOM;
+                mOldDist = spacing(event);
+                if (mOldDist > 10f) {
+                    mSavedMatrix.set(mMatrix);
+                    midPoint(mMid, event);
+                    mMode = ZOOM;
                 }
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
-                mode = NONE;
+                mMode = NONE;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mode == DRAG) {
-                    matrix.set(savedMatrix);
-                    matrix.postTranslate(event.getX() - start.x, event.getY()
-                            - start.y);
-                } else if (mode == ZOOM) {
+                if (mMode == DRAG) {
+                    mMatrix.set(mSavedMatrix);
+                    mMatrix.postTranslate(event.getX() - mStart.x, event.getY()
+                            - mStart.y);
+                } else if (mMode == ZOOM) {
                     float newDist = spacing(event);
                     if (newDist > 10f) {
-                        matrix.set(savedMatrix);
-                        float scale = newDist / oldDist;
-                        matrix.postScale(scale, scale, mid.x, mid.y);
+                        mMatrix.set(mSavedMatrix);
+                        float scale = newDist / mOldDist;
+                        mMatrix.postScale(scale, scale, mMid.x, mMid.y);
                     }
                 }
                 break;
         }
 
-        view.setImageMatrix(matrix);
+        view.setImageMatrix(mMatrix);
         return true;
     }
 
@@ -114,4 +100,35 @@ public class FullScreenImageActivity extends AppCompatActivity implements View.O
         point.set(x / 2, y / 2);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.detachView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.attachView(this);
+    }
+
+    @Override
+    public ImageView getIvForPicture() {
+        return mImageView;
+    }
+
+    @Override
+    public void showProgressDialog() {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
+    @Override
+    public void makeImageVisible() {
+        mImageView.setVisibility(View.VISIBLE);
+    }
 }
