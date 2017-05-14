@@ -115,8 +115,8 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
 
     @Override
     protected void onPause() {
-        super.onPause();
         mPresenter.detachView();
+        super.onPause();
     }
 
     @Override

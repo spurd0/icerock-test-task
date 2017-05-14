@@ -68,8 +68,8 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     @Override
     protected void onPause() {
-        super.onPause();
         mPresenter.detachView();
+        super.onPause();
     }
 
     @Override
