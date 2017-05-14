@@ -1,5 +1,6 @@
 package com.icerockdev.babenko.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,12 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     private DataFieldsAdapter mDataFieldsAdapter;
     private ArrayList<DataField> mDataFields;
 
+    public static void startActivity(Context context, DataField[] data) {
+        Intent dataFieldsIntent = new Intent(context, DataFieldsActivity.class);
+        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
+        context.startActivity(dataFieldsIntent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +58,10 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitButtonPressed();
+                hideError();
+                mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), mDataFields);
             }
         });
-    }
-
-    private void submitButtonPressed() {
-        hideError();
-        mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), mDataFields);
     }
 
     public void showError() {

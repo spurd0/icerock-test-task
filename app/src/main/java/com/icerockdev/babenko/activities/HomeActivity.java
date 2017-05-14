@@ -58,9 +58,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     public void gotDataFields(DataField[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
-        Intent dataFieldsIntent = new Intent(this, DataFieldsActivity.class);
-        dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
-        startActivity(dataFieldsIntent);
+        DataFieldsActivity.startActivity(this, data);
     }
 
     @Override

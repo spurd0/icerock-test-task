@@ -1,5 +1,7 @@
 package com.icerockdev.babenko.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -32,6 +34,12 @@ public class FullScreenImageActivity extends AppCompatActivity implements FullSc
     private PointF mStart = new PointF();
     private PointF mMid = new PointF();
     private float mOldDist = 1f;
+
+    public static void startActivity(Context context, String imageUrl) {
+        Intent intent = new Intent(context, FullScreenImageActivity.class);
+        intent.putExtra(IMAGE_URL_KEY, imageUrl);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -22,7 +22,6 @@ import com.icerockdev.babenko.presenters.ImagesPresenter;
 
 import java.util.ArrayList;
 
-import static com.icerockdev.babenko.activities.FullScreenImageActivity.IMAGE_URL_KEY;
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 /**
@@ -104,9 +103,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
             public void itemClicked(String imageUrl) {
                 if (BuildConfig.DEBUG)
                     Log.d(TAG, "Image for view is " + imageUrl);
-                Intent intent = new Intent(ImagesActivity.this, FullScreenImageActivity.class);
-                intent.putExtra(IMAGE_URL_KEY, imageUrl);
-                startActivity(intent);
+                FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
             }
         });
         mListIsEmptyErrorTv.setVisibility(View.GONE);
