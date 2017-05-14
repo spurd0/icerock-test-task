@@ -70,10 +70,9 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         mPresenter.detachView();
-        dismissProgressDialog();
     }
 
     @Override

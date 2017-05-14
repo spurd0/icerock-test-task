@@ -40,4 +40,9 @@ public abstract class BaseProgressActivity extends AppCompatActivity implements 
             progressDialogFragment.dismiss();
     }
 
+    @Override
+    protected void onPause() {
+        dismissProgressDialog();
+        super.onPause();
+    }
 }

@@ -98,8 +98,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         mPresenter.detachView();
     }
 

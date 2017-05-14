@@ -67,10 +67,9 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         mPresenter.detachView();
-        dismissProgressDialog();
     }
 
     @Override
