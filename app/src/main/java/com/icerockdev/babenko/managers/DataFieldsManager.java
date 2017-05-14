@@ -1,6 +1,7 @@
 package com.icerockdev.babenko.managers;
 
 import android.content.SharedPreferences;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Log;
@@ -37,6 +38,8 @@ import static com.icerockdev.babenko.data.ApplicationConstants.URL;
 public class DataFieldsManager {
     private static final String TAG = "DataFieldsManager";
     public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
+
+    private ArrayList<DataField> mDataFieldsList;
 
     public void requestDataFields(String Url, final DataFieldsCallback callback) {
         if (BuildConfig.DEBUG)
@@ -112,4 +115,15 @@ public class DataFieldsManager {
 
         void failedResponse(List<Integer> errorList);
     }
+
+    public ArrayList<DataField> getDataFields(Parcelable[] mFieldsData) {
+        if (mDataFieldsList == null) {
+            mDataFieldsList = new ArrayList<>();
+            for (Parcelable aData : mFieldsData) {
+                mDataFieldsList.add((DataField) aData);
+            }
+        }
+        return mDataFieldsList;
+    }
+
 }

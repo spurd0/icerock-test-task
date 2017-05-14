@@ -36,9 +36,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
-        mPresenter = new DataFieldsPresenter();
+        mPresenter = new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY));
         initViews();
-        requestFieldsData(); // TODO: 13/05/17 move to presenter
     }
 
     protected void initViews() {
@@ -46,11 +45,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         mHeaderErrorTv = (TextView) findViewById(R.id.validationErrorTv);
         initSubmitButton();
     }
-
-    private void requestFieldsData() {
-        mPresenter.requestFieldsData(this);
-    }
-
 
     private void initSubmitButton() {
         Button submitButton = (Button) findViewById(R.id.submitFieldsButton);
@@ -75,6 +69,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
 
     @Override
     public void gotFieldsData(ArrayList<DataField> dataFields) {
+        if (mDataFields != null)
+            return;
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
         mDataFields = dataFields;

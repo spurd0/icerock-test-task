@@ -20,13 +20,21 @@ import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_K
  */
 
 public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
+    private Parcelable[] mFieldsData;
 
-    public void requestFieldsData(Activity activity) {
-        Parcelable[] data = activity.getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY);
-        ArrayList<DataField> dataFieldsList = new ArrayList<>();
-        for (Parcelable aData : data) {
-            dataFieldsList.add((DataField) aData);
-        }
+    public DataFieldsPresenter(Parcelable[] fieldsData) {
+        mFieldsData = fieldsData;
+    }
+
+    @Override
+    public void attachView(DataFieldsView dataFieldsView) {
+        super.attachView(dataFieldsView);
+        requestFieldsData();
+    }
+
+    private void requestFieldsData() {
+        ArrayList<DataField> dataFieldsList = IceRockApplication.getInstance()
+                .getDataFieldsManager().getDataFields(mFieldsData);
         if (getView() != null)
             getView().gotFieldsData(dataFieldsList);
     }
