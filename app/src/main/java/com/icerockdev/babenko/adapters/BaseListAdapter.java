@@ -15,23 +15,21 @@ import java.util.List;
 public abstract class BaseListAdapter<Object> {
     protected Context mContext;
     private List<Object> mObjects;
-    private ViewGroup mViewGroup;
     private ViewGroup mParent;
 
-    public BaseListAdapter(@NonNull Context context, @NonNull List<Object> objects, ViewGroup parent) {
+    public BaseListAdapter(@NonNull Context context, @NonNull List<Object> objects) {
         mContext = context;
         mObjects = objects;
-        mParent = parent; // sorry i don`t know how original adapter get it :(
     }
 
     public void attachAdapter(ViewGroup viewGroup) {
-        mViewGroup = viewGroup;
+        mParent = viewGroup;
         addElements();
     }
 
     private void addElements() {
         for (int i = 0; i < mObjects.size(); i++) {
-            mViewGroup.addView(getView(i, mParent));
+            mParent.addView(getView(i, mParent));
         }
     }
 
