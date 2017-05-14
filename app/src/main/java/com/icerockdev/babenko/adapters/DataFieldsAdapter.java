@@ -28,8 +28,8 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
     private SparseArrayCompat<EditText> mFieldValues = new SparseArrayCompat<EditText>();
     private Drawable mDefaultBackground;
 
-    public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields, ViewGroup parent) {
-        super(context, dataFields, parent);
+    public DataFieldsAdapter(@NonNull Context context, @NonNull List<DataField> dataFields) {
+        super(context, dataFields);
     }
 
     @NonNull

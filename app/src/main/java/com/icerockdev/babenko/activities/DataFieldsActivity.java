@@ -77,7 +77,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
         mDataFields = dataFields;
-        mDataFieldsAdapter = new DataFieldsAdapter(this, mDataFields, mDataFieldsContainer);
+        mDataFieldsAdapter = new DataFieldsAdapter(this, mDataFields);
         mDataFieldsAdapter.attachAdapter(mDataFieldsContainer);
     }
 
