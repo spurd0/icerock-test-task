@@ -11,7 +11,7 @@ public class ImageItem {
     private String mUrl;
     private String mThumbnailUrl;
 
-    public ImageItem(ImageResponse imageResponse) {
+    public ImageItem(ImageResponse imageResponse) { // TODO: 14/05/17 remade
         this.mAlbumId = imageResponse.getAlbumId();
         this.mId = imageResponse.getId();
         this.mTitle = imageResponse.getTitle();
@@ -37,25 +37,5 @@ public class ImageItem {
 
     public String getUrl() {
         return mUrl;
-    }
-
-    public void setAlbumId(int albumId) {
-        this.mAlbumId = albumId;
-    }
-
-    public void setId(int id) {
-        this.mId = id;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.mThumbnailUrl = thumbnailUrl;
-    }
-
-    public void setTitle(String title) {
-        this.mTitle = title;
-    }
-
-    public void setUrl(String url) {
-        this.mUrl = url;
     }
 }
