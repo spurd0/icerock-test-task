@@ -39,7 +39,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         mPresenter = new DataFieldsPresenter();
         mPresenter.attachView(this);
         initViews();
-        requestFieldsData();
+        requestFieldsData(); // TODO: 13/05/17 move to presenter
     }
 
     protected void initViews() {
@@ -100,15 +100,14 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mPresenter.getView() == null)
-            mPresenter.attachView(this);
+    protected void onStop() {
+        super.onStop();
+        mPresenter.detachView();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        mPresenter.detachView();
+    protected void onStart() {
+        super.onStart();
+        mPresenter.attachView(this);
     }
 }

@@ -56,20 +56,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         UtilsHelper.saveStringToSharedPreferences(this, SERVER_ERROR_DIALOG_MESSAGE_KEY, "");
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPresenter.detachView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mPresenter.getView() == null)
-            mPresenter.attachView(this);
-        mPresenter.checkForErrors(this);
-    }
-
     public void gotDataFields(DataField[] data) {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Data field count is " + data.length);
@@ -95,5 +81,17 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void showUrlError(String error) {
         mRequestUrlEditText.setError(error);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.detachView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.attachView(this);
     }
 }

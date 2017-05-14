@@ -44,7 +44,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
         initViews();
         mPresenter = new ImagesPresenter();
         mPresenter.attachView(this);
-        requestPictures();
+        requestPictures(); // TODO: 13/05/17 move to presenter
     }
 
     private void initViews() {
@@ -87,9 +87,15 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     }
 
     @Override
-    protected void onPause() {
+    protected void onStop() {
+        super.onStop();
         mPresenter.detachView();
-        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.attachView(this);
     }
 
     @Override
