@@ -85,6 +85,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
     protected void onStop() {
         super.onStop();
         mPresenter.detachView();
+        dismissProgressDialog();
     }
 
     @Override

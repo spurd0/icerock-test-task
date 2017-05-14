@@ -86,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     protected void onStop() {
         super.onStop();
         mPresenter.detachView();
+        dismissProgressDialog();
     }
 
     @Override
