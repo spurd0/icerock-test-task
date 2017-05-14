@@ -131,17 +131,6 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     }
 
     @Override
-    public void showProgressDialog() {
-
-    }
-
-    @Override
-    public void dismissProgressDialog() {
-
-    }
-
-
-    @Override
     public void makeImageVisible() {
         mImageView.setVisibility(View.VISIBLE);
     }
