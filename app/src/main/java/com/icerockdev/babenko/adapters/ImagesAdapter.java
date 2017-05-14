@@ -56,12 +56,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private TextView mTitle;
         private Context mContext;
 
-        public ImagesItemHolder(View itemView, Context сontext) {
+        public ImagesItemHolder(View itemView, Context context) {
             super(itemView);
             this.mId = (TextView) itemView.findViewById(R.id.pictureElementId);
             this.mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             this.mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
-            this.mContext = сontext;
+            this.mContext = context;
         }
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
