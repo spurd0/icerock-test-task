@@ -49,7 +49,6 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
 
     private void initViews() {
         mImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
-        mImagesRecyclerView.setHasFixedSize(true);
         mListIsEmptyErrorTv = (TextView) findViewById(R.id.imagesListEmptyTv);
     }
 
@@ -100,7 +99,7 @@ public class ImagesActivity extends AppCompatActivity implements ImagesView {
 
     @Override
     public void gotImagesList(ArrayList<ImageItem> images) {
-        ImagesAdapter adapter = new ImagesAdapter(this, images, new ImagesListCallback() {
+        ImagesAdapter adapter = new ImagesAdapter(images, new ImagesListCallback() {
             @Override
             public void itemClicked(String imageUrl) {
                 if (BuildConfig.DEBUG)

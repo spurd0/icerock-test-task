@@ -3,7 +3,9 @@ package com.icerockdev.babenko.adapters;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,24 +27,17 @@ import java.util.ArrayList;
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItemHolder> {
     private ImagesListCallback mCallback;
     private ArrayList<ImageItem> mImageList;
-    private Picasso mPicasso;
 
 
-    public ImagesAdapter(Context context, ArrayList<ImageItem> imageList, ImagesListCallback callback) {
+    public ImagesAdapter(ArrayList<ImageItem> imageList, ImagesListCallback callback) {
         this.mCallback = callback;
         this.mImageList = imageList;
-        mPicasso = new Picasso.Builder(context).listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                if (BuildConfig.DEBUG) exception.printStackTrace();
-            }
-        }).downloader(new OkHttpDownloader(context)).build();
     }
 
     @Override
     public ImagesItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View imageItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_element, parent, false);
-        return new ImagesItemHolder(imageItemView);
+        return new ImagesItemHolder(imageItemView, parent.getContext());
     }
 
     @Override
@@ -59,18 +54,21 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private ImageView mImageView;
         private TextView mId;
         private TextView mTitle;
+        private Context mContext;
 
-        public ImagesItemHolder(View itemView) {
+        public ImagesItemHolder(View itemView, Context сontext) {
             super(itemView);
             this.mId = (TextView) itemView.findViewById(R.id.pictureElementId);
             this.mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             this.mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
+            this.mContext = сontext;
         }
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
-            mPicasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark).into(mImageView);
+            Picasso.with(mContext).load(item.getThumbnailUrl()).error(R.drawable.question_mark)
+                    .placeholder(R.drawable.question_mark).into(mImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
