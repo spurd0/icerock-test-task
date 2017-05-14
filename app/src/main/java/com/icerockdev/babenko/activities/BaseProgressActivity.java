@@ -27,7 +27,9 @@ public abstract class BaseProgressActivity extends AppCompatActivity implements 
         if (mDialogTag == null)
             throw new NullPointerException("mDialogTag isn`t defined");
         ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), mDialogTag);
+        getSupportFragmentManager().beginTransaction().add(progressDialogFragment, mDialogTag).commit();
+        getSupportFragmentManager().executePendingTransactions();
+
     }
 
     @Override
