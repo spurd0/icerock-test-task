@@ -1,11 +1,9 @@
 package com.icerockdev.babenko.presenters;
 
-import android.app.Activity;
 import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
-import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
@@ -13,17 +11,17 @@ import com.icerockdev.babenko.model.DataField;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY;
-
 /**
  * Created by Roman Babenko on 06/05/17.
  */
 
 public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     private Parcelable[] mFieldsData;
+    private DataFieldsManager mManager;
 
     public DataFieldsPresenter(Parcelable[] fieldsData) {
         mFieldsData = fieldsData;
+        mManager = new DataFieldsManager();
     }
 
     @Override
@@ -33,14 +31,13 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     }
 
     private void requestFieldsData() {
-        ArrayList<DataField> dataFieldsList = IceRockApplication.getInstance()
-                .getDataFieldsManager().getDataFields(mFieldsData);
+        ArrayList<DataField> dataFieldsList = mManager.getDataFields(mFieldsData);
         if (getView() != null)
-            getView().gotFieldsData(dataFieldsList);
+            getView().showDataFields(dataFieldsList);
     }
 
     public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields) {
-        IceRockApplication.getInstance().getDataFieldsManager().checkFields(fieldValues, dataFields,
+        mManager.checkFields(fieldValues, dataFields,
                 new DataFieldsManager.DataFieldsCheckerCallback() {
                     @Override
                     public void successResponse() {

@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
+import com.icerockdev.babenko.managers.FullScreenImageManager;
 import com.squareup.picasso.Callback;
 
 /**
@@ -12,9 +13,11 @@ import com.squareup.picasso.Callback;
 
 public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView> {
     private String mImageUrl;
+    private FullScreenImageManager mManager;
 
-    public FullScreenImagePresenter(String imageUrl) {
+    public FullScreenImagePresenter(String imageUrl, FullScreenImageManager manager) {
         mImageUrl = imageUrl;
+        mManager = manager;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
         if (mImageUrl == null)
             throw new NullPointerException("Image url is null");
         getView().showProgressDialog();
-        IceRockApplication.getInstance().getImagesManager().requestImage(targetIv, mImageUrl,
+        mManager.requestImage(targetIv, mImageUrl,
                 new Callback() {
                     @Override
                     public void onSuccess() {

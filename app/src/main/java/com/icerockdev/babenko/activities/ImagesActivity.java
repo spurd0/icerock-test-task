@@ -17,6 +17,7 @@ import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.interfaces.ImagesView;
+import com.icerockdev.babenko.managers.ImagesManager;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.presenters.ImagesPresenter;
 
@@ -40,7 +41,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        mPresenter = new ImagesPresenter();
+        mPresenter = new ImagesPresenter(new ImagesManager());
         initViews();
     }
 

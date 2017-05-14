@@ -36,49 +36,8 @@ import static com.icerockdev.babenko.data.ApplicationConstants.URL;
  */
 
 public class DataFieldsManager {
-    private static final String TAG = "DataFieldsManager";
-    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
 
     private ArrayList<DataField> mDataFieldsList;
-
-    public void requestDataFields(String Url, final DataFieldsCallback callback) {
-        if (BuildConfig.DEBUG)
-            Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c";
-
-        final Call<DataFieldResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
-                .getService().requestDataFields(Url);
-        data.enqueue(new Callback<DataFieldResponse[]>() {
-            @Override
-            public void onResponse(Call<DataFieldResponse[]> call, Response<DataFieldResponse[]> response) {
-                if (response.body() == null) {
-                    callback.failedResponse(IceRockApplication.getInstance()
-                            .getString(R.string.request_data_fields_error_null));
-                } else callback.successResponse(convertDataFields(response.body()));
-            }
-
-            @Override
-            public void onFailure(Call<DataFieldResponse[]> call, Throwable t) {
-                callback.failedResponse(t.getLocalizedMessage());
-                if (BuildConfig.DEBUG)
-                    Log.e(TAG, "Request error " + t.getLocalizedMessage());
-            }
-        });
-    }
-
-    private DataField[] convertDataFields(DataFieldResponse[] data) {
-        DataField[] convertedData = new DataField[data.length];
-        for (int i = 0; i < data.length; i++)
-            convertedData[i] = new DataField(data[i].getId(), data[i].getType(),
-                    data[i].getPlaceholder(),
-                    data[i].getDefaultValue());
-        return convertedData;
-    }
-
-    public interface DataFieldsCallback {
-        void failedResponse(String error);
-
-        void successResponse(DataField[] response);
-    }
 
     public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields,
                             DataFieldsCheckerCallback callback) {

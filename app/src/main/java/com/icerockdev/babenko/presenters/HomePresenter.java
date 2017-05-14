@@ -1,20 +1,15 @@
 package com.icerockdev.babenko.presenters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Patterns;
 
-import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.DataFieldsManager;
+import com.icerockdev.babenko.managers.HomeManager;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.DataFieldResponse;
 import com.icerockdev.babenko.utils.UtilsHelper;
-
-import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
 
 /**
@@ -22,12 +17,14 @@ import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIA
  */
 
 public class HomePresenter extends BasePresenter<HomeView> {
+    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.HomeManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
 
-    private DataFieldsManager mManager = IceRockApplication.getInstance().getDataFieldsManager();
+    private HomeManager mManager;
     private Context mContext;
 
-    public HomePresenter(Context context) {
+    public HomePresenter(Context context, HomeManager manager) {
         mContext = context;
+        mManager = manager;
     }
 
     @Override
@@ -42,7 +39,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
             return;
         }
         getView().showProgressDialog();
-        mManager.requestDataFields(url, new DataFieldsManager.DataFieldsCallback() {
+        mManager.requestDataFields(url, new HomeManager.DataFieldsCallback() {
             @Override
             public void failedResponse(String error) {
                 if (getView() != null) {

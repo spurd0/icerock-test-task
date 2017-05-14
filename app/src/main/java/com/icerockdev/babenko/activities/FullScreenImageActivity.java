@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
+import com.icerockdev.babenko.managers.FullScreenImageManager;
 import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
 
 /**
@@ -45,7 +46,8 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
-        mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY));
+        mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY),
+                new FullScreenImageManager());
         initViews();
     }
 

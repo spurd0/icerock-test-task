@@ -21,6 +21,11 @@ import java.util.List;
 
 public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
+    private ImagesManager mManager;
+
+    public ImagesPresenter(ImagesManager manager) {
+        mManager = manager;
+    }
 
     @Override
     public void attachView(ImagesView imagesView) {
@@ -30,7 +35,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
 
     private void requestPictures() {
         getView().showProgressDialog();
-        IceRockApplication.getInstance().getImagesManager().requestPicturesList(new ImagesManager.ImagesCallback() {
+        mManager.requestPicturesList(new ImagesManager.ImagesCallback() {
             @Override
             public void successResponse(ArrayList<ImageItem> images) {
                 if (getView() != null) {

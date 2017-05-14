@@ -10,12 +10,13 @@ import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
+import com.icerockdev.babenko.managers.HomeManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
-import static com.icerockdev.babenko.managers.DataFieldsManager.SERVER_ERROR_DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.presenters.HomePresenter.SERVER_ERROR_DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
@@ -27,7 +28,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mPresenter = new HomePresenter(this);
+        mPresenter = new HomePresenter(this, new HomeManager());
         initViews();
     }
 

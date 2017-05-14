@@ -2,8 +2,6 @@ package com.icerockdev.babenko;
 
 import android.app.Application;
 
-import com.icerockdev.babenko.managers.DataFieldsManager;
-import com.icerockdev.babenko.managers.ImagesManager;
 import com.icerockdev.babenko.managers.RetrofitManager;
 
 /**
@@ -12,9 +10,7 @@ import com.icerockdev.babenko.managers.RetrofitManager;
 
 public class IceRockApplication extends Application {
     private static IceRockApplication sInstance;
-    private DataFieldsManager mDataFieldsManager;
     private RetrofitManager mRetrofitManager;
-    private ImagesManager mImagesManager;
 
     @Override
     public void onCreate() {
@@ -24,20 +20,6 @@ public class IceRockApplication extends Application {
 
     public static IceRockApplication getInstance() {
         return sInstance;
-    }
-
-    public DataFieldsManager getDataFieldsManager() {
-        if (mDataFieldsManager != null)
-            return mDataFieldsManager;
-        mDataFieldsManager = new DataFieldsManager();
-        return mDataFieldsManager;
-    }
-
-    public ImagesManager getImagesManager() {
-        if (mImagesManager != null)
-            return mImagesManager;
-        mImagesManager = new ImagesManager();
-        return mImagesManager;
     }
 
     public RetrofitManager getRetrofitManager() {

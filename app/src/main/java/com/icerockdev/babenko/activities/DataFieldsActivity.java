@@ -31,7 +31,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     private TextView mHeaderErrorTv;
     private DataFieldsPresenter mPresenter;
     private DataFieldsAdapter mDataFieldsAdapter;
-    private ArrayList<DataField> mDataFields;
 
     public static void startActivity(Context context, DataField[] data) {
         Intent dataFieldsIntent = new Intent(context, DataFieldsActivity.class);
@@ -50,16 +49,15 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     protected void initViews() {
         mDataFieldsContainer = (LinearLayout) findViewById(R.id.dataFieldsEditTextContainer);
         mHeaderErrorTv = (TextView) findViewById(R.id.validationErrorTv);
-        initSubmitButton();
     }
 
-    private void initSubmitButton() {
+    private void initSubmitButton(final ArrayList<DataField> dataFields) {
         Button submitButton = (Button) findViewById(R.id.submitFieldsButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideError();
-                mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), mDataFields);
+                mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), dataFields);
             }
         });
     }
@@ -71,14 +69,14 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     @Override
-    public void gotFieldsData(ArrayList<DataField> dataFields) {
-        if (mDataFields != null)
+    public void showDataFields(ArrayList<DataField> dataFields) {
+        if (mDataFieldsAdapter != null)
             return;
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
-        mDataFields = dataFields;
-        mDataFieldsAdapter = new DataFieldsAdapter(this, mDataFields);
+        mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields);
         mDataFieldsAdapter.attachAdapter(mDataFieldsContainer);
+        initSubmitButton(dataFields);
     }
 
     @Override
