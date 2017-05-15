@@ -41,6 +41,8 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         mRequestUrlEditText = (EditText) findViewById(R.id.fieldsRequestUrlEditText);
         mRequestUrlEditText.setText(ApplicationConstants.URL_START);
         mRequestUrlEditText.setSelection(mRequestUrlEditText.getText().length());
+        if (BuildConfig.DEBUG)
+            mRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
     }
 
     public void requestDataFieldsButtonClicked(View v) {

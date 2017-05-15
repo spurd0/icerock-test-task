@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
@@ -18,6 +19,13 @@ import com.icerockdev.babenko.presenters.DataFieldsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
+import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
+import static com.icerockdev.babenko.data.ApplicationConstants.PHONE;
+import static com.icerockdev.babenko.data.ApplicationConstants.TEXT;
+import static com.icerockdev.babenko.data.ApplicationConstants.URL;
 
 /**
  * Created by Roman Babenko on 01/05/17.
@@ -27,7 +35,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     private static final String TAG = "DataFieldsActivity";
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY";
 
-    private LinearLayout mDataFieldsContainer;
     private TextView mHeaderErrorTv;
     private DataFieldsPresenter mPresenter;
     private DataFieldsAdapter mDataFieldsAdapter;
@@ -47,7 +54,6 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     }
 
     protected void initViews() {
-        mDataFieldsContainer = (LinearLayout) findViewById(R.id.dataFieldsEditTextContainer);
         mHeaderErrorTv = (TextView) findViewById(R.id.validationErrorTv);
     }
 
@@ -74,9 +80,33 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
             return;
         if (dataFields == null)
             throw new NullPointerException("FieldsListIsNull");
+        if (BuildConfig.DEBUG)
+            fillDataFields(dataFields);
         mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields);
-        mDataFieldsAdapter.attachAdapter(mDataFieldsContainer);
+        mDataFieldsAdapter.attachAdapter((LinearLayout) findViewById(R.id.dataFieldsEditTextContainer));
         initSubmitButton(dataFields);
+    }
+
+    private void fillDataFields(ArrayList<DataField> dataFields) {
+        for (DataField dataField : dataFields) {
+            switch (dataField.getType()) {
+                case TEXT:
+                    dataField.setValue("Very-very-very long text");
+                    break;
+                case EMAIL:
+                    dataField.setValue("foo@java.com");
+                    break;
+                case PHONE:
+                    dataField.setValue("+79991234200");
+                    break;
+                case NUMBER:
+                    dataField.setValue("12345");
+                    break;
+                case URL:
+                    dataField.setValue("ya.ru");
+                    break;
+            }
+        }
     }
 
     @Override

@@ -53,7 +53,7 @@ public class UtilsHelper {
             case URL:
                 return InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS;
             default:
-                throw new UnknownFormatConversionException("Unknown type");
+                throw new IllegalArgumentException("Unknown type");
         }
     }
 
@@ -70,7 +70,7 @@ public class UtilsHelper {
             case URL:
                 return context.getString(R.string.data_field_url_hint);
             default:
-                throw new UnknownFormatConversionException("Unknown type");
+                throw new IllegalArgumentException("Unknown type");
         }
     }
 }

@@ -74,7 +74,7 @@ public class DataFieldsManager {
             case URL:
                 return Patterns.WEB_URL.matcher(data).matches();
             default:
-                throw new UnknownFormatConversionException("Unknown type");
+                throw new IllegalArgumentException("Unknown type");
         }
     }
 

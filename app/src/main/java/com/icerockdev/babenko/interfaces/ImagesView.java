@@ -14,5 +14,5 @@ public interface ImagesView extends ProgressBaseView {
 
     void showListIsEmptyError();
 
-    void gotImagesList(ArrayList<ImageItem> imageItems);
+    void showImagesList(ArrayList<ImageItem> imageItems);
 }

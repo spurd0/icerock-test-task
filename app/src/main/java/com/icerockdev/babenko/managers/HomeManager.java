@@ -19,13 +19,9 @@ import retrofit2.Response;
 public class HomeManager {
     private static final String TAG = "HomeManager";
 
-
-    public void requestDataFields(String Url, final DataFieldsCallback callback) {
-        if (BuildConfig.DEBUG)
-            Url = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c";
-
+    public void requestDataFields(String url, final DataFieldsCallback callback) {
         final Call<DataFieldResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
-                .getService().requestDataFields(Url);
+                .getService().requestDataFields(url);
         data.enqueue(new Callback<DataFieldResponse[]>() {
             @Override
             public void onResponse(Call<DataFieldResponse[]> call, Response<DataFieldResponse[]> response) {

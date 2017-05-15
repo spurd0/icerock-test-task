@@ -3,6 +3,7 @@ package com.icerockdev.babenko.presenters;
 import android.content.Context;
 import android.util.Patterns;
 
+import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;

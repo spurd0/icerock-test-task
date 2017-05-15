@@ -1,19 +1,13 @@
 package com.icerockdev.babenko.presenters;
 
-import android.os.Parcelable;
 import android.util.Log;
 
 import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.ImagesManager;
-import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.model.ImageItem;
-import com.icerockdev.babenko.model.ImageResponse;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -46,7 +40,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                         getView().showListIsEmptyError();
                         return;
                     }
-                    getView().gotImagesList(images);
+                    getView().showImagesList(images);
                 }
             }
 

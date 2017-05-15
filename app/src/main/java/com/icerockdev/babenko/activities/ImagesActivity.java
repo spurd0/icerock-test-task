@@ -83,7 +83,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     }
 
     @Override
-    public void gotImagesList(ArrayList<ImageItem> images) {
+    public void showImagesList(ArrayList<ImageItem> images) {
         if (mImagesList != null)
             return;
         mImagesList = images;
