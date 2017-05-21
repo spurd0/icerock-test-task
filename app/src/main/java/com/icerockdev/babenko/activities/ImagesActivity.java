@@ -1,9 +1,7 @@
 package com.icerockdev.babenko.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,11 +11,10 @@ import android.widget.TextView;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.ImagesAdapter;
-import com.icerockdev.babenko.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.interfaces.ImagesView;
-import com.icerockdev.babenko.managers.ImagesManager;
+import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.presenters.ImagesPresenter;
 
@@ -41,7 +38,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        mPresenter = new ImagesPresenter(new ImagesManager());
+        mPresenter = new ImagesPresenter(new ImagesManagerImpl()); // TODO: 15/05/17 orientation change?
         initViews();
     }
 

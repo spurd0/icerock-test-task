@@ -6,14 +6,13 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
-import com.icerockdev.babenko.managers.FullScreenImageManager;
+import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
 import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
 
 /**
@@ -47,7 +46,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
         mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY),
-                new FullScreenImageManager());
+                new FullScreenImageManagerImpl());
         initViews();
     }
 
@@ -128,7 +127,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     }
 
     @Override
-    public ImageView getIvForPicture() {
+    public ImageView getIvForPicture() { // TODO: 15/05/17 how to correctly download images with picasso in mvp?
         return mImageView;
     }
 

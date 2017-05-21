@@ -1,15 +1,17 @@
 package com.icerockdev.babenko.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.TypedValue;
 
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.DataFieldResponse;
+import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.model.ImageResponse;
 
-import java.util.UnknownFormatConversionException;
+import java.util.ArrayList;
 
 import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
 import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
@@ -63,5 +65,23 @@ public class UtilsHelper {
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
+    }
+
+    public static DataField[] convertDataFields(DataFieldResponse[] data) {
+        DataField[] convertedData = new DataField[data.length];
+        for (int i = 0; i < data.length; i++)
+            convertedData[i] = new DataField(data[i].getId(), data[i].getType(),
+                    data[i].getPlaceholder(),
+                    data[i].getDefaultValue());
+        return convertedData;
+    }
+
+    public static ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
+        ArrayList<ImageItem> result = new ArrayList<>();
+        for (ImageResponse imageResponse : images) {
+            result.add(new ImageItem(imageResponse.getAlbumId(), imageResponse.getId(),
+                    imageResponse.getTitle(), imageResponse.getUrl(), imageResponse.getThumbnailUrl()));
+        }
+        return result;
     }
 }

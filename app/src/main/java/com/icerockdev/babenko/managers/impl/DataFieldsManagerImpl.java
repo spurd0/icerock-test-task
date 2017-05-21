@@ -1,29 +1,16 @@
-package com.icerockdev.babenko.managers;
+package com.icerockdev.babenko.managers.impl;
 
-import android.content.SharedPreferences;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.support.v4.util.SparseArrayCompat;
-import android.util.Log;
 import android.util.Patterns;
-import android.webkit.URLUtil;
 import android.widget.EditText;
 
-import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.DataFieldResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UnknownFormatConversionException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
 import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
@@ -35,7 +22,7 @@ import static com.icerockdev.babenko.data.ApplicationConstants.URL;
  * Created by Roman Babenko on 30/04/17.
  */
 
-public class DataFieldsManager {
+public class DataFieldsManagerImpl implements DataFieldsManager {
 
     private ArrayList<DataField> mDataFieldsList;
 
@@ -47,7 +34,7 @@ public class DataFieldsManager {
             EditText fieldValue = fieldValues.get(key);
             for (DataField dataField : dataFields)
                 if (dataField.getId() == key) {
-                    if (!isFieldDataCorrect(fieldValue.getText().toString(), dataField.getType()))
+                    if (!isDataFieldCorrect(fieldValue.getText().toString(), dataField.getType()))
                         errorList.add(key);
                 }
         }
@@ -56,7 +43,7 @@ public class DataFieldsManager {
         else callback.failedResponse(errorList);
     }
 
-    private boolean isFieldDataCorrect(String data, String type) {
+    public boolean isDataFieldCorrect(String data, String type) {
         if (data.isEmpty())
             return false;
         switch (type) {
@@ -76,12 +63,6 @@ public class DataFieldsManager {
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
-    }
-
-    public interface DataFieldsCheckerCallback {
-        void successResponse();
-
-        void failedResponse(List<Integer> errorList);
     }
 
     public ArrayList<DataField> getDataFields(Parcelable[] mFieldsData) {

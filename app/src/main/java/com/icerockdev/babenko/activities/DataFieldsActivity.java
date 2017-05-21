@@ -14,12 +14,12 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
+import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.DataFieldsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
 import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
@@ -49,7 +49,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
-        mPresenter = new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY));
+        mPresenter = new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
+                new DataFieldsManagerImpl());
         initViews();
     }
 
@@ -87,7 +88,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
         initSubmitButton(dataFields);
     }
 
-    private void fillDataFields(ArrayList<DataField> dataFields) {
+    private void fillDataFields(ArrayList<DataField> dataFields) {// TODO: 15/05/17 how to correctly make a testing or skip it?
         for (DataField dataField : dataFields) {
             switch (dataField.getType()) {
                 case TEXT:

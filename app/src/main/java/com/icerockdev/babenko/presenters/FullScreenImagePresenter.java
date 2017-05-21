@@ -3,7 +3,7 @@ package com.icerockdev.babenko.presenters;
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
-import com.icerockdev.babenko.managers.FullScreenImageManager;
+import com.icerockdev.babenko.managers.interfaces.FullScreenImageManager;
 import com.squareup.picasso.Callback;
 
 /**

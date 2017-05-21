@@ -1,24 +1,22 @@
-package com.icerockdev.babenko.managers;
+package com.icerockdev.babenko.managers.impl;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.interfaces.SharedPreferencesApi;
-import com.icerockdev.babenko.utils.UtilsHelper;
+import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 
 /**
  * Created by Roman Babenko on 10/05/17.
  */
 
-public class SharedPreferencesManager implements SharedPreferencesApi{
-    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.HomeManager.SERVER_ERROR_DIALOG_MESSAGE_KEY";
+public class SharedPreferencesManagerImpl implements SharedPreferencesManager {
+    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.impl.HomeManagerImpl.SERVER_ERROR_DIALOG_MESSAGE_KEY";
 
 
     private SharedPreferences mManager;
 
-    public SharedPreferencesManager(Context context) {
+    public SharedPreferencesManagerImpl(Context context) {
         mManager = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

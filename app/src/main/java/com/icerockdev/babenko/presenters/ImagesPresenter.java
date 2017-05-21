@@ -4,7 +4,8 @@ import android.util.Log;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.interfaces.ImagesView;
-import com.icerockdev.babenko.managers.ImagesManager;
+import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
+import com.icerockdev.babenko.managers.interfaces.ImagesManager;
 import com.icerockdev.babenko.model.ImageItem;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
 
     private void requestPictures() {
         getView().showProgressDialog();
-        mManager.requestPicturesList(new ImagesManager.ImagesCallback() {
+        mManager.requestPicturesList(new ImagesManagerImpl.ImagesCallback() {
             @Override
             public void successResponse(ArrayList<ImageItem> images) {
                 if (getView() != null) {

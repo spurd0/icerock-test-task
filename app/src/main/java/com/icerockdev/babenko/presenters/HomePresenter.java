@@ -5,8 +5,9 @@ import android.util.Patterns;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
-import com.icerockdev.babenko.interfaces.SharedPreferencesApi;
-import com.icerockdev.babenko.managers.HomeManager;
+import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
+import com.icerockdev.babenko.managers.interfaces.HomeManager;
+import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 
 
@@ -16,11 +17,11 @@ import com.icerockdev.babenko.model.DataField;
 
 public class HomePresenter extends BasePresenter<HomeView> {
     private HomeManager mManager;
-    private SharedPreferencesApi mSharedPreferencesApi;
+    private SharedPreferencesManager mSharedPreferencesManager;
 
-    public HomePresenter(HomeManager manager, SharedPreferencesApi sharedPreferencesApi) {
+    public HomePresenter(HomeManager manager, SharedPreferencesManager sharedPreferencesManager) {
         mManager = manager;
-        mSharedPreferencesApi = sharedPreferencesApi;
+        mSharedPreferencesManager = sharedPreferencesManager;
     }
 
     @Override
@@ -37,13 +38,13 @@ public class HomePresenter extends BasePresenter<HomeView> {
         }
         if (getView() != null)
             getView().showProgressDialog();
-        mManager.requestDataFields(url, new HomeManager.DataFieldsCallback() {
+        mManager.requestDataFields(url, new HomeManagerImpl.DataFieldsCallback() {
             @Override
             public void failedResponse(String error) {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
                     getView().showErrorDialog(error);
-                } else mSharedPreferencesApi.saveErrorMessage(error);
+                } else mSharedPreferencesManager.saveErrorMessage(error);
             }
 
             @Override
@@ -56,7 +57,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
                 } else if (emptyList)
-                    mSharedPreferencesApi.saveErrorMessage(IceRockApplication.getInstance()
+                    mSharedPreferencesManager.saveErrorMessage(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
             }
         });
@@ -64,7 +65,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
 
     private void checkForErrors() {
-        String dialogErrorMessage = mSharedPreferencesApi.getErrorMessage();
+        String dialogErrorMessage = mSharedPreferencesManager.getErrorMessage();
         if (!dialogErrorMessage.isEmpty())
             if (getView() != null)
                 getView().showErrorDialog(dialogErrorMessage);

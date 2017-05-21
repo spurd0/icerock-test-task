@@ -10,9 +10,9 @@ import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
-import com.icerockdev.babenko.interfaces.SharedPreferencesApi;
-import com.icerockdev.babenko.managers.HomeManager;
-import com.icerockdev.babenko.managers.SharedPreferencesManager;
+import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
+import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
+import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
 
@@ -23,14 +23,14 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String TAG = "HomeActivity";
     private EditText mRequestUrlEditText;
     private HomePresenter mPresenter;
-    private SharedPreferencesApi mSharedPreferencesApi;
+    private SharedPreferencesManager mSharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mSharedPreferencesApi = new SharedPreferencesManager(this);
-        mPresenter = new HomePresenter(new HomeManager(), mSharedPreferencesApi);
+        mSharedPreferencesManager = new SharedPreferencesManagerImpl(this);
+        mPresenter = new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
         initViews();
     }
 
@@ -57,7 +57,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
-        mSharedPreferencesApi.saveErrorMessage("");
+        mSharedPreferencesManager.saveErrorMessage("");
     }
 
     public void gotDataFields(DataField[] data) {

@@ -1,16 +1,14 @@
-package com.icerockdev.babenko.managers;
+package com.icerockdev.babenko.managers.impl;
 
-import android.net.Uri;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.managers.interfaces.ImagesManager;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.model.ImageResponse;
-import com.squareup.picasso.OkHttpDownloader;
-import com.squareup.picasso.Picasso;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.ArrayList;
 
@@ -24,8 +22,8 @@ import static com.icerockdev.babenko.data.ApplicationConstants.REQUEST_IMAGES_UR
  * Created by Roman Babenko on 10/05/17.
  */
 
-public class ImagesManager {
-    private static final String TAG = "ImagesManager";
+public class ImagesManagerImpl implements ImagesManager {
+    private static final String TAG = "ImagesManagerImpl";
 
     private ArrayList<ImageItem> mImagesList;
 
@@ -40,7 +38,7 @@ public class ImagesManager {
                         callback.failedResponse(IceRockApplication.getInstance()
                                 .getString(R.string.request_data_fields_error_null));
                     } else {
-                        mImagesList = convertImagesList(response.body());
+                        mImagesList = UtilsHelper.convertImagesList(response.body());
                         callback.successResponse(mImagesList);
                     }
                 }
@@ -56,20 +54,6 @@ public class ImagesManager {
             callback.successResponse(mImagesList);
         }
 
-    }
-
-    private ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
-        ArrayList<ImageItem> result = new ArrayList<>();
-        for (ImageResponse imageResponse : images) {
-            result.add(new ImageItem(imageResponse.getAlbumId(), imageResponse.getId(),
-                    imageResponse.getTitle(), imageResponse.getUrl(), imageResponse.getThumbnailUrl()));
-        }
-        return result;
-    }
-
-    public interface ImagesCallback{
-        void successResponse(ArrayList<ImageItem> images);
-        void failedResponse(String error);
     }
 
 }
