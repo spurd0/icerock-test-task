@@ -19,7 +19,7 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     private Parcelable[] mFieldsData;
     private DataFieldsManager mManager;
 
-    public DataFieldsPresenter(Parcelable[] fieldsData) {
+    public DataFieldsPresenter(Parcelable[] fieldsData) { // TODO: 15/05/17 maybe store fieldsData as static member?
         mFieldsData = fieldsData;
         mManager = new DataFieldsManager();
     }

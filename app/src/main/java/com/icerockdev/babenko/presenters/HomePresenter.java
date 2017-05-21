@@ -3,11 +3,9 @@ package com.icerockdev.babenko.presenters;
 import android.content.Context;
 import android.util.Patterns;
 
-import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
-import com.icerockdev.babenko.managers.DataFieldsManager;
 import com.icerockdev.babenko.managers.HomeManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
@@ -36,9 +34,11 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
     public void requestDataClicked(String url) {
         if (!Patterns.WEB_URL.matcher(url).matches()) {
+            if (getView() != null)
             getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
             return;
         }
+        if (getView() != null)
         getView().showProgressDialog();
         mManager.requestDataFields(url, new HomeManager.DataFieldsCallback() {
             @Override
@@ -60,7 +60,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
                     else getView().showErrorDialog(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_list_empty));
                 } else if (emptyList)
-                    UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(),
+                    UtilsHelper.saveStringToSharedPreferences(IceRockApplication.getInstance(), // TODO: 15/05/17 is it normal? what to do if getview -- null
                             SERVER_ERROR_DIALOG_MESSAGE_KEY, IceRockApplication.getInstance()
                                     .getString(R.string.request_data_fields_error_list_empty));
             }
