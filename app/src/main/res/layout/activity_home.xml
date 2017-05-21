@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.icerockdev.babenko.activities.HomeActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
->
-
         <EditText
             android:id="@+id/fieldsRequestUrlEditText"
             android:layout_width="wrap_content"
@@ -37,7 +28,5 @@
             app:layout_constraintLeft_toLeftOf="@+id/fieldsRequestUrlEditText"
             android:layout_marginTop="@dimen/request_fields_button_margin_top"
             android:onClick="requestDataFieldsButtonClicked"/>
-    </android.support.constraint.ConstraintLayout>
-
 
 </android.support.constraint.ConstraintLayout>
