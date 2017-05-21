@@ -31,15 +31,6 @@ public class UtilsHelper {
         );
     }
 
-    public static void saveStringToSharedPreferences(Context context, String key, String value) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putString(key, value).apply();
-    }
-
-    public static String getStringFromSharedPreferences(Context context, String key) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
-    }
-
     public static int getInputType(String type) {
         switch (type) {
             case TEXT:
