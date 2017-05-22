@@ -62,7 +62,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
     }
 
     public SparseArrayCompat<EditText> getFieldValues() {
-        return mFieldValues; //not so good solution if we use some view with recycling methods
+        return mFieldValues; // TODO: 5/22/2017 how to get all values?
     }
 
     public void updateErrorsViews(List<Integer> errorList) {
