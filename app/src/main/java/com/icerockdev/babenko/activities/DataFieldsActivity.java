@@ -83,7 +83,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
             throw new NullPointerException("FieldsListIsNull");
         if (BuildConfig.DEBUG)
             fillDataFields(dataFields);
-        mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields);
+        mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields); // hope that it won`t be too much fields.
         mDataFieldsAdapter.attachAdapter((LinearLayout) findViewById(R.id.dataFieldsEditTextContainer));
         initSubmitButton(dataFields);
     }
