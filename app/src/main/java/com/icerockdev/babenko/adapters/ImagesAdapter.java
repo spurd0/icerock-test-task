@@ -26,7 +26,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
     private ImagesListCallback mCallback;
     private ArrayList<ImageItem> mImageList;
 
-
     public ImagesAdapter(ArrayList<ImageItem> imageList, ImagesListCallback callback) {
         mCallback = callback;
         mImageList = imageList;
@@ -53,6 +52,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private TextView mId;
         private TextView mTitle;
         private Context mContext;
+        private Picasso mPicasso;
 
         public ImagesItemHolder(View itemView, Context context) {
             super(itemView);
@@ -60,19 +60,24 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
             mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
             mContext = context;
-        }
-
-        public void updateView(final ImageItem item, final ImagesListCallback callback) {
-            mId.setText(String.valueOf(item.getId()));
-            mTitle.setText(String.valueOf(item.getTitle()));
-            Picasso picasso = new Picasso.Builder(mContext).listener(new Picasso.Listener() {
+            mPicasso = new Picasso.Builder(mContext).listener(new Picasso.Listener() {
                 @Override
                 public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
                     if (BuildConfig.DEBUG) exception.printStackTrace();
                 }
             }).downloader(new OkHttpDownloader(mContext)).build();
-            picasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark)
-                    .placeholder(R.drawable.question_mark).into(mImageView);
+        }
+
+        public void updateView(final ImageItem item, final ImagesListCallback callback) {
+            mId.setText(String.valueOf(item.getId()));
+            mTitle.setText(String.valueOf(item.getTitle()));
+            mImageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                @Override
+                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                    mPicasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark)
+                            .placeholder(R.drawable.question_mark).resize(mImageView.getWidth(), 0).into(mImageView);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
