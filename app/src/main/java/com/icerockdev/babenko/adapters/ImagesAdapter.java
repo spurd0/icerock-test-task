@@ -71,7 +71,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mId.setText(String.valueOf(item.getId()));
             mTitle.setText(String.valueOf(item.getTitle()));
-            mImageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            mImageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // TODO: 5/22/2017 is it good solution? also check layout
                 @Override
                 public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     mPicasso.load(item.getThumbnailUrl()).error(R.drawable.question_mark)
