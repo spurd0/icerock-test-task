@@ -59,13 +59,13 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
             mId = (TextView) itemView.findViewById(R.id.pictureElementId);
             mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
+            mContext = itemView.getContext(); // is it good idea? 
             mPicasso = new Picasso.Builder(mContext).listener(new Picasso.Listener() {
                 @Override
                 public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
                     if (BuildConfig.DEBUG) exception.printStackTrace();
                 }
             }).downloader(new OkHttpDownloader(mContext)).build();
-            mContext = itemView.getContext();
         }
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
