@@ -29,7 +29,7 @@ public class HomeManagerImpl implements HomeManager {
                 if (response.body() == null) {
                     callback.failedResponse(IceRockApplication.getInstance()
                             .getString(R.string.request_data_fields_error_null));
-                } else callback.successResponse(UtilsHelper.convertDataFields(response.body()));
+                } else callback.successResponse(UtilsHelper.convertDataFields(response.body())); // TODO: 02/06/17 get as list
             }
 
             @Override

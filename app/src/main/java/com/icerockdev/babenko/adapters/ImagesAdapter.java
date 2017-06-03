@@ -34,7 +34,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
     @Override
     public ImagesItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View imageItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_element, parent, false);
-        return new ImagesItemHolder(imageItemView, parent.getContext());
+        return new ImagesItemHolder(imageItemView);
     }
 
     @Override
@@ -54,18 +54,18 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         private Context mContext;
         private Picasso mPicasso;
 
-        public ImagesItemHolder(View itemView, Context context) {
+        public ImagesItemHolder(View itemView) {
             super(itemView);
             mId = (TextView) itemView.findViewById(R.id.pictureElementId);
             mTitle = (TextView) itemView.findViewById(R.id.pictureElementTitle);
             mImageView = (ImageView) itemView.findViewById(R.id.pictureElementImgView);
-            mContext = context;
             mPicasso = new Picasso.Builder(mContext).listener(new Picasso.Listener() {
                 @Override
                 public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
                     if (BuildConfig.DEBUG) exception.printStackTrace();
                 }
             }).downloader(new OkHttpDownloader(mContext)).build();
+            mContext = itemView.getContext();
         }
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
