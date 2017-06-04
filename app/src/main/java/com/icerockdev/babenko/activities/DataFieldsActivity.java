@@ -83,7 +83,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
             throw new NullPointerException("FieldsListIsNull");
         if (BuildConfig.DEBUG)
             fillDataFields(dataFields);
-        mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields); // hope that it won`t be too much fields.
+        mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields);
+        // hope that it won`t be too much fields, moved to recyclerview @see feature/recycler_view_datafields
         mDataFieldsAdapter.attachAdapter((LinearLayout) findViewById(R.id.dataFieldsEditTextContainer));
         initSubmitButton(dataFields);
     }
