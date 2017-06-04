@@ -10,7 +10,7 @@ public interface HomeManager {
     void requestDataFields(String url, final DataFieldsCallback callback);
 
     interface DataFieldsCallback {
-        void failedResponse(String error);
+        void failedResponse(int errorCode);
 
         void successResponse(DataField[] response);
     }

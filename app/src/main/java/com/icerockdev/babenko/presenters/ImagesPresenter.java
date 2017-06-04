@@ -10,6 +10,8 @@ import com.icerockdev.babenko.model.ImageItem;
 
 import java.util.ArrayList;
 
+import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_LIST_NULL_RESPONSE;
+
 /**
  * Created by Roman Babenko on 10/05/17.
  */
@@ -46,10 +48,10 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
             }
 
             @Override
-            public void failedResponse(String error) {
+            public void failedResponse(int errorCode) {
                 if (getView() != null) {
                     getView().dismissProgressDialog();
-                    getView().showErrorDialog(error);
+                    getView().showErrorDialog(errorCode);
                 }
             }
         });

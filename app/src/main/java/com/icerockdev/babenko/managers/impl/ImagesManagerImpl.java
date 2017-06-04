@@ -4,13 +4,15 @@ import android.util.Log;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.managers.interfaces.ImagesManager;
+import com.icerockdev.babenko.managers.interfaces.RetrofitManager;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.model.ImageResponse;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,20 +25,28 @@ import static com.icerockdev.babenko.data.ApplicationConstants.REQUEST_IMAGES_UR
  */
 
 public class ImagesManagerImpl implements ImagesManager {
+    public static final int CODE_ERROR_LIST_NULL_RESPONSE = 1;
+    public static final int CODE_ERROR_OTHER = 2;
     private static final String TAG = "ImagesManagerImpl";
 
     private ArrayList<ImageItem> mImagesList;
 
+    @Inject
+    RetrofitManager mRetrofitManager;
+
+    public ImagesManagerImpl() {
+        IceRockApplication.getAppComponent().inject(this);
+    }
+
     public void requestPicturesList(final ImagesCallback callback) {
         if (mImagesList == null) {
-            final Call<ImageResponse[]> data = IceRockApplication.getInstance().getRetrofitManager()
+            final Call<ImageResponse[]> data = mRetrofitManager
                     .getService().requestImages(REQUEST_IMAGES_URL);
             data.enqueue(new Callback<ImageResponse[]>() {
                 @Override
                 public void onResponse(Call<ImageResponse[]> call, Response<ImageResponse[]> response) {
                     if (response.body() == null) {
-                        callback.failedResponse(IceRockApplication.getInstance()
-                                .getString(R.string.request_data_fields_error_null));
+                        callback.failedResponse(CODE_ERROR_LIST_NULL_RESPONSE);
                     } else {
                         mImagesList = UtilsHelper.convertImagesList(response.body());
                         callback.successResponse(mImagesList);
@@ -45,7 +55,7 @@ public class ImagesManagerImpl implements ImagesManager {
 
                 @Override
                 public void onFailure(Call<ImageResponse[]> call, Throwable t) {
-                    callback.failedResponse(t.getLocalizedMessage());
+                    callback.failedResponse(CODE_ERROR_OTHER);
                     if (BuildConfig.DEBUG)
                         Log.e(TAG, "Request error " + t.getLocalizedMessage());
                 }

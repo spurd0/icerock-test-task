@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface ImagesView extends ProgressBaseView {
-    void showErrorDialog(String message);
+    void showErrorDialog(int errorCode);
 
     void showListIsEmptyError();
 

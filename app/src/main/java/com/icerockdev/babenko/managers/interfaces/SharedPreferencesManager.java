@@ -5,7 +5,7 @@ package com.icerockdev.babenko.managers.interfaces;
  */
 
 public interface SharedPreferencesManager {
-    String getErrorMessage();
+    Integer getErrorCode();
 
-    void saveErrorMessage(String message);
+    void saveErrorCode(int code);
 }

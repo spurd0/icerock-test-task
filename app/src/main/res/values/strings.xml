@@ -8,6 +8,7 @@
     <string name="request_data_fields_error">Network error</string>
     <string name="request_data_fields_error_list_empty">Server returned empty list</string>
     <string name="request_data_fields_error_null">Server returned null</string>
+    <string name="request_data_fields_error_other">Server error occurred, try again later</string>
 
     <!--Fields list actions-->
     <string name="submit_fields_button_text">Submit</string>
@@ -22,4 +23,6 @@
 
     <!--Images list screen-->
     <string name="images_list_is_empty">Images list is empty</string>
+    <string name="request_images_list_error_null">Server returned null</string>
+    <string name="request_images_list_error_other">@string/request_data_fields_error_other</string>
 </resources>

@@ -21,6 +21,8 @@ import com.icerockdev.babenko.presenters.ImagesPresenter;
 import java.util.ArrayList;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_LIST_NULL_RESPONSE;
+import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_OTHER;
 
 /**
  * Created by Roman Babenko on 10/05/17.
@@ -53,10 +55,22 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     }
 
     @Override
-    public void showErrorDialog(String error) {
+    public void showErrorDialog(int errorCode) {
         ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
         Bundle arguments = new Bundle();
-        arguments.putString(DIALOG_MESSAGE_KEY, error);
+        String errorMsg;
+        switch (errorCode) {
+            case CODE_ERROR_LIST_NULL_RESPONSE:
+                errorMsg = getString(R.string.request_images_list_error_null);
+                break;
+            case CODE_ERROR_OTHER:
+                errorMsg = getString(R.string.request_images_list_error_other);
+                break;
+            default:
+                errorMsg = getString(R.string.request_images_list_error_other);
+                break;
+        }
+        arguments.putString(DIALOG_MESSAGE_KEY, errorMsg);
         serverErrorDialogFragment.setArguments(arguments);
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
     }

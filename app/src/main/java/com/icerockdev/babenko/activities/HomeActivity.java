@@ -16,7 +16,12 @@ import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
 
+import javax.inject.Inject;
+
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_EMPTY_LIST;
+import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_LIST_NULL_RESPONSE;
+import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_OTHER;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
@@ -29,7 +34,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mSharedPreferencesManager = new SharedPreferencesManagerImpl(this);
+        mSharedPreferencesManager = new SharedPreferencesManagerImpl();
         mPresenter = new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
         initViews();
     }
@@ -51,13 +56,27 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         mPresenter.requestDataClicked(mRequestUrlEditText.getText().toString());
     }
 
-    public void showErrorDialog(String error) {
+    public void showErrorDialog(int codeError) {
         ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
         Bundle arguments = new Bundle();
+        String error;
+        switch (codeError) {
+            case CODE_ERROR_EMPTY_LIST:
+            error = getString(R.string.request_data_fields_error_list_empty);
+                break;
+            case CODE_ERROR_LIST_NULL_RESPONSE:
+                error = getString(R.string.request_data_fields_error_null);
+                break;
+            case CODE_ERROR_OTHER:
+                error = getString(R.string.request_data_fields_error_other);
+                break;
+            default:
+                error = getString(R.string.request_data_fields_error_other);
+                break;
+        }
         arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
-        mSharedPreferencesManager.saveErrorMessage("");
     }
 
     public void gotDataFields(DataField[] data) {
@@ -67,8 +86,8 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     @Override
-    public void showUrlError(String error) {
-        mRequestUrlEditText.setError(error);
+    public void showUrlError() {
+        mRequestUrlEditText.setError(getString(R.string.url_error));
     }
 
     @Override

@@ -2,31 +2,33 @@ package com.icerockdev.babenko;
 
 import android.app.Application;
 
-import com.icerockdev.babenko.managers.RetrofitManager;
+import com.icerockdev.babenko.core.dagger.AppComponent;
+import com.icerockdev.babenko.core.dagger.DaggerAppComponent;
+import com.icerockdev.babenko.core.dagger.modules.ContextModule;
+import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 
 /**
  * Created by Roman Babenko on 30/04/17.
  */
 
 public class IceRockApplication extends Application {
-    private static IceRockApplication sInstance;
-    private RetrofitManager mRetrofitManager;
+    private static AppComponent sAppComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = this;
+        sAppComponent = initComponent();
     }
 
-    public static IceRockApplication getInstance() {
-        return sInstance;
+
+    private AppComponent initComponent() {
+        return DaggerAppComponent.builder()
+                .contextModule(new ContextModule(getApplicationContext()))
+                .picassoModule(new PicassoModule(getApplicationContext()))
+                .build();
     }
 
-    public RetrofitManager getRetrofitManager() {
-        if (mRetrofitManager != null)
-            return mRetrofitManager;
-        mRetrofitManager = new RetrofitManager();
-        return mRetrofitManager;
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
     }
-
 }

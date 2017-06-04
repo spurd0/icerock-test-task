@@ -14,7 +14,7 @@ public interface ImagesManager {
     interface ImagesCallback {
         void successResponse(ArrayList<ImageItem> images);
 
-        void failedResponse(String error);
+        void failedResponse(int errorCode);
     }
 
 }

@@ -8,9 +8,9 @@ import com.icerockdev.babenko.model.DataField;
 
 public interface HomeView extends ProgressBaseView {
 
-    void showErrorDialog(String message);
+    void showErrorDialog(int errorCode);
 
-    void showUrlError(String error);
+    void showUrlError();
 
     void gotDataFields(DataField[] fields);
 

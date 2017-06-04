@@ -2,20 +2,23 @@ package com.icerockdev.babenko.presenters;
 
 import android.util.Patterns;
 
-import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.HomeManager;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 
+import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_NULL;
+import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_OTHER;
 
 /**
  * Created by Roman Babenko on 06/05/17.
  */
 
 public class HomePresenter extends BasePresenter<HomeView> {
+    public static final int CODE_ERROR_EMPTY_LIST = 1;
+    public static final int CODE_ERROR_LIST_NULL_RESPONSE = 2;
+    public static final int CODE_ERROR_OTHER = 3;
     private HomeManager mManager;
     private SharedPreferencesManager mSharedPreferencesManager;
 
@@ -33,18 +36,30 @@ public class HomePresenter extends BasePresenter<HomeView> {
     public void requestDataClicked(String url) {
         if (!Patterns.WEB_URL.matcher(url).matches()) {
             if (getView() != null)
-                getView().showUrlError(IceRockApplication.getInstance().getString(R.string.url_error));
+                getView().showUrlError();
             return;
         }
         if (getView() != null)
             getView().showProgressDialog();
         mManager.requestDataFields(url, new HomeManagerImpl.DataFieldsCallback() {
             @Override
-            public void failedResponse(String error) {
+            public void failedResponse(int errorCode) {
+                int listErrorCode = 0;
+                switch (errorCode) {
+                    case ERROR_CODE_RESPONSE_NULL:
+                        listErrorCode = CODE_ERROR_LIST_NULL_RESPONSE;
+                        break;
+                    case ERROR_CODE_RESPONSE_OTHER:
+                        listErrorCode = CODE_ERROR_OTHER;
+                        break;
+                    default:
+                        listErrorCode = CODE_ERROR_OTHER;
+                        break;
+                }
                 if (getView() != null) {
                     getView().dismissProgressDialog();
-                    getView().showErrorDialog(error);
-                } else mSharedPreferencesManager.saveErrorMessage(error);
+                    getView().showErrorDialog(listErrorCode);
+                } else mSharedPreferencesManager.saveErrorCode(listErrorCode);
             }
 
             @Override
@@ -54,21 +69,23 @@ public class HomePresenter extends BasePresenter<HomeView> {
                     getView().dismissProgressDialog();
                     if (!emptyList)
                         getView().gotDataFields(response);
-                    else getView().showErrorDialog(IceRockApplication.getInstance()
-                            .getString(R.string.request_data_fields_error_list_empty));
+                    else getView().showErrorDialog(CODE_ERROR_EMPTY_LIST);
                 } else if (emptyList)
-                    mSharedPreferencesManager.saveErrorMessage(IceRockApplication.getInstance()
-                            .getString(R.string.request_data_fields_error_list_empty));
+                    mSharedPreferencesManager.saveErrorCode(CODE_ERROR_EMPTY_LIST);
             }
         });
     }
 
 
     private void checkForErrors() {
-        String dialogErrorMessage = mSharedPreferencesManager.getErrorMessage();
-        if (!dialogErrorMessage.isEmpty())
-            if (getView() != null)
-                getView().showErrorDialog(dialogErrorMessage);
+        int errorCode = mSharedPreferencesManager.getErrorCode();
+        if (errorCode == 0)
+            return;
+        if (getView() != null) {
+            mSharedPreferencesManager.saveErrorCode(0);
+            getView().showErrorDialog(errorCode);
+        }
     }
-
 }
+
+
