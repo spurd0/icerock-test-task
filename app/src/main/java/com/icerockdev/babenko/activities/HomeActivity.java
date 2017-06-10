@@ -1,13 +1,14 @@
 package com.icerockdev.babenko.activities;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
@@ -15,8 +16,6 @@ import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.presenters.HomePresenter;
-
-import javax.inject.Inject;
 
 import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_EMPTY_LIST;
@@ -26,14 +25,14 @@ import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_OTHER;
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
-    private EditText mRequestUrlEditText;
     private HomePresenter mPresenter;
     private SharedPreferencesManager mSharedPreferencesManager;
+    private ActivityHomeBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mSharedPreferencesManager = new SharedPreferencesManagerImpl();
         mPresenter = new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
         initViews();
@@ -45,15 +44,14 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     private void initViews() {
-        mRequestUrlEditText = (EditText) findViewById(R.id.fieldsRequestUrlEditText);
-        mRequestUrlEditText.setText(ApplicationConstants.URL_START);
-        mRequestUrlEditText.setSelection(mRequestUrlEditText.getText().length());
+        mBinding.fieldsRequestUrlEditText.setText(ApplicationConstants.URL_START);
+        mBinding.fieldsRequestUrlEditText.setSelection(mBinding.fieldsRequestUrlEditText.getText().length());
         if (BuildConfig.DEBUG)
-            mRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
+            mBinding.fieldsRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
     }
 
     public void requestDataFieldsButtonClicked(View v) {
-        mPresenter.requestDataClicked(mRequestUrlEditText.getText().toString());
+        mPresenter.requestDataClicked(mBinding.fieldsRequestUrlEditText.getText().toString());
     }
 
     public void showErrorDialog(int codeError) {
@@ -62,7 +60,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         String error;
         switch (codeError) {
             case CODE_ERROR_EMPTY_LIST:
-            error = getString(R.string.request_data_fields_error_list_empty);
+                error = getString(R.string.request_data_fields_error_list_empty);
                 break;
             case CODE_ERROR_LIST_NULL_RESPONSE:
                 error = getString(R.string.request_data_fields_error_null);
@@ -87,7 +85,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     @Override
     public void showUrlError() {
-        mRequestUrlEditText.setError(getString(R.string.url_error));
+        mBinding.fieldsRequestUrlEditText.setError(getString(R.string.url_error));
     }
 
     @Override
