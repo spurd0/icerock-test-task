@@ -14,21 +14,20 @@ import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 public class IceRockApplication extends Application {
     private static AppComponent sAppComponent;
 
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         sAppComponent = initComponent();
     }
 
-
     private AppComponent initComponent() {
         return DaggerAppComponent.builder()
                 .contextModule(new ContextModule(getApplicationContext()))
                 .picassoModule(new PicassoModule(getApplicationContext()))
                 .build();
-    }
-
-    public static AppComponent getAppComponent() {
-        return sAppComponent;
     }
 }

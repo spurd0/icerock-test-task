@@ -15,7 +15,7 @@ import dagger.Provides;
 public class ContextModule {
     private Context mContext;
 
-    public ContextModule (Context context) {
+    public ContextModule(Context context) {
         mContext = context;
     }
 

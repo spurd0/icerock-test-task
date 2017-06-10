@@ -29,7 +29,7 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
         if (mImageUrl == null)
             throw new NullPointerException("Image url is null");
         if (getView() != null)
-        getView().showProgressDialog();
+            getView().showProgressDialog();
         mManager.requestImage(targetIv, mImageUrl,
                 new Callback() {
                     @Override

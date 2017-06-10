@@ -28,11 +28,9 @@ public class ImagesManagerImpl implements ImagesManager {
     public static final int CODE_ERROR_LIST_NULL_RESPONSE = 1;
     public static final int CODE_ERROR_OTHER = 2;
     private static final String TAG = "ImagesManagerImpl";
-
-    private ArrayList<ImageItem> mImagesList;
-
     @Inject
     RetrofitManager mRetrofitManager;
+    private ArrayList<ImageItem> mImagesList;
 
     public ImagesManagerImpl() {
         IceRockApplication.getAppComponent().inject(this);

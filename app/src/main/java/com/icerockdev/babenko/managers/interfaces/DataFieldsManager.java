@@ -20,12 +20,12 @@ public interface DataFieldsManager {
 
     boolean isDataFieldCorrect(String data, String type);
 
+    ArrayList<DataField> getDataFields(Parcelable[] mFieldsData);
+
     interface DataFieldsCheckerCallback {
         void successResponse();
 
         void failedResponse(List<Integer> errorList);
     }
-
-    ArrayList<DataField> getDataFields(Parcelable[] mFieldsData);
 
 }

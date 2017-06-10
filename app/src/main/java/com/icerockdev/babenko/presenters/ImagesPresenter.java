@@ -10,8 +10,6 @@ import com.icerockdev.babenko.model.ImageItem;
 
 import java.util.ArrayList;
 
-import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_LIST_NULL_RESPONSE;
-
 /**
  * Created by Roman Babenko on 10/05/17.
  */

@@ -32,9 +32,8 @@ import static com.icerockdev.babenko.data.ApplicationConstants.URL;
  */
 
 public class DataFieldsActivity extends AppCompatActivity implements DataFieldsView {
-    private static final String TAG = "DataFieldsActivity";
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY";
-
+    private static final String TAG = "DataFieldsActivity";
     private TextView mHeaderErrorTv;
     private DataFieldsPresenter mPresenter;
     private DataFieldsAdapter mDataFieldsAdapter;

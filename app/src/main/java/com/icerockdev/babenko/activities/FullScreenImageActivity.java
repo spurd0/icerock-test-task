@@ -21,15 +21,13 @@ import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
 
 public class FullScreenImageActivity extends BaseProgressActivity implements FullScreenImageView, View.OnTouchListener {
     public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY";
-
-    private ImageView mImageView;
-    private FullScreenImagePresenter mPresenter;
-
-    private Matrix mMatrix = new Matrix();
-    private Matrix mSavedMatrix = new Matrix();
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
+    private ImageView mImageView;
+    private FullScreenImagePresenter mPresenter;
+    private Matrix mMatrix = new Matrix();
+    private Matrix mSavedMatrix = new Matrix();
     private int mMode = NONE;
     private PointF mStart = new PointF();
     private PointF mMid = new PointF();

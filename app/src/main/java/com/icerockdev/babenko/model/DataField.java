@@ -8,6 +8,17 @@ import android.os.Parcelable;
  */
 
 public class DataField implements Parcelable {
+    public static final Creator<DataField> CREATOR = new Creator<DataField>() {
+        @Override
+        public DataField createFromParcel(Parcel in) {
+            return new DataField(in);
+        }
+
+        @Override
+        public DataField[] newArray(int size) {
+            return new DataField[size];
+        }
+    };
     private int mId;
     private String mType;
     private String mPlaceholder;
@@ -30,18 +41,6 @@ public class DataField implements Parcelable {
         mValue = defaultValue;
     }
 
-    public static final Creator<DataField> CREATOR = new Creator<DataField>() {
-        @Override
-        public DataField createFromParcel(Parcel in) {
-            return new DataField(in);
-        }
-
-        @Override
-        public DataField[] newArray(int size) {
-            return new DataField[size];
-        }
-    };
-
     public int getId() {
         return mId;
     }
@@ -54,12 +53,12 @@ public class DataField implements Parcelable {
         return mPlaceholder;
     }
 
-    public void setValue(String value) {
-        mValue = value;
-    }
-
     public String getValue() {
         return mValue;
+    }
+
+    public void setValue(String value) {
+        mValue = value;
     }
 
     @Override

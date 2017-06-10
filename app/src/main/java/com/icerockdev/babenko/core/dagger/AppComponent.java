@@ -1,6 +1,5 @@
 package com.icerockdev.babenko.core.dagger;
 
-import com.icerockdev.babenko.activities.HomeActivity;
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
@@ -8,8 +7,6 @@ import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
-import com.icerockdev.babenko.presenters.HomePresenter;
-
 
 import javax.inject.Singleton;
 
@@ -25,7 +22,7 @@ public interface AppComponent {
 
     void inject(HomeManagerImpl homeManager);
 
-    void inject (ImagesManagerImpl imagesManager);
+    void inject(ImagesManagerImpl imagesManager);
 
-    void inject (FullScreenImageManagerImpl fullScreenImageManagerImpl);
+    void inject(FullScreenImageManagerImpl fullScreenImageManagerImpl);
 }

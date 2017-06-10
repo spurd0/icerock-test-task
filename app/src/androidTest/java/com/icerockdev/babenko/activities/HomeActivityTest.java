@@ -16,7 +16,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  */
 public class HomeActivityTest {
     @Rule
-    public ActivityTestRule mHomeActivityTestRule =  new ActivityTestRule(HomeActivity.class);
+    public ActivityTestRule mHomeActivityTestRule = new ActivityTestRule(HomeActivity.class);
 
     @Test
     public void requestDataFieldsButtonClicked() throws Exception {
