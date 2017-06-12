@@ -33,6 +33,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
     public ImagesItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ImageElementBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.image_element, parent, false);
+        binding.setCallback(mCallback);
         return new ImagesItemHolder(binding);
     }
 
@@ -62,12 +63,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
 
         public void updateView(final ImageItem item, final ImagesListCallback callback) {
             mBinding.setImage(item);
-            mBinding.pictureElementImgView.setOnClickListener(new View.OnClickListener() { // TODO: 12/06/17 move to binding
-                @Override
-                public void onClick(View v) {
-                    callback.itemClicked(item.getUrl());
-                }
-            });
         }
 
     }
