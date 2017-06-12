@@ -7,6 +7,10 @@
         <variable
             name="image"
             type="com.icerockdev.babenko.model.ImageItem" />
+
+        <variable
+            name="callback"
+            type="com.icerockdev.babenko.interfaces.ImagesListCallback" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -31,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 app:imageUrl="@{image.thumbnailUrl}"
+                android:onClick="@{() -> callback.itemClicked(image.url)}"
                 android:adjustViewBounds="true" />
 
 

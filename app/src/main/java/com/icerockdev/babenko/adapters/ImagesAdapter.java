@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -33,12 +32,13 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
     public ImagesItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ImageElementBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.image_element, parent, false);
+        binding.setCallback(mCallback);
         return new ImagesItemHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(ImagesItemHolder holder, int position) {
-        holder.updateView(mImageList.get(position), mCallback);
+        holder.updateView(mImageList.get(position));
     }
 
     @Override
@@ -60,14 +60,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
             mBinding = binding;
         }
 
-        public void updateView(final ImageItem item, final ImagesListCallback callback) {
+        public void updateView(final ImageItem item) {
             mBinding.setImage(item);
-            mBinding.pictureElementImgView.setOnClickListener(new View.OnClickListener() { // TODO: 12/06/17 move to binding
-                @Override
-                public void onClick(View v) {
-                    callback.itemClicked(item.getUrl());
-                }
-            });
         }
 
     }
