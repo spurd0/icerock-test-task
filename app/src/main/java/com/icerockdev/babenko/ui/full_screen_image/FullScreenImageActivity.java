@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
@@ -25,7 +27,8 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
     private ImageView mImageView;
-    private FullScreenImagePresenter mPresenter;
+    @InjectPresenter
+    FullScreenImagePresenter mPresenter;
     private Matrix mMatrix = new Matrix();
     private Matrix mSavedMatrix = new Matrix();
     private int mMode = NONE;
@@ -43,9 +46,13 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
-        mPresenter = new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY),
-                new FullScreenImageManagerImpl());
         initViews();
+    }
+
+    @ProvidePresenter
+    FullScreenImagePresenter provideFullScreenImagePresenter() {
+        return new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY),
+                new FullScreenImageManagerImpl());
     }
 
     @Override

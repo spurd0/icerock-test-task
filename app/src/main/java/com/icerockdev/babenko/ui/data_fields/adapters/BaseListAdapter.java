@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui;
+package com.icerockdev.babenko.ui.data_fields.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

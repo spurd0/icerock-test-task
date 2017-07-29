@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui.data_fields;
+package com.icerockdev.babenko.ui.data_fields.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.ui.BaseListAdapter;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
 

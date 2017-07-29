@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
@@ -31,7 +33,8 @@ import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_
 public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.ui.images_activity.ImagesActivity.SERVER_ERROR_DIALOG_TAG";
     private static final String TAG = "ImagesActivity";
-    private ImagesPresenter mPresenter;
+    @InjectPresenter
+    ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
     private TextView mListIsEmptyErrorTv;
     private ArrayList<ImageItem> mImagesList;
@@ -40,8 +43,12 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        mPresenter = new ImagesPresenter(new ImagesManagerImpl()); // TODO: 15/05/17 orientation change?
         initViews();
+    }
+
+    @ProvidePresenter
+    ImagesPresenter provideImagesPresenter() {
+        return new ImagesPresenter(new ImagesManagerImpl());
     }
 
     @Override

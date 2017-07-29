@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
@@ -26,7 +28,8 @@ import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_OTHER;
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
-    private HomePresenter mPresenter;
+    @InjectPresenter
+    HomePresenter mPresenter;
     private SharedPreferencesManager mSharedPreferencesManager;
     private ActivityHomeBinding mBinding;
 
@@ -35,8 +38,12 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mSharedPreferencesManager = new SharedPreferencesManagerImpl();
-        mPresenter = new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
         initViews();
+    }
+
+    @ProvidePresenter
+    HomePresenter provideHomePresenter() {
+        return new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
     }
 
     @Override

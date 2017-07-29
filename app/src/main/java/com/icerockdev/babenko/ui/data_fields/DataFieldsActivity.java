@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.ui.images.ImagesActivity;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
@@ -34,7 +37,8 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.ui.data_fields.DataFieldsActivity.DATA_FIELDS_KEY";
     private static final String TAG = "DataFieldsActivity";
     private TextView mHeaderErrorTv;
-    private DataFieldsPresenter mPresenter;
+    @InjectPresenter
+    DataFieldsPresenter mPresenter;
     private DataFieldsAdapter mDataFieldsAdapter;
 
     public static void startActivity(Context context, DataField[] data) {
@@ -47,9 +51,13 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_fields);
-        mPresenter = new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
-                new DataFieldsManagerImpl());
         initViews();
+    }
+
+    @ProvidePresenter
+    DataFieldsPresenter provideDataFieldsPresenter() {
+        return new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
+               new DataFieldsManagerImpl());
     }
 
     protected void initViews() {
