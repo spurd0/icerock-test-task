@@ -4,7 +4,6 @@ import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
-import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;

@@ -13,7 +13,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
-import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.ui.BaseProgressActivity;

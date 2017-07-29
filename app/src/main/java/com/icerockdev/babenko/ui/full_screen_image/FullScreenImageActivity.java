@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.interfaces.FullScreenImageView;
 import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 

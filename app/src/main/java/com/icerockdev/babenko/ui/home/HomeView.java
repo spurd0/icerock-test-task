@@ -1,5 +1,6 @@
-package com.icerockdev.babenko.interfaces;
+package com.icerockdev.babenko.ui.home;
 
+import com.icerockdev.babenko.ui.ProgressBaseView;
 import com.icerockdev.babenko.model.DataField;
 
 /**

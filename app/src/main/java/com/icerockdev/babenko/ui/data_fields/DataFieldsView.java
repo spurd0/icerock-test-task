@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.interfaces;
+package com.icerockdev.babenko.ui.data_fields;
 
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseView;

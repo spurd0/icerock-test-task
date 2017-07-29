@@ -2,7 +2,6 @@ package com.icerockdev.babenko.ui.home;
 
 import android.util.Patterns;
 
-import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.HomeManager;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;

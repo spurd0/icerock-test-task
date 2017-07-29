@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.interfaces;
+package com.icerockdev.babenko.ui;
 
 import com.icerockdev.babenko.ui.BaseView;
 

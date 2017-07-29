@@ -5,7 +5,6 @@ import android.util.Log;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.managers.interfaces.ImagesManager;
-import com.icerockdev.babenko.managers.interfaces.RetrofitManager;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.model.ImageResponse;
 import com.icerockdev.babenko.utils.UtilsHelper;

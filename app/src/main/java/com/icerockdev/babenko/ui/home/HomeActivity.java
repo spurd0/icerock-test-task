@@ -11,7 +11,6 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.ApplicationConstants;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
-import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
