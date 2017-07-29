@@ -1,10 +1,10 @@
-package com.icerockdev.babenko.activities;
+package com.icerockdev.babenko.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.icerockdev.babenko.fragments.ProgressDialogFragment;
+import com.icerockdev.babenko.ui.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.interfaces.ProgressBaseView;
 
 /**

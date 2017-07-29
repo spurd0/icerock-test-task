@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.presenters;
+package com.icerockdev.babenko.ui.data_fields;
 
 import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
@@ -8,6 +8,7 @@ import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.ui.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;

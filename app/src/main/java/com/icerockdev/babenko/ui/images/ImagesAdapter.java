@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.adapters;
+package com.icerockdev.babenko.ui.images;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;

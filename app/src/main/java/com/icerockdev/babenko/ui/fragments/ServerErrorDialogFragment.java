@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.fragments;
+package com.icerockdev.babenko.ui.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import com.icerockdev.babenko.R;
  */
 
 public class ServerErrorDialogFragment extends DialogFragment {
-    public static final String DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY";
+    public static final String DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY";
 
     @NonNull
     @Override

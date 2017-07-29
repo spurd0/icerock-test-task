@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.activities;
+package com.icerockdev.babenko.ui.data_fields;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,27 +12,26 @@ import android.widget.TextView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.adapters.DataFieldsAdapter;
+import com.icerockdev.babenko.ui.images.ImagesActivity;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.presenters.DataFieldsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
-import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
-import static com.icerockdev.babenko.data.ApplicationConstants.PHONE;
-import static com.icerockdev.babenko.data.ApplicationConstants.TEXT;
-import static com.icerockdev.babenko.data.ApplicationConstants.URL;
+import static com.icerockdev.babenko.core.ApplicationConstants.EMAIL;
+import static com.icerockdev.babenko.core.ApplicationConstants.NUMBER;
+import static com.icerockdev.babenko.core.ApplicationConstants.PHONE;
+import static com.icerockdev.babenko.core.ApplicationConstants.TEXT;
+import static com.icerockdev.babenko.core.ApplicationConstants.URL;
 
 /**
  * Created by Roman Babenko on 01/05/17.
  */
 
 public class DataFieldsActivity extends AppCompatActivity implements DataFieldsView {
-    public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.activities.DataFieldsActivity.DATA_FIELDS_KEY";
+    public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.ui.data_fields.DataFieldsActivity.DATA_FIELDS_KEY";
     private static final String TAG = "DataFieldsActivity";
     private TextView mHeaderErrorTv;
     private DataFieldsPresenter mPresenter;

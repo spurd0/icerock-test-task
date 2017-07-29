@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.activities;
+package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,16 +11,16 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
 import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
-import com.icerockdev.babenko.presenters.FullScreenImagePresenter;
 
 /**
  * Created by Roman Babenko on 5/11/2017.
  */
 
 public class FullScreenImageActivity extends BaseProgressActivity implements FullScreenImageView, View.OnTouchListener {
-    public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.presenters.FullScreenImagePresenter.IMAGE_URL_KEY";
+    public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.ui.full_screen_image.FullScreenImagePresenter.IMAGE_URL_KEY";
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
@@ -50,7 +50,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = "com.icerockdev.babenko.activities.FullScreenImageActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = "com.icerockdev.babenko.ui.full_image.FullScreenImageActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {

@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.activities;
+package com.icerockdev.babenko.ui.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -7,20 +7,21 @@ import android.view.View;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.data.ApplicationConstants;
+import com.icerockdev.babenko.ui.BaseProgressActivity;
+import com.icerockdev.babenko.core.ApplicationConstants;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
-import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.HomeView;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.presenters.HomePresenter;
+import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 
-import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
-import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_EMPTY_LIST;
-import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_LIST_NULL_RESPONSE;
-import static com.icerockdev.babenko.presenters.HomePresenter.CODE_ERROR_OTHER;
+import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_EMPTY_LIST;
+import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_LIST_NULL_RESPONSE;
+import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_OTHER;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.SERVER_ERROR_DIALOG_TAG";
@@ -40,7 +41,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = "com.icerockdev.babenko.activities.HomeActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = "com.icerockdev.babenko.ui.home.HomeActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {

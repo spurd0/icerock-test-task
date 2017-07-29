@@ -3,6 +3,7 @@ package com.icerockdev.babenko.activities;
 import android.support.test.rule.ActivityTestRule;
 
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.ui.home.HomeActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

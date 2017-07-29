@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.activities;
+package com.icerockdev.babenko.ui.images;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.adapters.ImagesAdapter;
-import com.icerockdev.babenko.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.BaseProgressActivity;
+import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
+import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.model.ImageItem;
-import com.icerockdev.babenko.presenters.ImagesPresenter;
 
 import java.util.ArrayList;
 
-import static com.icerockdev.babenko.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_LIST_NULL_RESPONSE;
 import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_OTHER;
 
@@ -29,7 +29,7 @@ import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_
  */
 
 public class ImagesActivity extends BaseProgressActivity implements ImagesView {
-    private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.activities.ImagesActivity.SERVER_ERROR_DIALOG_TAG";
+    private static final String SERVER_ERROR_DIALOG_TAG = "com.icerockdev.babenko.ui.images_activity.ImagesActivity.SERVER_ERROR_DIALOG_TAG";
     private static final String TAG = "ImagesActivity";
     private ImagesPresenter mPresenter;
     private RecyclerView mImagesRecyclerView;
@@ -46,7 +46,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = "com.icerockdev.babenko.activities.ImagesActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = "com.icerockdev.babenko.ui.images_activity.ImagesActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {

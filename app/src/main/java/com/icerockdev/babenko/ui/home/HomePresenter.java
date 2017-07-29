@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.presenters;
+package com.icerockdev.babenko.ui.home;
 
 import android.util.Patterns;
 
@@ -7,6 +7,7 @@ import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.HomeManager;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.ui.BasePresenter;
 
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_NULL;
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_OTHER;

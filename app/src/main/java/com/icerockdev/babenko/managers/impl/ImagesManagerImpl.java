@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.icerockdev.babenko.data.ApplicationConstants.REQUEST_IMAGES_URL;
+import static com.icerockdev.babenko.core.ApplicationConstants.REQUEST_IMAGES_URL;
 
 /**
  * Created by Roman Babenko on 10/05/17.

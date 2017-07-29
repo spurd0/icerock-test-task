@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.presenters;
+package com.icerockdev.babenko.ui.images;
 
 import android.util.Log;
 
@@ -7,6 +7,7 @@ import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.ImagesManager;
 import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.ui.BasePresenter;
 
 import java.util.ArrayList;
 

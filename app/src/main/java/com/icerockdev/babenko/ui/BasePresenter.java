@@ -1,10 +1,10 @@
-package com.icerockdev.babenko.presenters;
+package com.icerockdev.babenko.ui;
 
 /**
  * Created by Roman Babenko on 06/05/17.
  */
 
-abstract class BasePresenter<View> {
+public abstract class BasePresenter<View> {
     private View mView;
 
     public View getView() {

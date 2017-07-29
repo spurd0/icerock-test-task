@@ -13,17 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.HomeActivity">
+        <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DataFieldsActivity"></activity>
-        <activity android:name=".activities.ImagesActivity"></activity>
+        <activity android:name=".ui.data_fields.DataFieldsActivity"></activity>
+        <activity android:name=".ui.images.ImagesActivity"></activity>
         <activity
-            android:name=".activities.FullScreenImageActivity"
+            android:name=".ui.full_screen_image.FullScreenImageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
     </application>
 

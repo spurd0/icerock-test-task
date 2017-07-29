@@ -13,11 +13,11 @@ import com.icerockdev.babenko.model.ImageResponse;
 
 import java.util.ArrayList;
 
-import static com.icerockdev.babenko.data.ApplicationConstants.EMAIL;
-import static com.icerockdev.babenko.data.ApplicationConstants.NUMBER;
-import static com.icerockdev.babenko.data.ApplicationConstants.PHONE;
-import static com.icerockdev.babenko.data.ApplicationConstants.TEXT;
-import static com.icerockdev.babenko.data.ApplicationConstants.URL;
+import static com.icerockdev.babenko.core.ApplicationConstants.EMAIL;
+import static com.icerockdev.babenko.core.ApplicationConstants.NUMBER;
+import static com.icerockdev.babenko.core.ApplicationConstants.PHONE;
+import static com.icerockdev.babenko.core.ApplicationConstants.TEXT;
+import static com.icerockdev.babenko.core.ApplicationConstants.URL;
 
 /**
  * Created by Roman Babenko on 03/05/17.

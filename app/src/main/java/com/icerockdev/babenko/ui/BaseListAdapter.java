@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.adapters;
+package com.icerockdev.babenko.ui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
