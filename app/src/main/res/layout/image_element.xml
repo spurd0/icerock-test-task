@@ -34,9 +34,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                app:imageUrl="@{image.thumbnailUrl}"
+                android:adjustViewBounds="true"
                 android:onClick="@{() -> callback.itemClicked(image.url)}"
-                android:adjustViewBounds="true" />
+                app:imageUrl="@{image.thumbnailUrl}" />
 
 
             <LinearLayout

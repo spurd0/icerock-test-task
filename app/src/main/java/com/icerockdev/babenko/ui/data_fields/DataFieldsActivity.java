@@ -14,11 +14,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
-import com.icerockdev.babenko.ui.images.ImagesActivity;
 import com.icerockdev.babenko.interfaces.DataFieldsView;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
+import com.icerockdev.babenko.ui.images.ImagesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
 public class DataFieldsActivity extends AppCompatActivity implements DataFieldsView {
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.ui.data_fields.DataFieldsActivity.DATA_FIELDS_KEY";
     private static final String TAG = "DataFieldsActivity";
-    private TextView mHeaderErrorTv;
     @InjectPresenter
     DataFieldsPresenter mPresenter;
+    private TextView mHeaderErrorTv;
     private DataFieldsAdapter mDataFieldsAdapter;
 
     public static void startActivity(Context context, DataField[] data) {
@@ -57,7 +57,7 @@ public class DataFieldsActivity extends AppCompatActivity implements DataFieldsV
     @ProvidePresenter
     DataFieldsPresenter provideDataFieldsPresenter() {
         return new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
-               new DataFieldsManagerImpl());
+                new DataFieldsManagerImpl());
     }
 
     protected void initViews() {

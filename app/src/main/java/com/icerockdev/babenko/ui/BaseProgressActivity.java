@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.icerockdev.babenko.ui.fragments.ProgressDialogFragment;
 import com.icerockdev.babenko.interfaces.ProgressBaseView;
+import com.icerockdev.babenko.ui.fragments.ProgressDialogFragment;
 
 /**
  * Created by Roman Babenko on 14/05/17.

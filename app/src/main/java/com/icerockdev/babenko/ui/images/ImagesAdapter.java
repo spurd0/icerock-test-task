@@ -28,6 +28,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
         mImageList = imageList;
     }
 
+    @BindingAdapter("bind:imageUrl")
+    public static void loadImage(ImageView imageView, String v) {
+        Picasso.with(imageView.getContext()).load(v).error(R.drawable.question_mark)
+                .placeholder(R.drawable.question_mark).into(imageView);
+    }
+
     @Override
     public ImagesItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ImageElementBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
@@ -44,12 +50,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
     @Override
     public int getItemCount() {
         return mImageList.size();
-    }
-
-    @BindingAdapter("bind:imageUrl")
-    public static void loadImage(ImageView imageView, String v) {
-        Picasso.with(imageView.getContext()).load(v).error(R.drawable.question_mark)
-                .placeholder(R.drawable.question_mark).into(imageView);
     }
 
     class ImagesItemHolder extends RecyclerView.ViewHolder {

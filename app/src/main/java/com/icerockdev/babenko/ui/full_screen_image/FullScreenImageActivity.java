@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.interfaces.FullScreenImageView;
 import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
+import com.icerockdev.babenko.ui.BaseProgressActivity;
 
 /**
  * Created by Roman Babenko on 5/11/2017.
@@ -26,9 +26,9 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
-    private ImageView mImageView;
     @InjectPresenter
     FullScreenImagePresenter mPresenter;
+    private ImageView mImageView;
     private Matrix mMatrix = new Matrix();
     private Matrix mSavedMatrix = new Matrix();
     private int mMode = NONE;

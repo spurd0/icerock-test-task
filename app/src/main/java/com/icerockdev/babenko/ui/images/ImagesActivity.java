@@ -12,19 +12,19 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.ui.BaseProgressActivity;
-import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
-import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.interfaces.ImagesView;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.ui.BaseProgressActivity;
+import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
 
 import java.util.ArrayList;
 
-import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_LIST_NULL_RESPONSE;
 import static com.icerockdev.babenko.managers.impl.ImagesManagerImpl.CODE_ERROR_OTHER;
+import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 /**
  * Created by Roman Babenko on 10/05/17.
