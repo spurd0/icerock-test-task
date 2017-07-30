@@ -1,7 +1,5 @@
 package com.icerockdev.babenko.ui.full_screen_image;
 
-import android.widget.ImageView;
-
 import com.icerockdev.babenko.ui.ProgressBaseView;
 
 /**

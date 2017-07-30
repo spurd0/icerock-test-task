@@ -6,9 +6,6 @@ import android.text.InputType;
 import android.util.TypedValue;
 
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.model.ImageItem;
-
-import java.util.ArrayList;
 
 import static com.icerockdev.babenko.core.ApplicationConstants.EMAIL;
 import static com.icerockdev.babenko.core.ApplicationConstants.NUMBER;

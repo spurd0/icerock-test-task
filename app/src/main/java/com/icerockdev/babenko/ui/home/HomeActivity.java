@@ -92,15 +92,4 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         mBinding.fieldsRequestUrlEditText.setError(getString(R.string.url_error));
     }
 
-    @Override
-    protected void onPause() {
-        mPresenter.detachView();
-        super.onPause();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.attachView(this);
-    }
 }

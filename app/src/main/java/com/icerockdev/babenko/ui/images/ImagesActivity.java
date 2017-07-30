@@ -96,7 +96,6 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.attachView(this);
     }
 
     @Override

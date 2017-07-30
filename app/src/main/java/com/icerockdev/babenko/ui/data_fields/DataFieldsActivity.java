@@ -132,15 +132,4 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
         mHeaderErrorTv.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onPause() {
-        mPresenter.detachView();
-        super.onPause();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.attachView(this);
-    }
 }
