@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.services;
 
 import com.icerockdev.babenko.interfaces.NetworkApi;
-import com.icerockdev.babenko.model.Images;
+import com.icerockdev.babenko.model.ImageItem;
 
 import io.reactivex.Observable;
 
@@ -18,7 +18,7 @@ public class ImageService {
         mDataFieldsApi = networkApi;
     }
 
-    public Observable<Images> requestImages() {
+    public Observable<ImageItem[]> requestImages() {
         return mDataFieldsApi.requestImages(REQUEST_IMAGES_URL);
     }
 }

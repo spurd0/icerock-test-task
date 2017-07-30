@@ -7,7 +7,6 @@ import android.util.TypedValue;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.model.ImageItem;
-import com.icerockdev.babenko.model.ImageResponse;
 
 import java.util.ArrayList;
 
@@ -63,14 +62,5 @@ public class UtilsHelper {
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
-    }
-
-    public static ArrayList<ImageItem> convertImagesList(ImageResponse[] images) {
-        ArrayList<ImageItem> result = new ArrayList<>();
-        for (ImageResponse imageResponse : images) {
-            result.add(new ImageItem(imageResponse.getAlbumId(), imageResponse.getId(),
-                    imageResponse.getTitle(), imageResponse.getUrl(), imageResponse.getThumbnailUrl()));
-        }
-        return result;
     }
 }

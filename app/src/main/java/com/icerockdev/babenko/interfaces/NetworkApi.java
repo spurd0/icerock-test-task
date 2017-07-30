@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.interfaces;
 
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.Images;
+import com.icerockdev.babenko.model.ImageItem;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -16,5 +16,5 @@ public interface NetworkApi {
     Observable<DataField[]> requestDataFields(@Url String url);
 
     @GET
-    Observable<Images> requestImages(@Url String url);
+    Observable<ImageItem[]> requestImages(@Url String url);
 }

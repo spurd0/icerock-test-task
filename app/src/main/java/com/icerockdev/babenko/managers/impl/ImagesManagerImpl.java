@@ -36,35 +36,10 @@ public class ImagesManagerImpl implements ImagesManager {
                 // Be notified on the main thread
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(images -> {
-                            ArrayList list = new ArrayList<>(Arrays.asList(images.getImageItemArray()));
+                            ArrayList list = new ArrayList<>(Arrays.asList(images));
                             callback.successResponse(list);
                         },
                         exception -> callback.failedResponse(CODE_ERROR_OTHER));
-
-//        if (mImagesList == null) {
-//            final Call<ImageResponse[]> data = mRetrofitManager
-//                    .getService().requestImages(REQUEST_IMAGES_URL);
-//            data.enqueue(new Callback<ImageResponse[]>() {
-//                @Override
-//                public void onResponse(Call<ImageResponse[]> call, Response<ImageResponse[]> response) {
-//                    if (response.body() == null) {
-//                        callback.failedResponse(CODE_ERROR_LIST_NULL_RESPONSE);
-//                    } else {
-//                        mImagesList = UtilsHelper.convertImagesList(response.body());
-//                        callback.successResponse(mImagesList);
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ImageResponse[]> call, Throwable t) {
-//                    callback.failedResponse(CODE_ERROR_OTHER);
-//                    if (BuildConfig.DEBUG)
-//                        Log.e(TAG, "Request error " + t.getLocalizedMessage());
-//                }
-//            });
-//        } else {
-//            callback.successResponse(mImagesList);
-//        }
 
     }
 
