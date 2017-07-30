@@ -61,6 +61,22 @@ public class DataField implements Parcelable {
         mValue = value;
     }
 
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public void setType(String type) {
+        mType = type;
+    }
+
+    public void setDefaultValue(String default_value) {
+        mValue = default_value;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        mPlaceholder = placeholder;
+    }
+
     @Override
     public String toString() {
         return "Id is " + mId + " type is " + mType + " placeholder is " + mPlaceholder +

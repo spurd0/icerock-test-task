@@ -2,6 +2,7 @@ package com.icerockdev.babenko.ui.images;
 
 import android.util.Log;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.ImagesManager;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Roman Babenko on 10/05/17.
  */
-
+@InjectViewState
 public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
     private ImagesManager mManager;

@@ -2,11 +2,14 @@ package com.icerockdev.babenko.ui.home;
 
 import android.util.Patterns;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.HomeManager;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
+
+import java.util.List;
 
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_NULL;
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_OTHER;
@@ -14,7 +17,7 @@ import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RE
 /**
  * Created by Roman Babenko on 06/05/17.
  */
-
+@InjectViewState
 public class HomePresenter extends BasePresenter<HomeView> {
     public static final int CODE_ERROR_EMPTY_LIST = 1;
     public static final int CODE_ERROR_LIST_NULL_RESPONSE = 2;

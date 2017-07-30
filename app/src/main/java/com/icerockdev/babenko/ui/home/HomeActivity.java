@@ -19,6 +19,8 @@ import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
 
+import java.util.List;
+
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_EMPTY_LIST;
 import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_LIST_NULL_RESPONSE;
@@ -29,20 +31,18 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String TAG = "HomeActivity";
     @InjectPresenter
     HomePresenter mPresenter;
-    private SharedPreferencesManager mSharedPreferencesManager;
     private ActivityHomeBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-        mSharedPreferencesManager = new SharedPreferencesManagerImpl();
         initViews();
     }
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
-        return new HomePresenter(new HomeManagerImpl(), mSharedPreferencesManager);
+        return new HomePresenter(new HomeManagerImpl(), new SharedPreferencesManagerImpl());
     }
 
     @Override

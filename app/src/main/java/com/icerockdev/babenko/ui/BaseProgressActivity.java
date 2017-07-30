@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.icerockdev.babenko.ui.fragments.ProgressDialogFragment;
 
 /**
  * Created by Roman Babenko on 14/05/17.
  */
 
-public abstract class BaseProgressActivity extends AppCompatActivity implements ProgressBaseView {
+public abstract class BaseProgressActivity extends BaseActivity implements ProgressBaseView {
     protected String mDialogTag;
 
     @Override

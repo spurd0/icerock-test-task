@@ -1,6 +1,9 @@
 package com.icerockdev.babenko.core.dagger;
 
+import com.icerockdev.babenko.core.dagger.modules.ApiModule;
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
+import com.icerockdev.babenko.core.dagger.modules.DataFieldsModule;
+import com.icerockdev.babenko.core.dagger.modules.ImagesModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
 import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
@@ -16,7 +19,8 @@ import dagger.Component;
  * Created by Roman Babenko on 04/06/17.
  */
 @Singleton
-@Component(modules = {RetrofitModule.class, ContextModule.class, PicassoModule.class})
+@Component(modules = {RetrofitModule.class, ContextModule.class, PicassoModule.class,
+        DataFieldsModule.class, ImagesModule.class})
 public interface AppComponent {
     void inject(SharedPreferencesManagerImpl preferencesManager);
 

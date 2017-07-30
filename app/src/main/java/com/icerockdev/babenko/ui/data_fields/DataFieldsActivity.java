@@ -16,6 +16,7 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.ui.BaseActivity;
 import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.ui.images.ImagesActivity;
 
@@ -32,7 +33,7 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
  * Created by Roman Babenko on 01/05/17.
  */
 
-public class DataFieldsActivity extends AppCompatActivity implements DataFieldsView {
+public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.ui.data_fields.DataFieldsActivity.DATA_FIELDS_KEY";
     private static final String TAG = "DataFieldsActivity";
     @InjectPresenter

@@ -4,6 +4,7 @@ import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
 import com.icerockdev.babenko.model.DataField;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Roman Babenko on 06/05/17.
  */
-
+@InjectViewState
 public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     private Parcelable[] mFieldsData;
     private DataFieldsManager mManager;
