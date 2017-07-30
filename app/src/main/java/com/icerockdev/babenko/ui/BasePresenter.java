@@ -8,17 +8,4 @@ import com.arellomobile.mvp.MvpView;
  */
 
 public abstract class BasePresenter<View extends MvpView> extends MvpPresenter<View> {
-    private View mView;
-
-    public View getView() {
-        return mView;
-    }
-
-    public void attachView(View view) {
-        mView = view;
-    }
-
-    public void detachView() {
-        mView = null;
-    }
 }

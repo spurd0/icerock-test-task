@@ -34,8 +34,8 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
 
     private void requestFieldsData() {
         ArrayList<DataField> dataFieldsList = mManager.getDataFields(mFieldsData);
-        if (getView() != null)
-            getView().showDataFields(dataFieldsList);
+        if (getViewState() != null)
+            getViewState().showDataFields(dataFieldsList);
     }
 
     public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields) {
@@ -48,15 +48,15 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
 
                     @Override
                     public void failedResponse(List<Integer> errorList) {
-                        if (getView() != null)
-                            getView().displayFieldsError(errorList);
+                        if (getViewState() != null)
+                            getViewState().displayFieldsError(errorList);
                     }
                 });
     }
 
     private void fieldsAreCorrect() {
-        if (getView() != null)
-            getView().fieldsSuccessfullyChecked();
+        if (getViewState() != null)
+            getViewState().fieldsSuccessfullyChecked();
     }
 
 

@@ -30,27 +30,27 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
     }
 
     private void requestPictures() {
-        getView().showProgressDialog();
+        getViewState().showProgressDialog();
         mManager.requestPicturesList(new ImagesManagerImpl.ImagesCallback() {
             @Override
             public void successResponse(ArrayList<ImageItem> images) {
-                if (getView() != null) {
-                    getView().dismissProgressDialog();
+                if (getViewState() != null) {
+                    getViewState().dismissProgressDialog();
                     if (BuildConfig.DEBUG)
                         Log.d(TAG, "Images list length is " + images.size());
                     if (images.size() == 0) {
-                        getView().showListIsEmptyError();
+                        getViewState().showListIsEmptyError();
                         return;
                     }
-                    getView().showImagesList(images);
+                    getViewState().showImagesList(images);
                 }
             }
 
             @Override
             public void failedResponse(int errorCode) {
-                if (getView() != null) {
-                    getView().dismissProgressDialog();
-                    getView().showErrorDialog(errorCode);
+                if (getViewState() != null) {
+                    getViewState().dismissProgressDialog();
+                    getViewState().showErrorDialog(errorCode);
                 }
             }
         });

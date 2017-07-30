@@ -36,12 +36,12 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
     public void requestDataClicked(String url) {
         if (!Patterns.WEB_URL.matcher(url).matches()) {
-            if (getView() != null)
-                getView().showUrlError();
+            if (getViewState() != null)
+                getViewState().showUrlError();
             return;
         }
-        if (getView() != null)
-            getView().showProgressDialog();
+        if (getViewState() != null)
+            getViewState().showProgressDialog();
         mManager.requestDataFields(url, new HomeManagerImpl.DataFieldsCallback() {
             @Override
             public void failedResponse(int errorCode) {
@@ -57,20 +57,20 @@ public class HomePresenter extends BasePresenter<HomeView> {
                         listErrorCode = CODE_ERROR_OTHER;
                         break;
                 }
-                if (getView() != null) {
-                    getView().dismissProgressDialog();
-                    getView().showErrorDialog(listErrorCode);
+                if (getViewState() != null) {
+                    getViewState().dismissProgressDialog();
+                    getViewState().showErrorDialog(listErrorCode);
                 } else mSharedPreferencesManager.saveErrorCode(listErrorCode);
             }
 
             @Override
             public void successResponse(DataField[] response) {
                 boolean emptyList = response.length == 0;
-                if (getView() != null) {
-                    getView().dismissProgressDialog();
+                if (getViewState() != null) {
+                    getViewState().dismissProgressDialog();
                     if (!emptyList)
-                        getView().gotDataFields(response);
-                    else getView().showErrorDialog(CODE_ERROR_EMPTY_LIST);
+                        getViewState().gotDataFields(response);
+                    else getViewState().showErrorDialog(CODE_ERROR_EMPTY_LIST);
                 } else if (emptyList)
                     mSharedPreferencesManager.saveErrorCode(CODE_ERROR_EMPTY_LIST);
             }
@@ -82,9 +82,9 @@ public class HomePresenter extends BasePresenter<HomeView> {
         int errorCode = mSharedPreferencesManager.getErrorCode();
         if (errorCode == 0)
             return;
-        if (getView() != null) {
+        if (getViewState() != null) {
             mSharedPreferencesManager.saveErrorCode(0);
-            getView().showErrorDialog(errorCode);
+            getViewState().showErrorDialog(errorCode);
         }
     }
 }
