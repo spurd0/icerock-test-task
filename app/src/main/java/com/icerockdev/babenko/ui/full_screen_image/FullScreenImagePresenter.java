@@ -20,11 +20,6 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
         mManager = manager;
     }
 
-    @Override
-    public void attachView(FullScreenImageView fullScreenImageView) {
-        super.attachView(fullScreenImageView);
-    }
-
     public void requestImage(ImageView targetIv) {
         if (mImageUrl == null)
             throw new NullPointerException("Image url is null");

@@ -28,9 +28,10 @@ public class HomePresenter extends BasePresenter<HomeView> {
         mSharedPreferencesManager = sharedPreferencesManager;
     }
 
+
     @Override
-    public void attachView(HomeView homeView) {
-        super.attachView(homeView);
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         checkForErrors();
     }
 

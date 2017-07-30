@@ -27,8 +27,8 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     }
 
     @Override
-    public void attachView(DataFieldsView dataFieldsView) {
-        super.attachView(dataFieldsView);
+    public void onFirstViewAttach() {
+        super.onFirstViewAttach();
         requestFieldsData();
     }
 

@@ -24,8 +24,8 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
     }
 
     @Override
-    public void attachView(ImagesView imagesView) {
-        super.attachView(imagesView);
+    public void onFirstViewAttach() {
+        super.onFirstViewAttach();
         requestPictures();
     }
 
