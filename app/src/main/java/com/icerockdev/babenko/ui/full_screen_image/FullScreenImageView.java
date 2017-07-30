@@ -9,7 +9,5 @@ import com.icerockdev.babenko.ui.ProgressBaseView;
  */
 
 public interface FullScreenImageView extends ProgressBaseView {
-    ImageView getIvForPicture();
-
     void makeImageVisible();
 }

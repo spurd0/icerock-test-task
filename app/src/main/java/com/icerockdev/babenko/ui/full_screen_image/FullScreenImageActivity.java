@@ -62,6 +62,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private void initViews() {
         mImageView = (ImageView) findViewById(R.id.fullScreenImageView);
         mImageView.setOnTouchListener(this);
+        mPresenter.requestImage(mImageView);
     }
 
     @Override
@@ -128,11 +129,6 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     protected void onStart() {
         super.onStart();
         mPresenter.attachView(this);
-    }
-
-    @Override
-    public ImageView getIvForPicture() { // TODO: 15/05/17 how to correctly download images with picasso in mvp?
-        return mImageView;
     }
 
     @Override

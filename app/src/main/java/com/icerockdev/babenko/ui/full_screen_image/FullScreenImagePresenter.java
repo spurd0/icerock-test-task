@@ -2,6 +2,7 @@ package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.widget.ImageView;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.managers.interfaces.FullScreenImageManager;
 import com.icerockdev.babenko.ui.BasePresenter;
 import com.squareup.picasso.Callback;
@@ -9,7 +10,7 @@ import com.squareup.picasso.Callback;
 /**
  * Created by Roman Babenko on 14/05/17.
  */
-// TODO: 29/07/17  @InjectViewState
+@InjectViewState
 public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView> {
     private String mImageUrl;
     private FullScreenImageManager mManager;
@@ -22,10 +23,9 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
     @Override
     public void attachView(FullScreenImageView fullScreenImageView) {
         super.attachView(fullScreenImageView);
-        requestImage(fullScreenImageView.getIvForPicture());
     }
 
-    private void requestImage(ImageView targetIv) {
+    public void requestImage(ImageView targetIv) {
         if (mImageUrl == null)
             throw new NullPointerException("Image url is null");
         if (getView() != null)

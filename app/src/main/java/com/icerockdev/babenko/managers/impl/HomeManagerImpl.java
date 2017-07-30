@@ -41,25 +41,6 @@ public class HomeManagerImpl implements HomeManager {
                             callback.failedResponse(ERROR_CODE_RESPONSE_OTHER);
                         });
 
-
-//        final Call<DataFieldResponse[]> data = mRetrofitManager
-//                .getService().requestDataFields(url);
-//        data.enqueue(new Callback<DataFieldResponse[]>() {
-//            @Override
-//            public void onResponse(Call<DataFieldResponse[]> call, Response<DataFieldResponse[]> response) {
-//                if (response.body() == null) {
-//                    callback.failedResponse(ERROR_CODE_RESPONSE_NULL);
-//                } else
-//                    callback.successResponse(UtilsHelper.convertDataFields(response.body())); // TODO: 02/06/17 get as list
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DataFieldResponse[]> call, Throwable t) {
-//                callback.failedResponse(ERROR_CODE_RESPONSE_OTHER);
-//                if (BuildConfig.DEBUG)
-//                    Log.e(TAG, "Request error " + t.getLocalizedMessage());
-//            }
-//        });
     }
 
 }
