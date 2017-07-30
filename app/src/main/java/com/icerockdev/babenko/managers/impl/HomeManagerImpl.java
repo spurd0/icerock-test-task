@@ -5,7 +5,6 @@ import android.util.Log;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.managers.interfaces.HomeManager;
 import com.icerockdev.babenko.services.DataFieldsService;
-import com.icerockdev.babenko.utils.UtilsHelper;
 
 import javax.inject.Inject;
 
@@ -36,7 +35,7 @@ public class HomeManagerImpl implements HomeManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(dataFields -> Log.d(TAG, "dataFields length is:" + dataFields.length))
                 //.compose()
-                .subscribe(dataFields -> callback.successResponse(UtilsHelper.convertDataFields(dataFields)),
+                .subscribe(callback::successResponse,
                         exception -> {
                             Log.e(TAG, exception.getLocalizedMessage());
                             callback.failedResponse(ERROR_CODE_RESPONSE_OTHER);

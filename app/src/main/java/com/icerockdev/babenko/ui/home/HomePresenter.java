@@ -9,8 +9,6 @@ import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
 
-import java.util.List;
-
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_NULL;
 import static com.icerockdev.babenko.managers.impl.HomeManagerImpl.ERROR_CODE_RESPONSE_OTHER;
 

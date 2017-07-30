@@ -2,9 +2,7 @@ package com.icerockdev.babenko.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.icerockdev.babenko.ui.fragments.ProgressDialogFragment;
 
 /**

@@ -13,13 +13,10 @@ import com.icerockdev.babenko.core.ApplicationConstants;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
-
-import java.util.List;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_EMPTY_LIST;

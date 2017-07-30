@@ -1,6 +1,5 @@
 package com.icerockdev.babenko.core.dagger;
 
-import com.icerockdev.babenko.core.dagger.modules.ApiModule;
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
 import com.icerockdev.babenko.core.dagger.modules.DataFieldsModule;
 import com.icerockdev.babenko.core.dagger.modules.ImagesModule;

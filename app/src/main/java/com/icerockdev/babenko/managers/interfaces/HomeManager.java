@@ -2,8 +2,6 @@ package com.icerockdev.babenko.managers.interfaces;
 
 import com.icerockdev.babenko.model.DataField;
 
-import java.util.List;
-
 /**
  * Created by Roman Babenko on 14/05/17.
  */

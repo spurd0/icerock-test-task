@@ -2,9 +2,6 @@ package com.icerockdev.babenko.services;
 
 import com.icerockdev.babenko.interfaces.NetworkApi;
 import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.DataFieldResponse;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -19,7 +16,7 @@ public class DataFieldsService {
         mDataFieldsApi = networkApi;
     }
 
-    public Observable<DataFieldResponse[]> requestDataFields(String url) {
+    public Observable<DataField[]> requestDataFields(String url) {
         return mDataFieldsApi.requestDataFields(url);
     }
 }

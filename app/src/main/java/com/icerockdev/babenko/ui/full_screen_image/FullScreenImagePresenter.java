@@ -2,7 +2,6 @@ package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.widget.ImageView;
 
-import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.managers.interfaces.FullScreenImageManager;
 import com.icerockdev.babenko.ui.BasePresenter;
 import com.squareup.picasso.Callback;

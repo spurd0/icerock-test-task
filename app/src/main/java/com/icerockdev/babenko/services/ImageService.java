@@ -1,7 +1,6 @@
 package com.icerockdev.babenko.services;
 
 import com.icerockdev.babenko.interfaces.NetworkApi;
-import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.model.Images;
 
 import io.reactivex.Observable;

@@ -45,12 +45,24 @@ public class DataField implements Parcelable {
         return mId;
     }
 
+    public void setId(int id) {
+        mId = id;
+    }
+
     public String getType() {
         return mType;
     }
 
+    public void setType(String type) {
+        mType = type;
+    }
+
     public String getPlaceholder() {
         return mPlaceholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        mPlaceholder = placeholder;
     }
 
     public String getValue() {
@@ -61,20 +73,8 @@ public class DataField implements Parcelable {
         mValue = value;
     }
 
-    public void setId(int id) {
-        mId = id;
-    }
-
-    public void setType(String type) {
-        mType = type;
-    }
-
     public void setDefaultValue(String default_value) {
         mValue = default_value;
-    }
-
-    public void setPlaceholder(String placeholder) {
-        mPlaceholder = placeholder;
     }
 
     @Override
