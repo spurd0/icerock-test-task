@@ -88,17 +88,6 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     }
 
     @Override
-    protected void onPause() {
-        mPresenter.detachView();
-        super.onPause();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void showImagesList(ArrayList<ImageItem> images) {
         if (mImagesList != null)
             return;

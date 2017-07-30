@@ -118,7 +118,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
     }
-    
+
     @Override
     public void makeImageVisible() {
         mImageView.setVisibility(View.VISIBLE);

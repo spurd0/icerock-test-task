@@ -24,7 +24,11 @@ public abstract class BaseProgressActivity extends BaseActivity implements Progr
     public void showProgressDialog() {
         if (mDialogTag == null)
             throw new NullPointerException("mDialogTag isn`t defined");
-        ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getSupportFragmentManager().
+                findFragmentByTag(mDialogTag);
+        if (progressDialogFragment != null)
+            return;
+        progressDialogFragment = new ProgressDialogFragment();
         getSupportFragmentManager().beginTransaction().add(progressDialogFragment, mDialogTag).commit();
         getSupportFragmentManager().executePendingTransactions();
 
@@ -39,8 +43,8 @@ public abstract class BaseProgressActivity extends BaseActivity implements Progr
     }
 
     @Override
-    protected void onPause() {
+    protected void onDestroy() {
         dismissProgressDialog();
-        super.onPause();
+        super.onDestroy();
     }
 }

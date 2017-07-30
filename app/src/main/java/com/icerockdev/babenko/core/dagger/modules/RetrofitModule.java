@@ -62,6 +62,10 @@ public class RetrofitModule {
             name = name.substring(2, name.length()).toLowerCase();
             if (name.equals("value"))
                 return "default_value";
+            if (name.equals("album_id"))
+                return "albumId";
+            if (name.equals("thumbnail_url"))
+                return "thumbnailUrl";
             return name;
         }
     }
