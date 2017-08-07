@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:errorEnabled="true">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/dataFieldValue"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/data_field_element_value_margin_vertical"
-            android:layout_marginLeft="@dimen/data_field_element_value_margin_horizontal"
-            android:layout_marginRight="@dimen/data_field_element_value_margin_horizontal"
-            android:layout_marginTop="@dimen/data_field_element_value_margin_vertical"
-            android:inputType="textPersonName"
-            android:text="Name" />
-    </android.support.design.widget.TextInputLayout>
+            app:counterEnabled="true"
+            app:errorEnabled="true">
 
-</LinearLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/dataFieldValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/data_field_element_value_margin_vertical"
+                android:layout_marginLeft="@dimen/data_field_element_value_margin_horizontal"
+                android:layout_marginRight="@dimen/data_field_element_value_margin_horizontal"
+                android:layout_marginTop="@dimen/data_field_element_value_margin_vertical"
+                android:inputType="textPersonName"
+                android:text="Name" />
+        </android.support.design.widget.TextInputLayout>
 
+    </LinearLayout>
+
+</layout>

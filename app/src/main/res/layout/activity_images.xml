@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/imagesRecyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/imagesListEmptyTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/images_list_is_empty"
-        android:textAlignment="center"
-        android:textColor="@color/errorTextColor"
-        android:visibility="gone" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/imagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/imagesListEmptyTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/images_list_is_empty"
+            android:textAlignment="center"
+            android:textColor="@color/errorTextColor"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</layout>

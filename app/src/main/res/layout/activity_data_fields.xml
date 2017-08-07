@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dataFieldsScrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/dataFieldsContainer"
+    <ScrollView
+        android:id="@+id/dataFieldsScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/validationErrorTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/errorTextColor"
-            android:visibility="gone" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/dataFieldsEditTextContainer"
+            android:id="@+id/dataFieldsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/submitFieldsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/submit_fields_button_text" />
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/validationErrorTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/errorTextColor"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/dataFieldsEditTextContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/submitFieldsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit_fields_button_text" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.databinding.ActivityFullScreenImageBinding;
 import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 
@@ -27,7 +28,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private static final int ZOOM = 2;
     @InjectPresenter
     FullScreenImagePresenter mPresenter;
-    private ImageView mImageView;
+    private ActivityFullScreenImageBinding mBinding;
     private Matrix mMatrix = new Matrix();
     private Matrix mSavedMatrix = new Matrix();
     private int mMode = NONE;
@@ -60,9 +61,8 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     }
 
     private void initViews() {
-        mImageView = (ImageView) findViewById(R.id.fullScreenImageView);
-        mImageView.setOnTouchListener(this);
-        mPresenter.requestImage(mImageView);
+        mBinding.fullScreenImageView.setOnTouchListener(this);
+        mPresenter.requestImage(mBinding.fullScreenImageView);
     }
 
     @Override
@@ -121,6 +121,6 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
 
     @Override
     public void makeImageVisible() {
-        mImageView.setVisibility(View.VISIBLE);
+        mBinding.fullScreenImageView.setVisibility(View.VISIBLE);
     }
 }

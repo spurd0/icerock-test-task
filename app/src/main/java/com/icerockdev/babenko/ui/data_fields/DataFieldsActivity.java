@@ -2,17 +2,18 @@ package com.icerockdev.babenko.ui.data_fields;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.databinding.ActivityDataFieldsBinding;
 import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseActivity;
@@ -37,8 +38,8 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     private static final String TAG = "DataFieldsActivity";
     @InjectPresenter
     DataFieldsPresenter mPresenter;
-    private TextView mHeaderErrorTv;
     private DataFieldsAdapter mDataFieldsAdapter;
+    private ActivityDataFieldsBinding mBinding;
 
     public static void startActivity(Context context, DataField[] data) {
         Intent dataFieldsIntent = new Intent(context, DataFieldsActivity.class);
@@ -49,18 +50,13 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_fields);
-        initViews();
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_data_fields);
     }
 
     @ProvidePresenter
     DataFieldsPresenter provideDataFieldsPresenter() {
         return new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
                 new DataFieldsManagerImpl());
-    }
-
-    protected void initViews() {
-        mHeaderErrorTv = (TextView) findViewById(R.id.validationErrorTv);
     }
 
     private void initSubmitButton(final ArrayList<DataField> dataFields) {
@@ -75,9 +71,9 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     }
 
     public void showError() {
-        mHeaderErrorTv.setVisibility(View.VISIBLE);
-        mHeaderErrorTv.setText(getText(R.string.data_field_incorrect_format));
-        mHeaderErrorTv.requestFocus();
+        mBinding.validationErrorTv.setVisibility(View.VISIBLE);
+        mBinding.validationErrorTv.setText(getText(R.string.data_field_incorrect_format));
+        mBinding.validationErrorTv.requestFocus();
     }
 
     @Override
@@ -129,7 +125,7 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     }
 
     public void hideError() {
-        mHeaderErrorTv.setVisibility(View.GONE);
+        mBinding.validationErrorTv.setVisibility(View.GONE);
     }
 
 }

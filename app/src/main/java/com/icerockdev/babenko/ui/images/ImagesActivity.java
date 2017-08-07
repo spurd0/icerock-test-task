@@ -3,15 +3,14 @@ package com.icerockdev.babenko.ui.images;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
+import com.icerockdev.babenko.databinding.ActivityImagesBinding;
 import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
 import com.icerockdev.babenko.model.ImageItem;
@@ -34,15 +33,13 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     private static final String TAG = "ImagesActivity";
     @InjectPresenter
     ImagesPresenter mPresenter;
-    private RecyclerView mImagesRecyclerView;
-    private TextView mListIsEmptyErrorTv;
+    private ActivityImagesBinding mBinding;
     private ArrayList<ImageItem> mImagesList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        initViews();
     }
 
     @ProvidePresenter
@@ -53,11 +50,6 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @Override
     protected void setDialogFragmentTag() {
         mDialogTag = "com.icerockdev.babenko.ui.images_activity.ImagesActivity.PROGRESS_DIALOG_TAG";
-    }
-
-    private void initViews() {
-        mImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
-        mListIsEmptyErrorTv = (TextView) findViewById(R.id.imagesListEmptyTv);
     }
 
     @Override
@@ -83,8 +75,8 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
 
     @Override
     public void showListIsEmptyError() {
-        mListIsEmptyErrorTv.setVisibility(View.VISIBLE);
-        mImagesRecyclerView.setVisibility(View.GONE);
+        mBinding.imagesListEmptyTv.setVisibility(View.VISIBLE);
+        mBinding.imagesRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -100,9 +92,9 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
                 FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
             }
         });
-        mListIsEmptyErrorTv.setVisibility(View.GONE);
-        mImagesRecyclerView.setVisibility(View.VISIBLE);
-        mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mImagesRecyclerView.setAdapter(adapter);
+        mBinding.imagesListEmptyTv.setVisibility(View.GONE);
+        mBinding.imagesRecyclerView.setVisibility(View.VISIBLE);
+        mBinding.imagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.imagesRecyclerView.setAdapter(adapter);
     }
 }
