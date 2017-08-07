@@ -5,9 +5,9 @@ import com.icerockdev.babenko.core.dagger.modules.DataFieldsModule;
 import com.icerockdev.babenko.core.dagger.modules.ImagesModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
-import com.icerockdev.babenko.managers.impl.FullScreenImageManagerImpl;
-import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
-import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
+import com.icerockdev.babenko.models.impl.FullScreenImageModelImpl;
+import com.icerockdev.babenko.models.impl.HomeModelImpl;
+import com.icerockdev.babenko.models.impl.ImagesModelImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 
 import javax.inject.Singleton;
@@ -23,9 +23,9 @@ import dagger.Component;
 public interface AppComponent {
     void inject(SharedPreferencesManagerImpl preferencesManager);
 
-    void inject(HomeManagerImpl homeManager);
+    void inject(HomeModelImpl homeManager);
 
-    void inject(ImagesManagerImpl imagesManager);
+    void inject(ImagesModelImpl imagesManager);
 
-    void inject(FullScreenImageManagerImpl fullScreenImageManagerImpl);
+    void inject(FullScreenImageModelImpl fullScreenImageManagerImpl);
 }

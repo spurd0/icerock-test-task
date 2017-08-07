@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.managers.impl.ImagesManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.ImagesManager;
+import com.icerockdev.babenko.models.impl.ImagesModelImpl;
+import com.icerockdev.babenko.models.interfaces.ImagesModel;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.ui.BasePresenter;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 @InjectViewState
 public class ImagesPresenter extends BasePresenter<ImagesView> {
     private static final String TAG = "ImagesPresenter";
-    private ImagesManager mManager;
+    private ImagesModel mManager;
 
-    public ImagesPresenter(ImagesManager manager) {
+    public ImagesPresenter(ImagesModel manager) {
         mManager = manager;
     }
 
@@ -31,7 +31,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
 
     private void requestPictures() {
         getViewState().showProgressDialog();
-        mManager.requestPicturesList(new ImagesManagerImpl.ImagesCallback() {
+        mManager.requestPicturesList(new ImagesModelImpl.ImagesCallback() {
             @Override
             public void successResponse(ArrayList<ImageItem> images) {
                 if (getViewState() != null) {

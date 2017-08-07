@@ -14,7 +14,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.databinding.ActivityDataFieldsBinding;
-import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
+import com.icerockdev.babenko.models.impl.DataFieldsModelImpl;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseActivity;
 import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
@@ -56,7 +56,7 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     @ProvidePresenter
     DataFieldsPresenter provideDataFieldsPresenter() {
         return new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
-                new DataFieldsManagerImpl());
+                new DataFieldsModelImpl());
     }
 
     private void initSubmitButton(final ArrayList<DataField> dataFields) {

@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.managers.interfaces;
+package com.icerockdev.babenko.models.interfaces;
 
 import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Roman Babenko on 30/04/17.
  */
 
-public interface DataFieldsManager {
+public interface DataFieldsModel {
 
     void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields,
                      DataFieldsCheckerCallback callback);

@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.managers.interfaces;
+package com.icerockdev.babenko.models.interfaces;
 
 import com.icerockdev.babenko.model.DataField;
 
@@ -6,7 +6,7 @@ import com.icerockdev.babenko.model.DataField;
  * Created by Roman Babenko on 14/05/17.
  */
 
-public interface HomeManager {
+public interface HomeModel {
     void requestDataFields(String url, final DataFieldsCallback callback);
 
     interface DataFieldsCallback {

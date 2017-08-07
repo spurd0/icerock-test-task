@@ -1,11 +1,11 @@
-package com.icerockdev.babenko.managers.impl;
+package com.icerockdev.babenko.models.impl;
 
 import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
+import com.icerockdev.babenko.models.interfaces.DataFieldsModel;
 import com.icerockdev.babenko.model.DataField;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
  * Created by Roman Babenko on 30/04/17.
  */
 
-public class DataFieldsManagerImpl implements DataFieldsManager {
+public class DataFieldsModelImpl implements DataFieldsModel {
 
     private ArrayList<DataField> mDataFieldsList;
 

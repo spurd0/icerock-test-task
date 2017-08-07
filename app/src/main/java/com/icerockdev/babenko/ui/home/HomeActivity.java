@@ -11,7 +11,7 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.ApplicationConstants;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
-import com.icerockdev.babenko.managers.impl.HomeManagerImpl;
+import com.icerockdev.babenko.models.impl.HomeModelImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
@@ -39,7 +39,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
-        return new HomePresenter(new HomeManagerImpl(), new SharedPreferencesManagerImpl());
+        return new HomePresenter(new HomeModelImpl(), new SharedPreferencesManagerImpl());
     }
 
     @Override

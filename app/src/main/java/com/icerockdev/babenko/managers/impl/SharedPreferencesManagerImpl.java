@@ -14,7 +14,7 @@ import javax.inject.Inject;
  */
 
 public class SharedPreferencesManagerImpl implements SharedPreferencesManager {
-    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.managers.impl.HomeManagerImpl.SERVER_ERROR_DIALOG_MESSAGE_KEY";
+    public static final String SERVER_ERROR_DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.models.impl.HomeModelImpl.SERVER_ERROR_DIALOG_MESSAGE_KEY";
     @Inject
     Context mContext;
 

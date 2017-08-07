@@ -5,8 +5,8 @@ import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.managers.impl.DataFieldsManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.DataFieldsManager;
+import com.icerockdev.babenko.models.impl.DataFieldsModelImpl;
+import com.icerockdev.babenko.models.interfaces.DataFieldsModel;
 import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
 
@@ -19,9 +19,9 @@ import java.util.List;
 @InjectViewState
 public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     private Parcelable[] mFieldsData;
-    private DataFieldsManager mManager;
+    private DataFieldsModel mManager;
 
-    public DataFieldsPresenter(Parcelable[] fieldsData, DataFieldsManager manager) { // TODO: 15/05/17 maybe store fieldsData as static member?
+    public DataFieldsPresenter(Parcelable[] fieldsData, DataFieldsModel manager) { // TODO: 15/05/17 maybe store fieldsData as static member?
         mFieldsData = fieldsData;
         mManager = manager;
     }
@@ -40,7 +40,7 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
 
     public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields) {
         mManager.checkFields(fieldValues, dataFields,
-                new DataFieldsManagerImpl.DataFieldsCheckerCallback() {
+                new DataFieldsModelImpl.DataFieldsCheckerCallback() {
                     @Override
                     public void successResponse() {
                         fieldsAreCorrect();

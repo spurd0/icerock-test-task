@@ -1,9 +1,9 @@
-package com.icerockdev.babenko.managers.impl;
+package com.icerockdev.babenko.models.impl;
 
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.managers.interfaces.FullScreenImageManager;
+import com.icerockdev.babenko.models.interfaces.FullScreenImageModel;
 import com.icerockdev.babenko.managers.interfaces.PicassoManager;
 
 import javax.inject.Inject;
@@ -12,11 +12,11 @@ import javax.inject.Inject;
  * Created by Roman Babenko on 14/05/17.
  */
 
-public class FullScreenImageManagerImpl implements FullScreenImageManager {
+public class FullScreenImageModelImpl implements FullScreenImageModel {
     @Inject
     PicassoManager mPicasso;
 
-    public FullScreenImageManagerImpl() {
+    public FullScreenImageModelImpl() {
         IceRockApplication.getAppComponent().inject(this);
     }
 

@@ -1,9 +1,9 @@
-package com.icerockdev.babenko.managers.impl;
+package com.icerockdev.babenko.models.impl;
 
 import android.util.Log;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.managers.interfaces.HomeManager;
+import com.icerockdev.babenko.models.interfaces.HomeModel;
 import com.icerockdev.babenko.services.DataFieldsService;
 
 import javax.inject.Inject;
@@ -15,15 +15,15 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Roman Babenko on 14/05/17.
  */
 
-public class HomeManagerImpl implements HomeManager {
+public class HomeModelImpl implements HomeModel {
     public static final int ERROR_CODE_RESPONSE_NULL = 1;
     public static final int ERROR_CODE_RESPONSE_OTHER = 2;
-    private static final String TAG = "HomeManagerImpl";
+    private static final String TAG = "HomeModelImpl";
 
     @Inject
     DataFieldsService mDataFieldsService;
 
-    public HomeManagerImpl() {
+    public HomeModelImpl() {
         IceRockApplication.getAppComponent().inject(this);
     }
 

@@ -3,7 +3,7 @@ package com.icerockdev.babenko.ui.full_screen_image;
 import android.widget.ImageView;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.managers.interfaces.FullScreenImageManager;
+import com.icerockdev.babenko.models.interfaces.FullScreenImageModel;
 import com.icerockdev.babenko.ui.BasePresenter;
 import com.squareup.picasso.Callback;
 
@@ -13,9 +13,9 @@ import com.squareup.picasso.Callback;
 @InjectViewState
 public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView> {
     private String mImageUrl;
-    private FullScreenImageManager mManager;
+    private FullScreenImageModel mManager;
 
-    public FullScreenImagePresenter(String imageUrl, FullScreenImageManager manager) {
+    public FullScreenImagePresenter(String imageUrl, FullScreenImageModel manager) {
         mImageUrl = imageUrl;
         mManager = manager;
     }

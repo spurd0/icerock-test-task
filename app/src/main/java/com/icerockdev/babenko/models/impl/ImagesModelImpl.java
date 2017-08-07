@@ -1,7 +1,7 @@
-package com.icerockdev.babenko.managers.impl;
+package com.icerockdev.babenko.models.impl;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.managers.interfaces.ImagesManager;
+import com.icerockdev.babenko.models.interfaces.ImagesModel;
 import com.icerockdev.babenko.model.ImageItem;
 import com.icerockdev.babenko.services.ImageService;
 
@@ -17,15 +17,15 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Roman Babenko on 10/05/17.
  */
 
-public class ImagesManagerImpl implements ImagesManager {
+public class ImagesModelImpl implements ImagesModel {
     public static final int CODE_ERROR_LIST_NULL_RESPONSE = 1;
     public static final int CODE_ERROR_OTHER = 2;
-    private static final String TAG = "ImagesManagerImpl";
+    private static final String TAG = "ImagesModelImpl";
     @Inject
     ImageService mImageService;
     private ArrayList<ImageItem> mImagesList;
 
-    public ImagesManagerImpl() {
+    public ImagesModelImpl() {
         IceRockApplication.getAppComponent().inject(this);
     }
 
