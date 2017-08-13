@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -19,6 +20,7 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
@@ -32,6 +34,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     @InjectPresenter
     HomePresenter mPresenter;
     private ActivityHomeBinding mBinding;
+    private TextWatcher mDataFieldsUrlTextWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,23 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         mBinding.fieldsRequestUrlEditText.setSelection(mBinding.fieldsRequestUrlEditText.getText().length());
         if (BuildConfig.DEBUG)
             mBinding.fieldsRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
+        initWatchers();
+    }
+
+    private void initWatchers() {
+        mDataFieldsUrlTextWatcher = new ErrorCleaningWatcher(mBinding.fieldsRequestUrlInput);
+        mBinding.fieldsRequestUrlEditText.addTextChangedListener(mDataFieldsUrlTextWatcher);
+    }
+
+    @Override
+    protected void onDestroy() {
+        releaseWatchers();
+        super.onDestroy();
+    }
+
+    private void releaseWatchers() {
+        mBinding.fieldsRequestUrlEditText.removeTextChangedListener(mDataFieldsUrlTextWatcher);
+        mDataFieldsUrlTextWatcher = null;
     }
 
     public void requestDataFieldsButtonClicked(View v) {

@@ -21,7 +21,7 @@ public class HomeActivityTest {
 
     @Test
     public void requestDataFieldsButtonClicked() throws Exception {
-        onView(withId(R.id.fieldsRequestUrlEditText)).perform(typeTextIntoFocusedView("www.mocky.io/v2/58fa10ce110000b81ad2106c"));
+        onView(withId(R.id.fields_request_url_edit_text)).perform(typeTextIntoFocusedView("www.mocky.io/v2/58fa10ce110000b81ad2106c"));
         onView(withId(R.id.getFieldsButton));
     }
 

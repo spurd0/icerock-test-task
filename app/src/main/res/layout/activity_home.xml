@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -12,9 +13,9 @@
     </data>
 
     <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/splash_image_view"
@@ -26,25 +27,32 @@
 
         <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/reqeust_fields_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{isAnimationLoaded ? View.VISIBLE : View.INVISIBLE}"
-            tools:context="com.icerockdev.babenko.ui.home.HomeActivity"
-            android:id="@+id/reqeust_fields_container">
+            tools:context="com.icerockdev.babenko.ui.home.HomeActivity">
 
-            <EditText
-                android:id="@+id/fieldsRequestUrlEditText"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/fields_request_url_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:hint="@string/request_fields_edittext_url_hint"
-                android:inputType="textUri"
-                android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@+id/getFieldsButton"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/fields_request_url_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textUri"
+                    android:maxLines="1" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/getFieldsButton"
@@ -54,9 +62,9 @@
                 android:onClick="requestDataFieldsButtonClicked"
                 android:text="@string/request_fields_button_text"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/fieldsRequestUrlEditText"
-                app:layout_constraintRight_toRightOf="@+id/fieldsRequestUrlEditText"
-                app:layout_constraintTop_toBottomOf="@+id/fieldsRequestUrlEditText" />
+                app:layout_constraintLeft_toLeftOf="@+id/fields_request_url_input"
+                app:layout_constraintRight_toRightOf="@+id/fields_request_url_input"
+                app:layout_constraintTop_toBottomOf="@+id/fields_request_url_input" />
 
         </android.support.constraint.ConstraintLayout>
 
