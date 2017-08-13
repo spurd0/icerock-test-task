@@ -1,5 +1,7 @@
 package com.icerockdev.babenko.ui.home;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.icerockdev.babenko.model.DataField;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.ui.home.HomePresenter.CODE_ERROR_EMPTY_LIST;
@@ -33,7 +36,36 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mBinding.getRoot().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final AnimatorSet animatorSet = UtilsHelper.getMoveScalingAnimator(mBinding.container, mBinding.splashImageView, mBinding.getRoot(),
+                        0, 0, 300, 0);
+                animatorSet.start();
+                animatorSet.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mBinding.setIsAnimationLoaded(true);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+            }
+        }, 500);
         initViews();
     }
 

@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="isAnimationLoaded"
+            type="boolean">
+
+        </variable>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.icerockdev.babenko.ui.home.HomeActivity">
+        android:id="@+id/container">
 
-        <EditText
-            android:id="@+id/fieldsRequestUrlEditText"
+        <ImageView
+            android:id="@+id/splash_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/request_fields_edittext_url_hint"
-            android:inputType="textUri"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/getFieldsButton"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            android:layout_gravity="center"
+            android:src="@drawable/splash"
+            android:visibility="@{isAnimationLoaded ? View.INVISIBLE : View.VISIBLE}" />
 
-        <Button
-            android:id="@+id/getFieldsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/request_fields_button_margin_top"
-            android:onClick="requestDataFieldsButtonClicked"
-            android:text="@string/request_fields_button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@+id/fieldsRequestUrlEditText"
-            app:layout_constraintRight_toRightOf="@+id/fieldsRequestUrlEditText"
-            app:layout_constraintTop_toBottomOf="@+id/fieldsRequestUrlEditText" />
+        <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{isAnimationLoaded ? View.VISIBLE : View.INVISIBLE}"
+            tools:context="com.icerockdev.babenko.ui.home.HomeActivity"
+            android:id="@+id/reqeust_fields_container">
 
-    </android.support.constraint.ConstraintLayout>
+            <EditText
+                android:id="@+id/fieldsRequestUrlEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/request_fields_edittext_url_hint"
+                android:inputType="textUri"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/getFieldsButton"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <Button
+                android:id="@+id/getFieldsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/request_fields_button_margin_top"
+                android:onClick="requestDataFieldsButtonClicked"
+                android:text="@string/request_fields_button_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/fieldsRequestUrlEditText"
+                app:layout_constraintRight_toRightOf="@+id/fieldsRequestUrlEditText"
+                app:layout_constraintTop_toBottomOf="@+id/fieldsRequestUrlEditText" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </FrameLayout>
 </layout>
