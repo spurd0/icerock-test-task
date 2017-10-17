@@ -1,14 +1,13 @@
 package com.icerockdev.babenko.core.dagger;
 
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
-import com.icerockdev.babenko.core.dagger.modules.DataFieldsModule;
 import com.icerockdev.babenko.core.dagger.modules.ImagesModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
+import com.icerockdev.babenko.core.dagger.modules.SharedPreferencesModule;
 import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageModelImpl;
 import com.icerockdev.babenko.ui.home.HomeModelImpl;
 import com.icerockdev.babenko.ui.images.ImagesModelImpl;
-import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 
 import javax.inject.Singleton;
 
@@ -19,10 +18,8 @@ import dagger.Component;
  */
 @Singleton
 @Component(modules = {RetrofitModule.class, ContextModule.class, PicassoModule.class,
-        DataFieldsModule.class, ImagesModule.class})
+        ImagesModule.class, SharedPreferencesModule.class})
 public interface AppComponent {
-    void inject(SharedPreferencesManagerImpl preferencesManager);
-
     void inject(HomeModelImpl homeManager);
 
     void inject(ImagesModelImpl imagesManager);

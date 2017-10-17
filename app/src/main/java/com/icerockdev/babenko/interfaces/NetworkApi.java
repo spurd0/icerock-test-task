@@ -4,6 +4,7 @@ import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.model.entities.ImageItem;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
 
@@ -13,7 +14,7 @@ import retrofit2.http.Url;
 
 public interface NetworkApi {
     @GET
-    Observable<DataField[]> requestDataFields(@Url String url);
+    Single<DataField[]> requestDataFields(@Url String url);
 
     @GET
     Observable<ImageItem[]> requestImages(@Url String url);

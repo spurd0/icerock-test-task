@@ -9,7 +9,7 @@ import com.icerockdev.babenko.ui.ProgressBaseView;
 
 public interface HomeView extends ProgressBaseView {
 
-    void showErrorDialog(int errorCode);
+    void showErrorDialog(String error);
 
     void showUrlError();
 

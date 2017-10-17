@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core.rx;
+package com.icerockdev.babenko.utils;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.SingleTransformer;

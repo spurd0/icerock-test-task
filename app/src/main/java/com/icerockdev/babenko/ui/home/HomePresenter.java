@@ -3,34 +3,28 @@ package com.icerockdev.babenko.ui.home;
 import android.util.Patterns;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
-import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
-
-import static com.icerockdev.babenko.ui.home.HomeModelImpl.ERROR_CODE_RESPONSE_NULL;
-import static com.icerockdev.babenko.ui.home.HomeModelImpl.ERROR_CODE_RESPONSE_OTHER;
+import com.icerockdev.babenko.utils.RxUtils;
 
 /**
  * Created by Roman Babenko on 06/05/17.
  */
 @InjectViewState
 public class HomePresenter extends BasePresenter<HomeView> {
-    public static final int CODE_ERROR_EMPTY_LIST = 1;
-    public static final int CODE_ERROR_LIST_NULL_RESPONSE = 2;
-    public static final int CODE_ERROR_OTHER = 3;
-    private HomeModel mManager;
-    private SharedPreferencesManager mSharedPreferencesManager;
+    private static final int REQUEST_RUNNING = 1;
+    private static final int REQUEST_COMPLETED = 2;
+    private static final int VIEW_DETACHED = 3;
+    private HomeModel mModel;
+    private int mDataFieldsRequestState = -1;
 
-    public HomePresenter(HomeModel manager, SharedPreferencesManager sharedPreferencesManager) {
-        mManager = manager;
-        mSharedPreferencesManager = sharedPreferencesManager;
+    public HomePresenter(HomeModel model) {
+        mModel = model;
     }
-
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        checkForErrors();
+        checkRequestState();
     }
 
     public void requestDataClicked(String url) {
@@ -41,50 +35,40 @@ public class HomePresenter extends BasePresenter<HomeView> {
         }
         if (getViewState() != null)
             getViewState().showProgressDialog();
-        mManager.requestDataFields(url, new HomeModelImpl.DataFieldsCallback() {
-            @Override
-            public void failedResponse(int errorCode) {
-                int listErrorCode = 0;
-                switch (errorCode) {
-                    case ERROR_CODE_RESPONSE_NULL:
-                        listErrorCode = CODE_ERROR_LIST_NULL_RESPONSE;
-                        break;
-                    case ERROR_CODE_RESPONSE_OTHER:
-                        listErrorCode = CODE_ERROR_OTHER;
-                        break;
-                    default:
-                        listErrorCode = CODE_ERROR_OTHER;
-                        break;
-                }
-                if (getViewState() != null) {
+        mDataFieldsRequestState = REQUEST_RUNNING;
+        mModel.requestDataFields(url)
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .subscribe((dataFields, throwable) -> {
+                    mDataFieldsRequestState = REQUEST_COMPLETED;
                     getViewState().dismissProgressDialog();
-                    getViewState().showErrorDialog(listErrorCode);
-                } else mSharedPreferencesManager.saveErrorCode(listErrorCode);
-            }
-
-            @Override
-            public void successResponse(DataField[] response) {
-                boolean emptyList = response.length == 0;
-                if (getViewState() != null) {
-                    getViewState().dismissProgressDialog();
-                    if (!emptyList)
-                        getViewState().gotDataFields(response);
-                    else getViewState().showErrorDialog(CODE_ERROR_EMPTY_LIST);
-                } else if (emptyList)
-                    mSharedPreferencesManager.saveErrorCode(CODE_ERROR_EMPTY_LIST);
-            }
-        });
+                    if (throwable != null) {
+                        getViewState().showErrorDialog(throwable.getMessage());
+                        return;
+                    }
+                    getViewState().gotDataFields(dataFields);
+                });
     }
 
+    @Override
+    public void detachView(HomeView view) {
+        mDataFieldsRequestState = mDataFieldsRequestState == REQUEST_RUNNING ? VIEW_DETACHED
+                : mDataFieldsRequestState;
+        super.detachView(view);
+    }
 
-    private void checkForErrors() {
-        int errorCode = mSharedPreferencesManager.getErrorCode();
-        if (errorCode == 0)
+    private void checkRequestState() {
+        if (mDataFieldsRequestState != VIEW_DETACHED)
             return;
-        if (getViewState() != null) {
-            mSharedPreferencesManager.saveErrorCode(0);
-            getViewState().showErrorDialog(errorCode);
-        }
+        mModel.getDataFieldsResult()
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .subscribe((dataFields, throwable) -> {
+                    mDataFieldsRequestState = 0;
+                    if (throwable != null) {
+                        getViewState().showErrorDialog(throwable.getMessage());
+                        return;
+                    }
+                    getViewState().gotDataFields(dataFields);
+                });
     }
 }
 

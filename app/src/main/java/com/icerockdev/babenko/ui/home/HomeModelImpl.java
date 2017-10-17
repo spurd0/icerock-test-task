@@ -2,45 +2,46 @@ package com.icerockdev.babenko.ui.home;
 
 import android.util.Log;
 
+import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.ui.home.HomeModel;
-import com.icerockdev.babenko.services.DataFieldsService;
+import com.icerockdev.babenko.interfaces.NetworkApi;
+import com.icerockdev.babenko.model.entities.DataField;
+import com.icerockdev.babenko.utils.RxUtils;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.subjects.AsyncSubject;
 
 /**
  * Created by Roman Babenko on 14/05/17.
  */
 
 public class HomeModelImpl implements HomeModel {
-    public static final int ERROR_CODE_RESPONSE_NULL = 1;
-    public static final int ERROR_CODE_RESPONSE_OTHER = 2;
-    private static final String TAG = "HomeModelImpl";
-
+    private static final String TAG = HomeModelImpl.class.getName();
     @Inject
-    DataFieldsService mDataFieldsService;
+    NetworkApi mNetworkApi;
+    private AsyncSubject<DataField[]> mDataFieldsSubject = AsyncSubject.create();
 
     public HomeModelImpl() {
         IceRockApplication.getAppComponent().inject(this);
     }
 
-    public void requestDataFields(String url, final DataFieldsCallback callback) {
-        mDataFieldsService.requestDataFields(url)
-                // Run on a background thread
-                .subscribeOn(Schedulers.io())
-                // Be notified on the main thread
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(dataFields -> Log.d(TAG, "dataFields length is:" + dataFields.length))
-                //.compose()
-                .subscribe(callback::successResponse,
-                        exception -> {
-                            Log.e(TAG, exception.getLocalizedMessage());
-                            callback.failedResponse(ERROR_CODE_RESPONSE_OTHER);
-                        });
-
+    public Single<DataField[]> requestDataFields(String url) {
+        return mNetworkApi.requestDataFields(url)
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .doOnSuccess(dataFields -> {
+                    if (BuildConfig.DEBUG)
+                        Log.d(TAG, "dataFields length is:" + dataFields.length);
+                    mDataFieldsSubject.onNext(dataFields);
+                    mDataFieldsSubject.onComplete();
+                })
+                .doOnError(throwable -> {
+                    mDataFieldsSubject.onError(throwable);
+                });
     }
 
+    public Single<DataField[]> getDataFieldsResult() {
+        return mDataFieldsSubject.singleOrError();
+    }
 }

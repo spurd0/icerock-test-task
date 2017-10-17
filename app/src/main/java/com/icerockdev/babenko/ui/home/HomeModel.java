@@ -2,16 +2,14 @@ package com.icerockdev.babenko.ui.home;
 
 import com.icerockdev.babenko.model.entities.DataField;
 
+import io.reactivex.Single;
+
 /**
  * Created by Roman Babenko on 14/05/17.
  */
 
 public interface HomeModel {
-    void requestDataFields(String url, final DataFieldsCallback callback);
+    Single<DataField[]> requestDataFields(String url);
 
-    interface DataFieldsCallback {
-        void failedResponse(int errorCode);
-
-        void successResponse(DataField[] response);
-    }
+    Single<DataField[]> getDataFieldsResult();
 }

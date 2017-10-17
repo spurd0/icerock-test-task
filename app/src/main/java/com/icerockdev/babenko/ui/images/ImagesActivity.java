@@ -19,9 +19,9 @@ import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
 
 import java.util.ArrayList;
 
+import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 import static com.icerockdev.babenko.ui.images.ImagesModelImpl.CODE_ERROR_LIST_NULL_RESPONSE;
 import static com.icerockdev.babenko.ui.images.ImagesModelImpl.CODE_ERROR_OTHER;
-import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 /**
  * Created by Roman Babenko on 10/05/17.

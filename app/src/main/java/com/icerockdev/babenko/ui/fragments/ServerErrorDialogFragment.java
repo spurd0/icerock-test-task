@@ -13,7 +13,8 @@ import com.icerockdev.babenko.R;
  */
 
 public class ServerErrorDialogFragment extends DialogFragment {
-    public static final String DIALOG_MESSAGE_KEY = "com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY";
+    public static final String DIALOG_MESSAGE_KEY = ServerErrorDialogFragment.class.getName()
+            + ".DIALOG_MESSAGE_KEY";
 
     @NonNull
     @Override

@@ -31,7 +31,7 @@ public final class TextInputLayoutUtils {
     }
 
     // there should be no instances of an util class
-    private TextInputLayoutUtils(){
+    private TextInputLayoutUtils() {
     }
 
     public static void setText(TextInputLayout textInputLayout, CharSequence text) {
