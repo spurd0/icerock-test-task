@@ -3,14 +3,12 @@ package com.icerockdev.babenko.ui.home;
 import android.util.Patterns;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.models.impl.HomeModelImpl;
-import com.icerockdev.babenko.models.interfaces.HomeModel;
 import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
 
-import static com.icerockdev.babenko.models.impl.HomeModelImpl.ERROR_CODE_RESPONSE_NULL;
-import static com.icerockdev.babenko.models.impl.HomeModelImpl.ERROR_CODE_RESPONSE_OTHER;
+import static com.icerockdev.babenko.ui.home.HomeModelImpl.ERROR_CODE_RESPONSE_NULL;
+import static com.icerockdev.babenko.ui.home.HomeModelImpl.ERROR_CODE_RESPONSE_OTHER;
 
 /**
  * Created by Roman Babenko on 06/05/17.

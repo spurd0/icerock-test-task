@@ -14,7 +14,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.databinding.ActivityFullScreenImageBinding;
-import com.icerockdev.babenko.models.impl.FullScreenImageModelImpl;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
 
 /**

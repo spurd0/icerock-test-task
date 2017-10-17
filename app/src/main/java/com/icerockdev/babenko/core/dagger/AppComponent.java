@@ -5,9 +5,9 @@ import com.icerockdev.babenko.core.dagger.modules.DataFieldsModule;
 import com.icerockdev.babenko.core.dagger.modules.ImagesModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
-import com.icerockdev.babenko.models.impl.FullScreenImageModelImpl;
-import com.icerockdev.babenko.models.impl.HomeModelImpl;
-import com.icerockdev.babenko.models.impl.ImagesModelImpl;
+import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageModelImpl;
+import com.icerockdev.babenko.ui.home.HomeModelImpl;
+import com.icerockdev.babenko.ui.images.ImagesModelImpl;
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
 
 import javax.inject.Singleton;

@@ -4,9 +4,7 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.models.impl.ImagesModelImpl;
-import com.icerockdev.babenko.models.interfaces.ImagesModel;
-import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.ui.BasePresenter;
 
 import java.util.ArrayList;

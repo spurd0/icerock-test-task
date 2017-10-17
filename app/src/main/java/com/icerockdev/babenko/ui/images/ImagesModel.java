@@ -1,6 +1,6 @@
-package com.icerockdev.babenko.models.interfaces;
+package com.icerockdev.babenko.ui.images;
 
-import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.model.entities.ImageItem;
 
 import java.util.ArrayList;
 

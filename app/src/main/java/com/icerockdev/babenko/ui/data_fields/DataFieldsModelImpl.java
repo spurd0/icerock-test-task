@@ -1,12 +1,11 @@
-package com.icerockdev.babenko.models.impl;
+package com.icerockdev.babenko.ui.data_fields;
 
 import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.icerockdev.babenko.models.interfaces.DataFieldsModel;
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 
 import java.util.ArrayList;
 import java.util.List;

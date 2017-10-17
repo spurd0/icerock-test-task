@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.ui.images;
 
-import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.ui.ProgressBaseView;
 
 import java.util.ArrayList;

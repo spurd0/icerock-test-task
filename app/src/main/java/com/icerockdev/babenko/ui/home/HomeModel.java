@@ -1,6 +1,6 @@
-package com.icerockdev.babenko.models.interfaces;
+package com.icerockdev.babenko.ui.home;
 
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 
 /**
  * Created by Roman Babenko on 14/05/17.

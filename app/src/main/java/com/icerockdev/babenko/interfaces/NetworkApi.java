@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.interfaces;
 
-import com.icerockdev.babenko.model.DataField;
-import com.icerockdev.babenko.model.ImageItem;
+import com.icerockdev.babenko.model.entities.DataField;
+import com.icerockdev.babenko.model.entities.ImageItem;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

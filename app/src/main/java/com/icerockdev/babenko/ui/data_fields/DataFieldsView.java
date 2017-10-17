@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.ui.data_fields;
 
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BaseView;
 
 import java.util.ArrayList;

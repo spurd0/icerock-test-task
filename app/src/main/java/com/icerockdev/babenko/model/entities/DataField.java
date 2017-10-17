@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.model;
+package com.icerockdev.babenko.model.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;

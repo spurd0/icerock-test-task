@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.services;
 
 import com.icerockdev.babenko.interfaces.NetworkApi;
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 
 import io.reactivex.Observable;
 

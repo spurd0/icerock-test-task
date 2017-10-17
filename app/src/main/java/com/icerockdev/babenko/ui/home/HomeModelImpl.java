@@ -1,9 +1,9 @@
-package com.icerockdev.babenko.models.impl;
+package com.icerockdev.babenko.ui.home;
 
 import android.util.Log;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.models.interfaces.HomeModel;
+import com.icerockdev.babenko.ui.home.HomeModel;
 import com.icerockdev.babenko.services.DataFieldsService;
 
 import javax.inject.Inject;

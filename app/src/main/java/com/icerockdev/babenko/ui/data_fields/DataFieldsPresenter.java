@@ -5,9 +5,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.models.impl.DataFieldsModelImpl;
-import com.icerockdev.babenko.models.interfaces.DataFieldsModel;
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
 
 import java.util.ArrayList;

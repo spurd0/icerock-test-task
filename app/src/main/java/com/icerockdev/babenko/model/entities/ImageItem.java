@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.model;
+package com.icerockdev.babenko.model.entities;
 
 /**
  * Created by Roman Babenko on 11/05/17.

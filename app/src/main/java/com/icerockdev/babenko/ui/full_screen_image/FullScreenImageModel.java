@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.models.interfaces;
+package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.widget.ImageView;
 

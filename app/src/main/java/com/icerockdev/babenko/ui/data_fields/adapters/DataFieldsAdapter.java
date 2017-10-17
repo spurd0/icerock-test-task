@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.model.DataField;
+import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import java.util.List;

@@ -1,9 +1,8 @@
-package com.icerockdev.babenko.models.impl;
+package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.models.interfaces.FullScreenImageModel;
 import com.icerockdev.babenko.managers.interfaces.PicassoManager;
 
 import javax.inject.Inject;
