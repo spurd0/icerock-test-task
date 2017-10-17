@@ -6,7 +6,7 @@
 
         <variable
             name="image"
-            type="com.icerockdev.babenko.model.ImageItem" />
+            type="com.icerockdev.babenko.model.entities.ImageItem" />
 
         <variable
             name="callback"
