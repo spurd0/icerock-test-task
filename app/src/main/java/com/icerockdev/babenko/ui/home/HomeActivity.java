@@ -71,7 +71,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = "com.icerockdev.babenko.ui.home.HomeActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = HomeActivity.class.getName() + ".PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {
