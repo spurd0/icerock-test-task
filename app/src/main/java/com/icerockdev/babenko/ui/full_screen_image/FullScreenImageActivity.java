@@ -2,6 +2,7 @@ package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -44,14 +45,14 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_full_screen_image);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_screen_image);
         initViews();
     }
 
     @ProvidePresenter
     FullScreenImagePresenter provideFullScreenImagePresenter() {
         return new FullScreenImagePresenter(getIntent().getStringExtra(IMAGE_URL_KEY),
-                new FullScreenImageModelImpl());
+                new FullScreenImageInteractorImpl());
     }
 
     @Override

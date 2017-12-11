@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.ui.data_fields;
 
-import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.Patterns;
 import android.widget.EditText;
@@ -8,8 +8,11 @@ import android.widget.EditText;
 import com.icerockdev.babenko.model.entities.DataField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import io.reactivex.Single;
 
 import static com.icerockdev.babenko.core.ApplicationConstants.EMAIL;
 import static com.icerockdev.babenko.core.ApplicationConstants.NUMBER;
@@ -21,28 +24,31 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
  * Created by Roman Babenko on 30/04/17.
  */
 
-public class DataFieldsModelImpl implements DataFieldsModel {
+public class DataFieldsInteractorImpl implements DataFieldsInteractor {
 
-    private ArrayList<DataField> mDataFieldsList;
+    private DataField[] mDataFields;
 
-    public void checkFields(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields,
-                            DataFieldsCheckerCallback callback) {
-        List<Integer> errorList = new ArrayList<Integer>();
-        for (int i = 0; i < fieldValues.size(); i++) {
-            int key = fieldValues.keyAt(i);
-            EditText fieldValue = fieldValues.get(key);
-            for (DataField dataField : dataFields)
-                if (dataField.getId() == key) {
-                    if (!isDataFieldCorrect(fieldValue.getText().toString(), dataField.getType()))
-                        errorList.add(key);
-                }
-        }
-        if (errorList.isEmpty())
-            callback.successResponse();
-        else callback.failedResponse(errorList);
+    public DataFieldsInteractorImpl(@NonNull DataField[] dataFields) {
+        mDataFields = dataFields;
     }
 
-    public boolean isDataFieldCorrect(String data, String type) {
+    public Single<List<Integer>> checkFields(SparseArrayCompat<EditText> fieldValues) {
+        return Single.fromCallable(() -> {
+            List<Integer> errorList = new ArrayList<Integer>();
+            for (int i = 0; i < fieldValues.size(); i++) {
+                int key = fieldValues.keyAt(i);
+                EditText fieldValue = fieldValues.get(key);
+                for (DataField dataField : mDataFields)
+                    if (dataField.getId() == key) {
+                        if (!isDataFieldCorrect(fieldValue.getText().toString(), dataField.getType()))
+                            errorList.add(key);
+                    }
+            }
+            return errorList;
+        });
+    }
+
+    private boolean isDataFieldCorrect(String data, String type) {
         if (data.isEmpty())
             return false;
         switch (type) {
@@ -64,14 +70,7 @@ public class DataFieldsModelImpl implements DataFieldsModel {
         }
     }
 
-    public ArrayList<DataField> getDataFields(Parcelable[] mFieldsData) {
-        if (mDataFieldsList == null) {
-            mDataFieldsList = new ArrayList<>();
-            for (Parcelable aData : mFieldsData) {
-                mDataFieldsList.add((DataField) aData);
-            }
-        }
-        return mDataFieldsList;
+    public Single<List<DataField>> requestDataFields() {
+        return Single.fromCallable(() -> Arrays.asList(mDataFields));
     }
-
 }

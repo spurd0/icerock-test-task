@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.core.dagger.modules;
 
-import com.icerockdev.babenko.interfaces.NetworkApi;
+import com.icerockdev.babenko.core.NetworkApi;
 
 import javax.inject.Singleton;
 

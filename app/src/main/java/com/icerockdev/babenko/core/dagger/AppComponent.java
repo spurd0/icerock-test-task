@@ -5,9 +5,11 @@ import com.icerockdev.babenko.core.dagger.modules.ImagesModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 import com.icerockdev.babenko.core.dagger.modules.RetrofitModule;
 import com.icerockdev.babenko.core.dagger.modules.SharedPreferencesModule;
-import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageModelImpl;
-import com.icerockdev.babenko.ui.home.HomeModelImpl;
-import com.icerockdev.babenko.ui.images.ImagesModelImpl;
+import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageInteractorImpl;
+import com.icerockdev.babenko.ui.home.HomeActivity;
+import com.icerockdev.babenko.ui.home.HomeInteractorImpl;
+import com.icerockdev.babenko.ui.images.ImagesActivity;
+import com.icerockdev.babenko.ui.images.ImagesInteractorImpl;
 
 import javax.inject.Singleton;
 
@@ -20,9 +22,9 @@ import dagger.Component;
 @Component(modules = {RetrofitModule.class, ContextModule.class, PicassoModule.class,
         ImagesModule.class, SharedPreferencesModule.class})
 public interface AppComponent {
-    void inject(HomeModelImpl homeManager);
+    void inject(FullScreenImageInteractorImpl fullScreenImageManagerImpl);
 
-    void inject(ImagesModelImpl imagesManager);
+    void inject(HomeActivity homeActivity);
 
-    void inject(FullScreenImageModelImpl fullScreenImageManagerImpl);
+    void inject(ImagesActivity imagesActivity);
 }

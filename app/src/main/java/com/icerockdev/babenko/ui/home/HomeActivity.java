@@ -11,8 +11,10 @@ import android.view.View;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
+import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.ApplicationConstants;
+import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
@@ -21,6 +23,8 @@ import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
+import javax.inject.Inject;
+
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
@@ -28,6 +32,10 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String TAG = HomeActivity.class.getName();
     @InjectPresenter
     HomePresenter mPresenter;
+
+    @Inject
+    NetworkApi mNetworkApi;
+
     private ActivityHomeBinding mBinding;
     private TextWatcher mDataFieldsUrlTextWatcher;
 
@@ -60,13 +68,14 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
                 }
             });
-        }, 500);
+        }, ApplicationConstants.ANIMATION_DURATION);
         initViews();
     }
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
-        return new HomePresenter(new HomeModelImpl());
+        IceRockApplication.getAppComponent().inject(this);
+        return new HomePresenter(new HomeInteractorImpl(mNetworkApi));
     }
 
     @Override
@@ -75,10 +84,11 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     private void initViews() {
-        mBinding.fieldsRequestUrlEditText.setText(ApplicationConstants.URL_START);
+        mBinding.fieldsRequestUrlEditText.setText(getString(R.string.url_start));
         mBinding.fieldsRequestUrlEditText.setSelection(mBinding.fieldsRequestUrlEditText.getText().length());
-        if (BuildConfig.DEBUG)
+        if (BuildConfig.DEBUG) {
             mBinding.fieldsRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
+        }
         initWatchers();
     }
 
@@ -102,9 +112,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
         mPresenter.requestDataClicked(mBinding.fieldsRequestUrlEditText.getText().toString());
     }
 
-    public void showErrorDialog(String error) {
-        if (BuildConfig.DEBUG)
-            Log.e(TAG, "Error occurred:" + error);
+    public void showErrorDialog() {
         ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
         Bundle arguments = new Bundle();
         arguments.putString(DIALOG_MESSAGE_KEY, getString(R.string.request_data_fields_error_other));

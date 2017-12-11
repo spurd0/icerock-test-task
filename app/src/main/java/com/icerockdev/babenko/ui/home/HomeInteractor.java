@@ -8,8 +8,8 @@ import io.reactivex.Single;
  * Created by Roman Babenko on 14/05/17.
  */
 
-public interface HomeModel {
+public interface HomeInteractor {
+
     Single<DataField[]> requestDataFields(String url);
 
-    Single<DataField[]> getDataFieldsResult();
 }

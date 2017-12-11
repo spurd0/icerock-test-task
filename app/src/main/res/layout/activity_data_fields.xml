@@ -30,6 +30,8 @@
                 android:id="@+id/submitFieldsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                android:onClick="submitFieldsClicked"
                 android:text="@string/submit_fields_button_text" />
         </LinearLayout>
     </ScrollView>

@@ -12,9 +12,9 @@ import com.squareup.picasso.Callback;
 @InjectViewState
 public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView> {
     private String mImageUrl;
-    private FullScreenImageModel mManager;
+    private FullScreenImageInteractor mManager;
 
-    public FullScreenImagePresenter(String imageUrl, FullScreenImageModel manager) {
+    public FullScreenImagePresenter(String imageUrl, FullScreenImageInteractor manager) {
         mImageUrl = imageUrl;
         mManager = manager;
     }

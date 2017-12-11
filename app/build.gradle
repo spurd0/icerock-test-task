@@ -33,6 +33,7 @@ android {
 
 def retrofit = '2.2.0'
 def support_version = '25.3.1'
+def moxy = '1.5.3'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -52,10 +53,10 @@ dependencies {
     compile "com.google.dagger:dagger:2.9"
     annotationProcessor "com.google.dagger:dagger-compiler:2.9"
 
-    compile 'com.arello-mobile:moxy:1.5.3'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
-    compile 'com.arello-mobile:moxy-android:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
+    compile 'com.arello-mobile:moxy:' + moxy
+    annotationProcessor 'com.arello-mobile:moxy-compiler:' + moxy
+    compile 'com.arello-mobile:moxy-android:' + moxy
+    compile 'com.arello-mobile:moxy-app-compat:' + moxy
     compile "com.android.support:appcompat-v7:$support_version"
 
     compile "io.reactivex.rxjava2:rxjava:2.1.2"

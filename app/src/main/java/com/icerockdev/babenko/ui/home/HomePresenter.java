@@ -11,65 +11,28 @@ import com.icerockdev.babenko.utils.RxUtils;
  */
 @InjectViewState
 public class HomePresenter extends BasePresenter<HomeView> {
-    private static final int REQUEST_RUNNING = 1;
-    private static final int REQUEST_COMPLETED = 2;
-    private static final int VIEW_DETACHED = 3;
-    private HomeModel mModel;
-    private int mDataFieldsRequestState = -1;
+    private HomeInteractor mHomeInteractor;
 
-    public HomePresenter(HomeModel model) {
-        mModel = model;
-    }
-
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        checkRequestState();
+    public HomePresenter(HomeInteractor model) {
+        mHomeInteractor = model;
     }
 
     public void requestDataClicked(String url) {
-        if (!Patterns.WEB_URL.matcher(url).matches()) {
-            if (getViewState() != null)
-                getViewState().showUrlError();
-            return;
-        }
-        if (getViewState() != null)
-            getViewState().showProgressDialog();
-        mDataFieldsRequestState = REQUEST_RUNNING;
-        mModel.requestDataFields(url)
+
+        getViewState().showProgressDialog();
+        mHomeInteractor.requestDataFields(url)
                 .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
-                .subscribe((dataFields, throwable) -> {
-                    mDataFieldsRequestState = REQUEST_COMPLETED;
-                    getViewState().dismissProgressDialog();
-                    if (throwable != null) {
-                        getViewState().showErrorDialog(throwable.getMessage());
-                        return;
-                    }
-                    getViewState().gotDataFields(dataFields);
-                });
+                .doFinally(() -> getViewState().dismissProgressDialog())
+                .subscribe(dataFields -> getViewState().gotDataFields(dataFields),
+                        throwable -> {
+                            if (throwable instanceof RuntimeException) {
+                                getViewState().showUrlError();
+                            } else {
+                                getViewState().showErrorDialog();
+                            }
+                        });
     }
 
-    @Override
-    public void detachView(HomeView view) {
-        mDataFieldsRequestState = mDataFieldsRequestState == REQUEST_RUNNING ? VIEW_DETACHED
-                : mDataFieldsRequestState;
-        super.detachView(view);
-    }
-
-    private void checkRequestState() {
-        if (mDataFieldsRequestState != VIEW_DETACHED)
-            return;
-        mModel.getDataFieldsResult()
-                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
-                .subscribe((dataFields, throwable) -> {
-                    mDataFieldsRequestState = 0;
-                    if (throwable != null) {
-                        getViewState().showErrorDialog(throwable.getMessage());
-                        return;
-                    }
-                    getViewState().gotDataFields(dataFields);
-                });
-    }
 }
 
 

@@ -1,0 +1,5 @@
+<resources>
+    <string name="url_start">http://www.</string>
+    <string name="request_images_url">https://jsonplaceholder.typicode.com/photos</string>
+
+</resources>

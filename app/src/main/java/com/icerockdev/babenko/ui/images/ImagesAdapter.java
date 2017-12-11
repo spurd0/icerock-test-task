@@ -14,6 +14,7 @@ import com.icerockdev.babenko.model.entities.ImageItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Roman Babenko on 11/05/17.
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItemHolder> {
     private ImagesListCallback mCallback;
-    private ArrayList<ImageItem> mImageList;
+    private List<ImageItem> mImageList;
 
-    public ImagesAdapter(ArrayList<ImageItem> imageList, ImagesListCallback callback) {
+    public ImagesAdapter(List<ImageItem> imageList, ImagesListCallback callback) {
         mCallback = callback;
         mImageList = imageList;
     }

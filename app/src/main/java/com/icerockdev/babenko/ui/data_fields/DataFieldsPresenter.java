@@ -1,27 +1,21 @@
 package com.icerockdev.babenko.ui.data_fields;
 
-import android.os.Parcelable;
 import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.ui.BasePresenter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.icerockdev.babenko.utils.RxUtils;
 
 /**
  * Created by Roman Babenko on 06/05/17.
  */
 @InjectViewState
 public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
-    private Parcelable[] mFieldsData;
-    private DataFieldsModel mManager;
+    private DataFieldsInteractor mDataFieldsInteractor;
 
-    public DataFieldsPresenter(Parcelable[] fieldsData, DataFieldsModel manager) { // TODO: 15/05/17 maybe store fieldsData as static member?
-        mFieldsData = fieldsData;
-        mManager = manager;
+    public DataFieldsPresenter(DataFieldsInteractor dataFieldsInteractor) { // TODO: 15/05/17 maybe store fieldsData as static member?
+        mDataFieldsInteractor = dataFieldsInteractor;
     }
 
     @Override
@@ -31,31 +25,26 @@ public class DataFieldsPresenter extends BasePresenter<DataFieldsView> {
     }
 
     private void requestFieldsData() {
-        ArrayList<DataField> dataFieldsList = mManager.getDataFields(mFieldsData);
-        if (getViewState() != null)
-            getViewState().showDataFields(dataFieldsList);
+        mDataFieldsInteractor.requestDataFields()
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .subscribe(dataFields -> getViewState().showDataFields(dataFields));
     }
 
-    public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues, ArrayList<DataField> dataFields) {
-        mManager.checkFields(fieldValues, dataFields,
-                new DataFieldsModelImpl.DataFieldsCheckerCallback() {
-                    @Override
-                    public void successResponse() {
+    public void submitButtonPressed(SparseArrayCompat<EditText> fieldValues) {
+        // TODO: 11/12/2017 show progress dialog
+        mDataFieldsInteractor.checkFields(fieldValues)
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .subscribe(integers -> {
+                    if (integers.isEmpty()) {
                         fieldsAreCorrect();
-                    }
-
-                    @Override
-                    public void failedResponse(List<Integer> errorList) {
-                        if (getViewState() != null)
-                            getViewState().displayFieldsError(errorList);
+                    } else {
+                        getViewState().displayFieldsError(integers);
                     }
                 });
     }
 
     private void fieldsAreCorrect() {
-        if (getViewState() != null)
-            getViewState().fieldsSuccessfullyChecked();
+        getViewState().fieldsSuccessfullyChecked();
     }
-
 
 }

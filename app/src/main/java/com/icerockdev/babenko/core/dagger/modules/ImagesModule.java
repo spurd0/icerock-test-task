@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.core.dagger.modules;
 
-import com.icerockdev.babenko.interfaces.NetworkApi;
-import com.icerockdev.babenko.services.ImageService;
+import com.icerockdev.babenko.core.NetworkApi;
+import com.icerockdev.babenko.repo.impl.ImageRepositoryImpl;
 
 import javax.inject.Singleton;
 
@@ -16,7 +16,7 @@ public class ImagesModule {
 
     @Provides
     @Singleton
-    ImageService provideImageService(NetworkApi networkApi) {
-        return new ImageService(networkApi);
+    ImageRepositoryImpl provideImageService(NetworkApi networkApi) {
+        return new ImageRepositoryImpl(networkApi);
     }
 }

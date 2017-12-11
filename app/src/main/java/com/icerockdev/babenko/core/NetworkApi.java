@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.interfaces;
+package com.icerockdev.babenko.core;
 
 import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.model.entities.ImageItem;
@@ -17,5 +17,5 @@ public interface NetworkApi {
     Single<DataField[]> requestDataFields(@Url String url);
 
     @GET
-    Observable<ImageItem[]> requestImages(@Url String url);
+    Single<ImageItem[]> requestImages(@Url String url);
 }

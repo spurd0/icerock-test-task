@@ -5,11 +5,10 @@ package com.icerockdev.babenko.core;
  */
 
 public class ApplicationConstants {
-    public static final String URL_START = "http://www.";
     public static final String TEXT = "TEXT";
     public static final String EMAIL = "EMAIL";
     public static final String PHONE = "PHONE";
     public static final String NUMBER = "NUMBER";
     public static final String URL = "URL";
-    public static final String REQUEST_IMAGES_URL = "https://jsonplaceholder.typicode.com/photos";
+    public static final int ANIMATION_DURATION = 500;
 }

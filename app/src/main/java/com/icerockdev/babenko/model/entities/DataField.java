@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class DataField implements Parcelable {
+
     public static final Creator<DataField> CREATOR = new Creator<DataField>() {
         @Override
         public DataField createFromParcel(Parcel in) {
@@ -24,13 +25,6 @@ public class DataField implements Parcelable {
     private String mPlaceholder;
     private String mValue;
 
-    protected DataField(Parcel in) {
-        mId = in.readInt();
-        mType = in.readString();
-        mPlaceholder = in.readString();
-        mValue = in.readString();
-    }
-
     public DataField(int id,
                      String type,
                      String placeholder,
@@ -39,6 +33,26 @@ public class DataField implements Parcelable {
         mType = type;
         mPlaceholder = placeholder;
         mValue = defaultValue;
+    }
+
+    protected DataField(Parcel in) {
+        mId = in.readInt();
+        mType = in.readString();
+        mPlaceholder = in.readString();
+        mValue = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeString(mType);
+        dest.writeString(mPlaceholder);
+        dest.writeString(mValue);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public int getId() {
@@ -79,16 +93,4 @@ public class DataField implements Parcelable {
                 " current is " + mValue;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mId);
-        dest.writeString(mType);
-        dest.writeString(mPlaceholder);
-        dest.writeString(mValue);
-    }
 }

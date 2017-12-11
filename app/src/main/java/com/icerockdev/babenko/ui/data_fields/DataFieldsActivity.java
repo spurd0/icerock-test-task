@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -19,7 +19,6 @@ import com.icerockdev.babenko.ui.BaseActivity;
 import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.ui.images.ImagesActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.icerockdev.babenko.core.ApplicationConstants.EMAIL;
@@ -33,10 +32,12 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
  */
 
 public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
-    public static final String DATA_FIELDS_KEY = "com.icerockdev.babenko.ui.data_fields.DataFieldsActivity.DATA_FIELDS_KEY";
-    private static final String TAG = "DataFieldsActivity";
+    public static final String DATA_FIELDS_KEY = DataFieldsActivity.class.getName() + ".DATA_FIELDS_KEY";
+    private static final String TAG = DataFieldsActivity.class.getName();
+
     @InjectPresenter
     DataFieldsPresenter mPresenter;
+
     private DataFieldsAdapter mDataFieldsAdapter;
     private ActivityDataFieldsBinding mBinding;
 
@@ -54,20 +55,14 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
 
     @ProvidePresenter
     DataFieldsPresenter provideDataFieldsPresenter() {
-        return new DataFieldsPresenter(getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY),
-                new DataFieldsModelImpl());
+        Parcelable[] allParcelables = getIntent().getParcelableArrayExtra(DATA_FIELDS_KEY);
+        DataField[] dataFields = new DataField[allParcelables.length];
+        for (int i = 0; i < allParcelables.length; i++) {
+            dataFields[i] = (DataField) allParcelables[i];
+        }
+        return new DataFieldsPresenter(new DataFieldsInteractorImpl(dataFields));
     }
 
-    private void initSubmitButton(final ArrayList<DataField> dataFields) {
-        Button submitButton = (Button) findViewById(R.id.submitFieldsButton);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideError();
-                mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues(), dataFields);
-            }
-        });
-    }
 
     public void showError() {
         mBinding.validationErrorTv.setVisibility(View.VISIBLE);
@@ -76,20 +71,19 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
     }
 
     @Override
-    public void showDataFields(ArrayList<DataField> dataFields) {
-        if (mDataFieldsAdapter != null)
-            return;
-        if (dataFields == null)
-            throw new NullPointerException("FieldsListIsNull");
-        if (BuildConfig.DEBUG)
+    public void showDataFields(List<DataField> dataFields) {
+        if (BuildConfig.DEBUG) {
             fillDataFields(dataFields);
+        }
+
         mDataFieldsAdapter = new DataFieldsAdapter(this, dataFields);
         // hope that it won`t be too much fields, moved to recyclerview @see feature/recycler_view_datafields
         mDataFieldsAdapter.attachAdapter((LinearLayout) findViewById(R.id.dataFieldsEditTextContainer));
-        initSubmitButton(dataFields);
+
+        mBinding.submitFieldsButton.setEnabled(true);
     }
 
-    private void fillDataFields(ArrayList<DataField> dataFields) {// TODO: 15/05/17 how to correctly make a testing or skip it?
+    private void fillDataFields(List<DataField> dataFields) {// TODO: 15/05/17 how to correctly make a testing or skip it?
         for (DataField dataField : dataFields) {
             switch (dataField.getType()) {
                 case TEXT:
@@ -119,12 +113,16 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
 
     @Override
     public void fieldsSuccessfullyChecked() {
-        Intent intent = new Intent(this, ImagesActivity.class);
-        startActivity(intent);
+        ImagesActivity.start(this);
+        finish();
     }
 
     public void hideError() {
         mBinding.validationErrorTv.setVisibility(View.GONE);
     }
 
+    public void submitFieldsClicked(View view) {
+        hideError();
+        mPresenter.submitButtonPressed(mDataFieldsAdapter.getFieldValues());
+    }
 }

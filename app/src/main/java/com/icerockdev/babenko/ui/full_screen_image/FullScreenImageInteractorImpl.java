@@ -11,11 +11,11 @@ import javax.inject.Inject;
  * Created by Roman Babenko on 14/05/17.
  */
 
-public class FullScreenImageModelImpl implements FullScreenImageModel {
+public class FullScreenImageInteractorImpl implements FullScreenImageInteractor {
     @Inject
     PicassoManager mPicasso;
 
-    public FullScreenImageModelImpl() {
+    public FullScreenImageInteractorImpl() {
         IceRockApplication.getAppComponent().inject(this);
     }
 

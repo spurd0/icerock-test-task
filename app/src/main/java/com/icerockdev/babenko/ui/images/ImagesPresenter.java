@@ -4,20 +4,18 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.ui.BasePresenter;
-
-import java.util.ArrayList;
+import com.icerockdev.babenko.utils.RxUtils;
 
 /**
  * Created by Roman Babenko on 10/05/17.
  */
 @InjectViewState
 public class ImagesPresenter extends BasePresenter<ImagesView> {
-    private static final String TAG = "ImagesPresenter";
-    private ImagesModel mManager;
+    private static final String TAG = ImagesPresenter.class.getName();
+    private ImagesInteractor mManager;
 
-    public ImagesPresenter(ImagesModel manager) {
+    public ImagesPresenter(ImagesInteractor manager) {
         mManager = manager;
     }
 
@@ -29,29 +27,20 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
 
     private void requestPictures() {
         getViewState().showProgressDialog();
-        mManager.requestPicturesList(new ImagesModelImpl.ImagesCallback() {
-            @Override
-            public void successResponse(ArrayList<ImageItem> images) {
-                if (getViewState() != null) {
-                    getViewState().dismissProgressDialog();
+        mManager.requestPicturesList()
+                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+                .doFinally(() -> getViewState().dismissProgressDialog())
+                .subscribe(imageItems -> {
                     if (BuildConfig.DEBUG)
-                        Log.d(TAG, "Images list length is " + images.size());
-                    if (images.size() == 0) {
+                        Log.d(TAG, "Images list length is " + imageItems.size());
+                    if (imageItems.size() == 0) {
                         getViewState().showListIsEmptyError();
                         return;
                     }
-                    getViewState().showImagesList(images);
-                }
-            }
-
-            @Override
-            public void failedResponse(int errorCode) {
-                if (getViewState() != null) {
-                    getViewState().dismissProgressDialog();
-                    getViewState().showErrorDialog(errorCode);
-                }
-            }
-        });
+                    getViewState().showImagesList(imageItems);
+                }, throwable -> {
+                    getViewState().showErrorDialog();
+                });
     }
 
 }
