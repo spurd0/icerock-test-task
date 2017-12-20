@@ -17,7 +17,7 @@
             android:textColor="@color/errorTextColor"
             android:visibility="gone" />
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/dataFieldsEditTextContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
