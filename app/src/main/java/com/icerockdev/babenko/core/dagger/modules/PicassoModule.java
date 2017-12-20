@@ -2,8 +2,8 @@ package com.icerockdev.babenko.core.dagger.modules;
 
 import android.content.Context;
 
-import com.icerockdev.babenko.managers.impl.PicassoManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.PicassoManager;
+import com.icerockdev.babenko.providers.impl.PicassoProviderImpl;
+import com.icerockdev.babenko.providers.PicassoProvider;
 
 import javax.inject.Singleton;
 
@@ -23,7 +23,7 @@ public class PicassoModule {
 
     @Provides
     @Singleton
-    PicassoManager providePicassoManager() {
-        return new PicassoManagerImpl(mContext);
+    PicassoProvider providePicassoManager() {
+        return new PicassoProviderImpl(mContext);
     }
 }

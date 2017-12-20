@@ -3,7 +3,7 @@ package com.icerockdev.babenko.ui.full_screen_image;
 import android.widget.ImageView;
 
 import com.icerockdev.babenko.IceRockApplication;
-import com.icerockdev.babenko.managers.interfaces.PicassoManager;
+import com.icerockdev.babenko.providers.PicassoProvider;
 
 import javax.inject.Inject;
 
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 public class FullScreenImageInteractorImpl implements FullScreenImageInteractor {
     @Inject
-    PicassoManager mPicasso;
+    PicassoProvider mPicasso;
 
     public FullScreenImageInteractorImpl() {
         IceRockApplication.getAppComponent().inject(this);
@@ -21,7 +21,7 @@ public class FullScreenImageInteractorImpl implements FullScreenImageInteractor 
 
     public void requestImage(ImageView targetIv, String imageUrl,
                              com.squareup.picasso.Callback imageCallback) {
-        mPicasso.getManager().load(imageUrl).into(targetIv, imageCallback);
+        mPicasso.getPicasso().load(imageUrl).into(targetIv, imageCallback);
     }
 
 }

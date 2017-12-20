@@ -30,10 +30,6 @@ public final class TextInputLayoutUtils {
         FIELD_INDICATOR_AREA = fieldIndicatorArea;
     }
 
-    // there should be no instances of an util class
-    private TextInputLayoutUtils() {
-    }
-
     public static void setText(TextInputLayout textInputLayout, CharSequence text) {
         EditText editText = textInputLayout.getEditText();
         if (editText != null) {
@@ -107,7 +103,7 @@ public final class TextInputLayoutUtils {
     }
 
     /**
-     * Проверяет введен ли текст, если не введен - ставит сообщение об ошибке
+     * Проверяет введен ли текст, если не введен - выводит сообщение об ошибке
      *
      * @param textInputLayout input layout
      * @param errorIfEmpty    текст ошибки, если ввод пустой
@@ -125,7 +121,7 @@ public final class TextInputLayoutUtils {
     }
 
     /**
-     * Проверяет введен ли текст, если не введен - ставит сообщение об ошибке
+     * Проверяет введен ли текст, если не введен - выводит сообщение об ошибке
      *
      * @param textInputLayout input layout
      * @param errorIfEmpty    текст ошибки, если ввод пустой
