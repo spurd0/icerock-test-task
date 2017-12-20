@@ -2,12 +2,13 @@ package com.icerockdev.babenko.ui.images;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -15,7 +16,6 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.NetworkApi;
-import com.icerockdev.babenko.databinding.ActivityImagesBinding;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.repo.impl.ImageRepositoryImpl;
 import com.icerockdev.babenko.ui.BaseProgressActivity;
@@ -25,6 +25,9 @@ import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
@@ -37,9 +40,16 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     private static final String TAG = ImagesActivity.class.getName();
     @InjectPresenter
     ImagesPresenter mPresenter;
+
     @Inject
     NetworkApi mNetworkApi;
-    private ActivityImagesBinding mBinding;
+
+    @BindView(R.id.imagesListEmptyTv)
+    TextView mImagesListEmptyTv;
+
+    @BindView(R.id.imagesRecyclerView)
+    RecyclerView mImagesRecyclerView;
+
 
     public static void start(Context context) {
         Intent intent = new Intent(context, ImagesActivity.class);
@@ -49,7 +59,8 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_images);
+        setContentView(R.layout.activity_images);
+        ButterKnife.bind(this);
     }
 
     @ProvidePresenter
@@ -75,8 +86,8 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
 
     @Override
     public void showListIsEmptyError() {
-        mBinding.imagesListEmptyTv.setVisibility(View.VISIBLE);
-        mBinding.imagesRecyclerView.setVisibility(View.GONE);
+        mImagesListEmptyTv.setVisibility(View.VISIBLE);
+        mImagesRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -86,9 +97,9 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
                 Log.d(TAG, "Image for view is " + imageUrl);
             FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
         });
-        mBinding.imagesListEmptyTv.setVisibility(View.GONE);
-        mBinding.imagesRecyclerView.setVisibility(View.VISIBLE);
-        mBinding.imagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mBinding.imagesRecyclerView.setAdapter(adapter);
+        mImagesListEmptyTv.setVisibility(View.GONE);
+        mImagesRecyclerView.setVisibility(View.VISIBLE);
+        mImagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mImagesRecyclerView.setAdapter(adapter);
     }
 }
