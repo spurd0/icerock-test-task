@@ -3,7 +3,7 @@ package com.icerockdev.babenko.managers.impl;
 import android.content.Context;
 
 import com.icerockdev.babenko.BuildConfig;
-import com.icerockdev.babenko.managers.interfaces.PicassoManager;
+import com.icerockdev.babenko.managers.PicassoManager;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 

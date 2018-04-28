@@ -4,7 +4,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.ui.BasePresenter;
+import com.icerockdev.babenko.ui.base.BasePresenter;
 import com.icerockdev.babenko.utils.RxUtils;
 
 /**

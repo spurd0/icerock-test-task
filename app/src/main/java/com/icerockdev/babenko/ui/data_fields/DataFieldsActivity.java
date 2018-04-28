@@ -15,7 +15,7 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.databinding.ActivityDataFieldsBinding;
 import com.icerockdev.babenko.model.entities.DataField;
-import com.icerockdev.babenko.ui.BaseActivity;
+import com.icerockdev.babenko.ui.base.activities.BaseActivity;
 import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter;
 import com.icerockdev.babenko.ui.images.ImagesActivity;
 

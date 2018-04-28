@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.managers.interfaces;
+package com.icerockdev.babenko.managers;
 
 /**
  * Created by Roman Babenko on 10/05/17.

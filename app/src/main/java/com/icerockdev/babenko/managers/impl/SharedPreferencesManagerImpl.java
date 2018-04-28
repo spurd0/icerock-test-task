@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
+import com.icerockdev.babenko.managers.SharedPreferencesManager;
 
 /**
  * Created by Roman Babenko on 10/05/17.

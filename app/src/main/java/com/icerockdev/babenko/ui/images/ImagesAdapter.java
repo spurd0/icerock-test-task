@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.databinding.ImageElementBinding;
-import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.squareup.picasso.Picasso;
 

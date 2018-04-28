@@ -3,7 +3,7 @@ package com.icerockdev.babenko.core.dagger.modules;
 import android.content.Context;
 
 import com.icerockdev.babenko.managers.impl.PicassoManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.PicassoManager;
+import com.icerockdev.babenko.managers.PicassoManager;
 
 import javax.inject.Singleton;
 

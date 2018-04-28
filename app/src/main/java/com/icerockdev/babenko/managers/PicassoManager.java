@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.managers.interfaces;
+package com.icerockdev.babenko.managers;
 
 import com.squareup.picasso.Picasso;
 

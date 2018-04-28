@@ -15,14 +15,14 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.databinding.ActivityFullScreenImageBinding;
-import com.icerockdev.babenko.ui.BaseProgressActivity;
+import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
 
 /**
  * Created by Roman Babenko on 5/11/2017.
  */
 
 public class FullScreenImageActivity extends BaseProgressActivity implements FullScreenImageView, View.OnTouchListener {
-    public static final String IMAGE_URL_KEY = "com.icerockdev.babenko.ui.full_screen_image.FullScreenImagePresenter.IMAGE_URL_KEY";
+    public static final String IMAGE_URL_KEY = "FullScreenImagePresenter.IMAGE_URL_KEY";
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
@@ -57,7 +57,7 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = "com.icerockdev.babenko.ui.full_image.FullScreenImageActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = "FullScreenImageActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {

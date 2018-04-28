@@ -16,9 +16,9 @@ import com.icerockdev.babenko.core.ApplicationConstants;
 import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.model.entities.DataField;
-import com.icerockdev.babenko.ui.BaseProgressActivity;
+import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
-import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
@@ -26,7 +26,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
     private static final String SERVER_ERROR_DIALOG_TAG = HomeActivity.class.getName() + ".SERVER_ERROR_DIALOG_TAG";

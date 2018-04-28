@@ -3,7 +3,7 @@ package com.icerockdev.babenko.ui.full_screen_image;
 import android.widget.ImageView;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.ui.BasePresenter;
+import com.icerockdev.babenko.ui.base.BasePresenter;
 import com.squareup.picasso.Callback;
 
 /**
@@ -24,18 +24,17 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
             throw new NullPointerException("Image url is null");
         }
         getViewState().showProgressDialog();
-        mManager.requestImage(targetIv, mImageUrl,
-                new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        getViewState().dismissProgressDialog();
-                        getViewState().makeImageVisible();
-                    }
+        mManager.requestImage(targetIv, mImageUrl, new Callback() {
+            @Override
+            public void onSuccess() {
+                getViewState().dismissProgressDialog();
+                getViewState().makeImageVisible();
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        getViewState().dismissProgressDialog();
-                    }
-                });
+            @Override
+            public void onError(Exception e) {
+                getViewState().dismissProgressDialog();
+            }
+        });
     }
 }

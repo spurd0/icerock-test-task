@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui;
+package com.icerockdev.babenko.ui.base;
 
 import com.arellomobile.mvp.MvpPresenter;
 import com.arellomobile.mvp.MvpView;

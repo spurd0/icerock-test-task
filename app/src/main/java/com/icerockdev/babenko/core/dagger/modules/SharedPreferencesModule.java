@@ -3,7 +3,7 @@ package com.icerockdev.babenko.core.dagger.modules;
 import android.content.Context;
 
 import com.icerockdev.babenko.managers.impl.SharedPreferencesManagerImpl;
-import com.icerockdev.babenko.managers.interfaces.SharedPreferencesManager;
+import com.icerockdev.babenko.managers.SharedPreferencesManager;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui;
+package com.icerockdev.babenko.ui.base.views;
 
 /**
  * Created by Roman Babenko on 14/05/17.

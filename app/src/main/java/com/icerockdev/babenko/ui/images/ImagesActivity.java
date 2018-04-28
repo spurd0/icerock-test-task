@@ -16,8 +16,8 @@ import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.databinding.ActivityImagesBinding;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.repo.impl.ImageRepositoryImpl;
-import com.icerockdev.babenko.ui.BaseProgressActivity;
-import com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
+import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
+import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 /**
  * Created by Roman Babenko on 10/05/17.

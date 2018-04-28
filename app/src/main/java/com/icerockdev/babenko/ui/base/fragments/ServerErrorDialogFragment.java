@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui.fragments;
+package com.icerockdev.babenko.ui.base.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;

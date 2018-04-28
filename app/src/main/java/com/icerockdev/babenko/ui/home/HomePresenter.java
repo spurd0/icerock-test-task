@@ -1,7 +1,7 @@
 package com.icerockdev.babenko.ui.home;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.icerockdev.babenko.ui.BasePresenter;
+import com.icerockdev.babenko.ui.base.BasePresenter;
 import com.icerockdev.babenko.utils.RxUtils;
 
 /**

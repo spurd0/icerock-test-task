@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.ui;
+package com.icerockdev.babenko.ui.base.activities;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
