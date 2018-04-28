@@ -20,25 +20,21 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
     }
 
     public void requestImage(ImageView targetIv) {
-        if (mImageUrl == null)
+        if (mImageUrl == null) {
             throw new NullPointerException("Image url is null");
-        if (getViewState() != null)
-            getViewState().showProgressDialog();
+        }
+        getViewState().showProgressDialog();
         mManager.requestImage(targetIv, mImageUrl,
                 new Callback() {
                     @Override
                     public void onSuccess() {
-                        if (getViewState() != null) {
-                            getViewState().dismissProgressDialog();
-                            getViewState().makeImageVisible();
-                        }
+                        getViewState().dismissProgressDialog();
+                        getViewState().makeImageVisible();
                     }
 
                     @Override
                     public void onError(Exception e) {
-                        if (getViewState() != null) {
-                            getViewState().dismissProgressDialog();
-                        }
+                        getViewState().dismissProgressDialog();
                     }
                 });
     }

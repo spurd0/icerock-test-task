@@ -6,12 +6,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.NetworkApi;
@@ -25,6 +23,8 @@ import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
@@ -82,8 +82,8 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @Override
     public void showImagesList(final List<ImageItem> images) {
         ImagesAdapter adapter = new ImagesAdapter(images, imageUrl -> {
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Image for view is " + imageUrl);
+
+            Timber.tag(TAG).d("Image for view is:%s", imageUrl);
             FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
         });
         mBinding.imagesListEmptyTv.setVisibility(View.GONE);

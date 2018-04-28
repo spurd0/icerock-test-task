@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -12,8 +11,10 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
+import timber.log.Timber;
+
 public final class TextInputLayoutUtils {
-    private static final String LOG_TAG = TextInputLayoutUtils.class.getSimpleName();
+    private static final String TAG = TextInputLayoutUtils.class.getSimpleName();
 
     private static final Field FIELD_INDICATOR_AREA;
 
@@ -24,7 +25,7 @@ public final class TextInputLayoutUtils {
             fieldIndicatorArea = TextInputLayout.class.getDeclaredField("mIndicatorArea");
             fieldIndicatorArea.setAccessible(true);
         } catch (NoSuchFieldException e) {
-            Log.w(LOG_TAG, e);
+            Timber.tag(TAG).w(e);
         }
 
         FIELD_INDICATOR_AREA = fieldIndicatorArea;
@@ -182,7 +183,7 @@ public final class TextInputLayoutUtils {
                 FIELD_INDICATOR_AREA.set(textInputLayout, null);
             }
         } catch (IllegalAccessException e) {
-            Log.w(LOG_TAG, e);
+            Timber.tag(TAG).w(e);
         }
     }
 }

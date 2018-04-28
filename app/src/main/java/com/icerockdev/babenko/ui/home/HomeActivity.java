@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -24,6 +23,8 @@ import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 import static com.icerockdev.babenko.ui.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
@@ -121,8 +122,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     public void gotDataFields(DataField[] data) {
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Data field count is " + data.length);
+        Timber.tag(TAG).d("Data field count is " + data.length);
         DataFieldsActivity.startActivity(this, data);
     }
 
