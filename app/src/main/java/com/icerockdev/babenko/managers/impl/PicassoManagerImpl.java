@@ -1,11 +1,10 @@
 package com.icerockdev.babenko.managers.impl;
 
 import android.content.Context;
-import android.net.Uri;
 
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.managers.interfaces.PicassoManager;
-import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -16,12 +15,11 @@ public class PicassoManagerImpl implements PicassoManager {
     private Picasso mPicasso;
 
     public PicassoManagerImpl(Context context) {
-        mPicasso = new Picasso.Builder(context).listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                if (BuildConfig.DEBUG) exception.printStackTrace();
+        mPicasso = new Picasso.Builder(context).listener((picasso, uri, exception) -> {
+            if (BuildConfig.DEBUG) {
+                exception.printStackTrace();
             }
-        }).downloader(new OkHttpDownloader(context)).build();
+        }).downloader(new OkHttp3Downloader(context)).build();
     }
 
 

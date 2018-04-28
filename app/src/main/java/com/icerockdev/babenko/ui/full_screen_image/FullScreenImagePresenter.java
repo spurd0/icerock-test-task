@@ -35,9 +35,10 @@ public class FullScreenImagePresenter extends BasePresenter<FullScreenImageView>
                     }
 
                     @Override
-                    public void onError() {
-                        if (getViewState() != null)
+                    public void onError(Exception e) {
+                        if (getViewState() != null) {
                             getViewState().dismissProgressDialog();
+                        }
                     }
                 });
     }

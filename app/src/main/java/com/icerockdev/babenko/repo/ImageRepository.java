@@ -2,7 +2,6 @@ package com.icerockdev.babenko.repo;
 
 import com.icerockdev.babenko.model.entities.ImageItem;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**

@@ -7,6 +7,8 @@ import com.icerockdev.babenko.core.dagger.DaggerAppComponent;
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
 
+import timber.log.Timber;
+
 /**
  * Created by Roman Babenko on 30/04/17.
  */
@@ -21,6 +23,9 @@ public class IceRockApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
         sAppComponent = initComponent();
     }
 

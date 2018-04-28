@@ -13,7 +13,6 @@ import com.icerockdev.babenko.interfaces.ImagesListCallback;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
 
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView imageView, String v) {
-        Picasso.with(imageView.getContext()).load(v).error(R.drawable.question_mark)
+        Picasso.get().load(v).error(R.drawable.question_mark)
                 .placeholder(R.drawable.question_mark).into(imageView);
     }
 

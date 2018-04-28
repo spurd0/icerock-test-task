@@ -5,10 +5,8 @@ import android.widget.EditText;
 
 import com.icerockdev.babenko.model.entities.DataField;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
