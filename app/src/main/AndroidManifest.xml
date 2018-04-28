@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.icerockdev.babenko">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".IceRockApplication"
@@ -22,11 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.data_fields.DataFieldsActivity"></activity>
-        <activity android:name=".ui.images.ImagesActivity"></activity>
+        <activity android:name=".ui.data_fields.DataFieldsActivity" />
+        <activity android:name=".ui.images.ImagesActivity" />
         <activity
             android:name=".ui.full_screen_image.FullScreenImageActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
     </application>
 
 </manifest>
