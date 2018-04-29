@@ -3,6 +3,7 @@ package com.icerockdev.babenko.ui.home;
 import android.util.Patterns;
 
 import com.icerockdev.babenko.model.entities.DataField;
+import com.icerockdev.babenko.model.errors.IncorrectEmailException;
 import com.icerockdev.babenko.repo.DataFieldsRepository;
 
 import io.reactivex.Completable;
@@ -23,7 +24,7 @@ public class HomeInteractorImpl implements HomeInteractor {
     public Single<DataField[]> requestDataFields(String url) {
         return Completable.fromAction(() -> {
             if (!Patterns.WEB_URL.matcher(url).matches()) {
-                throw new RuntimeException();
+                throw new IncorrectEmailException();
             }
         }).andThen(dataFieldsRepository.requestDataFields(url));
     }

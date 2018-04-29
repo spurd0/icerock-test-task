@@ -19,12 +19,12 @@ public class ServerErrorDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
-        String message = getContext().getString(R.string.request_data_fields_error_other);
+        String message = getContext().getString(R.string.error_other);
         if (arguments != null) {
             message = arguments.getString(DIALOG_MESSAGE_KEY);
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getString(R.string.request_data_fields_error))
+        builder.setTitle(getString(R.string.error_title))
                 .setMessage(message);
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();

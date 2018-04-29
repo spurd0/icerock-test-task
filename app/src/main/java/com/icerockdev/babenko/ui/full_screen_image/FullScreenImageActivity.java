@@ -62,11 +62,6 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
                 new FullScreenImageInteractorImpl());
     }
 
-    @Override
-    protected void setDialogFragmentTag() {
-        mDialogTag = "FullScreenImageActivity.PROGRESS_DIALOG_TAG";
-    }
-
     private void initViews() {
         fullScreenImageView.setOnTouchListener(this);
         mPresenter.requestImage(fullScreenImageView);

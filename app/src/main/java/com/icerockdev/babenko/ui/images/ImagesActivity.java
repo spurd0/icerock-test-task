@@ -66,11 +66,6 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     }
 
     @Override
-    protected void setDialogFragmentTag() {
-        mDialogTag = "ImagesActivity.PROGRESS_DIALOG_TAG";
-    }
-
-    @Override
     public void showErrorDialog() {
         ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
         Bundle arguments = new Bundle();

@@ -17,8 +17,8 @@ import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.repo.DataFieldsRepository;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
 import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
-import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
+import com.icerockdev.babenko.utils.UtilsHelper;
 
 import javax.inject.Inject;
 
@@ -53,7 +53,6 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
@@ -64,11 +63,6 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     HomePresenter provideHomePresenter() {
         IceRockApplication.getAppComponent().inject(this);
         return new HomePresenter(new HomeInteractorImpl(dataFieldsRepository));
-    }
-
-    @Override
-    protected void setDialogFragmentTag() {
-        mDialogTag = "HomeActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {
@@ -97,13 +91,17 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     public void requestDataFieldsButtonClicked(View v) {
-        mPresenter.requestDataClicked(fieldsRequestUrlEditText.getText().toString());
+        if (UtilsHelper.isNetworkAvailable(this)) {
+            mPresenter.requestDataClicked(fieldsRequestUrlEditText.getText().toString());
+        } else {
+            showErrorDialog(getString(R.string.error_no_network));
+        }
     }
 
-    public void showErrorDialog() {
+    private void showErrorDialog(String error) {
         ServerErrorDialogFragment serverErrorDialogFragment = new ServerErrorDialogFragment();
         Bundle arguments = new Bundle();
-        arguments.putString(DIALOG_MESSAGE_KEY, getString(R.string.request_data_fields_error_other));
+        arguments.putString(DIALOG_MESSAGE_KEY, error);
         serverErrorDialogFragment.setArguments(arguments);
         serverErrorDialogFragment.show(getSupportFragmentManager(), SERVER_ERROR_DIALOG_TAG);
     }
@@ -111,6 +109,16 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     public void gotDataFields(DataField[] data) {
         Timber.tag(TAG).d("Data field count is:%s", data.length);
         navigator.navigateToDataFieldsActivity(this, data);
+    }
+
+    @Override
+    public void showTimeoutError() {
+        showErrorDialog(getString(R.string.error_timeout));
+    }
+
+    @Override
+    public void showErrorDialog() {
+        showErrorDialog(getString(R.string.error_other));
     }
 
     @Override

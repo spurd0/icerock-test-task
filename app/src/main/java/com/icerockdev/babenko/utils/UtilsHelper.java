@@ -2,6 +2,8 @@ package com.icerockdev.babenko.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.InputType;
 import android.util.TypedValue;
 
@@ -59,5 +61,12 @@ public class UtilsHelper {
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

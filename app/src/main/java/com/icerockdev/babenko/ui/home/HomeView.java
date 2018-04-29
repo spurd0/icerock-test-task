@@ -8,11 +8,11 @@ import com.icerockdev.babenko.ui.base.views.ProgressBaseView;
  */
 
 public interface HomeView extends ProgressBaseView {
-
     void showErrorDialog();
 
     void showUrlError();
 
     void gotDataFields(DataField[] fields);
 
+    void showTimeoutError();
 }
