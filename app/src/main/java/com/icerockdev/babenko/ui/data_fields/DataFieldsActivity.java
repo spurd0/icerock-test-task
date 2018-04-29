@@ -47,10 +47,10 @@ public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
 
     private DataFieldsAdapter mDataFieldsAdapter;
 
-    public static void startActivity(Context context, DataField[] data) {
+    public static Intent getStartingIntent(Context context, DataField[] data) {
         Intent dataFieldsIntent = new Intent(context, DataFieldsActivity.class);
         dataFieldsIntent.putExtra(DATA_FIELDS_KEY, data);
-        context.startActivity(dataFieldsIntent);
+        return dataFieldsIntent;
     }
 
     @Override

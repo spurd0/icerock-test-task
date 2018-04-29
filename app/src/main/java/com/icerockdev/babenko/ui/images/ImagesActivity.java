@@ -90,7 +90,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     public void showImagesList(final List<ImageItem> images) {
         ImagesAdapter adapter = new ImagesAdapter(images, imageUrl -> {
             Timber.tag(TAG).d("Image for view is:%s", imageUrl);
-            FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
+            navigator.navigateToFullScreenImageActivity(ImagesActivity.this, imageUrl);
         });
         imagesListEmptyTv.setVisibility(View.GONE);
         imagesRecyclerView.setVisibility(View.VISIBLE);

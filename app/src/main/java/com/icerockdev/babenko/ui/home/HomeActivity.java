@@ -110,7 +110,7 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
 
     public void gotDataFields(DataField[] data) {
         Timber.tag(TAG).d("Data field count is:%s", data.length);
-        DataFieldsActivity.startActivity(this, data);
+        navigator.navigateToDataFieldsActivity(this, data);
     }
 
     @Override

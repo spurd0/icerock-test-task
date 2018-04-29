@@ -41,10 +41,10 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private PointF mMid = new PointF();
     private float mOldDist = 1f;
 
-    public static void startActivity(Context context, String imageUrl) {
+    public static Intent getStartingIntent(Context context, String imageUrl) {
         Intent intent = new Intent(context, FullScreenImageActivity.class);
         intent.putExtra(IMAGE_URL_KEY, imageUrl);
-        context.startActivity(intent);
+        return intent;
     }
 
     @Override
