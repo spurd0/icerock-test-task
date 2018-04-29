@@ -32,8 +32,8 @@ import static com.icerockdev.babenko.core.ApplicationConstants.URL;
  */
 
 public class DataFieldsActivity extends BaseActivity implements DataFieldsView {
-    public static final String DATA_FIELDS_KEY = DataFieldsActivity.class.getName() + ".DATA_FIELDS_KEY";
-    private static final String TAG = DataFieldsActivity.class.getName();
+    public static final String DATA_FIELDS_KEY = "DataFieldsActivity.DATA_FIELDS_KEY";
+    private static final String TAG = "DataFieldsActivity";
 
     @InjectPresenter
     DataFieldsPresenter mPresenter;

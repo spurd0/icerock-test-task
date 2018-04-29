@@ -13,12 +13,12 @@ import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.core.ApplicationConstants;
-import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.model.entities.DataField;
+import com.icerockdev.babenko.repo.DataFieldsRepository;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
-import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
+import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
 import com.icerockdev.babenko.utils.UtilsHelper;
 
@@ -29,13 +29,13 @@ import timber.log.Timber;
 import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
-    private static final String SERVER_ERROR_DIALOG_TAG = HomeActivity.class.getName() + ".SERVER_ERROR_DIALOG_TAG";
-    private static final String TAG = HomeActivity.class.getName();
+    private static final String SERVER_ERROR_DIALOG_TAG = "HomeActivity.SERVER_ERROR_DIALOG_TAG";
+    private static final String TAG = "HomeActivity";
     @InjectPresenter
     HomePresenter mPresenter;
 
     @Inject
-    NetworkApi mNetworkApi;
+    DataFieldsRepository dataFieldsRepository;
 
     private ActivityHomeBinding mBinding;
     private TextWatcher mDataFieldsUrlTextWatcher;
@@ -76,12 +76,12 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
         IceRockApplication.getAppComponent().inject(this);
-        return new HomePresenter(new HomeInteractorImpl(mNetworkApi));
+        return new HomePresenter(new HomeInteractorImpl(dataFieldsRepository));
     }
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = HomeActivity.class.getName() + ".PROGRESS_DIALOG_TAG";
+        mDialogTag = "HomeActivity.PROGRESS_DIALOG_TAG";
     }
 
     private void initViews() {

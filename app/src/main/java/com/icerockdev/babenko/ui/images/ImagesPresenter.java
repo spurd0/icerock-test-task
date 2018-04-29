@@ -11,7 +11,7 @@ import timber.log.Timber;
  */
 @InjectViewState
 public class ImagesPresenter extends BasePresenter<ImagesView> {
-    private static final String TAG = ImagesPresenter.class.getName();
+    private static final String TAG = "ImagesPresenter";
     private ImagesInteractor mManager;
 
     public ImagesPresenter(ImagesInteractor manager) {

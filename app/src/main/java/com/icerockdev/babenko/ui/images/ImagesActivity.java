@@ -12,10 +12,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.databinding.ActivityImagesBinding;
 import com.icerockdev.babenko.model.entities.ImageItem;
-import com.icerockdev.babenko.repo.impl.ImageRepositoryImpl;
+import com.icerockdev.babenko.repo.ImageRepository;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
 import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageActivity;
@@ -33,12 +32,13 @@ import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment
  */
 
 public class ImagesActivity extends BaseProgressActivity implements ImagesView {
-    private static final String SERVER_ERROR_DIALOG_TAG = ImagesActivity.class.getName() + ".SERVER_ERROR_DIALOG_TAG";
-    private static final String TAG = ImagesActivity.class.getName();
+    private static final String SERVER_ERROR_DIALOG_TAG = "ImagesActivity.SERVER_ERROR_DIALOG_TAG";
+    private static final String TAG = "ImagesActivity";
     @InjectPresenter
     ImagesPresenter mPresenter;
     @Inject
-    NetworkApi mNetworkApi;
+    ImageRepository imageRepository;
+
     private ActivityImagesBinding mBinding;
 
     public static void start(Context context) {
@@ -55,12 +55,12 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @ProvidePresenter
     ImagesPresenter provideImagesPresenter() {
         IceRockApplication.getAppComponent().inject(this);
-        return new ImagesPresenter(new ImagesInteractorImpl(new ImageRepositoryImpl(mNetworkApi), this));
+        return new ImagesPresenter(new ImagesInteractorImpl(imageRepository));
     }
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag = ImagesActivity.class.getName() + ".PROGRESS_DIALOG_TAG";
+        mDialogTag =  "ImagesActivity.PROGRESS_DIALOG_TAG";
     }
 
     @Override

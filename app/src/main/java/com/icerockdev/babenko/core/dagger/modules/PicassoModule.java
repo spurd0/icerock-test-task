@@ -2,8 +2,8 @@ package com.icerockdev.babenko.core.dagger.modules;
 
 import android.content.Context;
 
-import com.icerockdev.babenko.managers.impl.PicassoManagerImpl;
 import com.icerockdev.babenko.managers.PicassoManager;
+import com.icerockdev.babenko.managers.impl.PicassoManagerImpl;
 
 import javax.inject.Singleton;
 
@@ -15,7 +15,7 @@ import dagger.Provides;
  */
 @Module
 public class PicassoModule {
-    Context mContext;
+    private Context mContext;
 
     public PicassoModule(Context context) {
         mContext = context;

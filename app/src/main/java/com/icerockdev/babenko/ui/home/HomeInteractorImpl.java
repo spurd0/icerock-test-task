@@ -2,10 +2,8 @@ package com.icerockdev.babenko.ui.home;
 
 import android.util.Patterns;
 
-import com.icerockdev.babenko.core.NetworkApi;
 import com.icerockdev.babenko.model.entities.DataField;
-
-import javax.inject.Inject;
+import com.icerockdev.babenko.repo.DataFieldsRepository;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -15,12 +13,11 @@ import io.reactivex.Single;
  */
 
 public class HomeInteractorImpl implements HomeInteractor {
-    private static final String TAG = HomeInteractorImpl.class.getName();
-    @Inject
-    NetworkApi mNetworkApi;
+    private static final String TAG = "HomeInteractorImpl";
+    private final DataFieldsRepository dataFieldsRepository;
 
-    public HomeInteractorImpl(NetworkApi networkApi) {
-        mNetworkApi = networkApi;
+    public HomeInteractorImpl(DataFieldsRepository dataFieldsRepository) {
+        this.dataFieldsRepository = dataFieldsRepository;
     }
 
     public Single<DataField[]> requestDataFields(String url) {
@@ -28,7 +25,7 @@ public class HomeInteractorImpl implements HomeInteractor {
             if (!Patterns.WEB_URL.matcher(url).matches()) {
                 throw new RuntimeException();
             }
-        }).andThen(mNetworkApi.requestDataFields(url));
+        }).andThen(dataFieldsRepository.requestDataFields(url));
     }
 
 }

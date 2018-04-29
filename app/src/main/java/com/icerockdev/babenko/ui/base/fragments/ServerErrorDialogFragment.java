@@ -13,14 +13,16 @@ import com.icerockdev.babenko.R;
  */
 
 public class ServerErrorDialogFragment extends DialogFragment {
-    public static final String DIALOG_MESSAGE_KEY = ServerErrorDialogFragment.class.getName()
-            + ".DIALOG_MESSAGE_KEY";
+    public static final String DIALOG_MESSAGE_KEY = "ServerErrorDialogFragment.DIALOG_MESSAGE_KEY";
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
-        String message = arguments.getString(DIALOG_MESSAGE_KEY);
+        String message = getContext().getString(R.string.request_data_fields_error_other);
+        if (arguments != null) {
+            message = arguments.getString(DIALOG_MESSAGE_KEY);
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.request_data_fields_error))
                 .setMessage(message);

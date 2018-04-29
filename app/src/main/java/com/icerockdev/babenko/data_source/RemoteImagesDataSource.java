@@ -1,13 +1,9 @@
-package com.icerockdev.babenko.repo;
+package com.icerockdev.babenko.data_source;
 
 import com.icerockdev.babenko.model.entities.ImageItem;
 
 import io.reactivex.Single;
 
-/**
- * Created by spurdo on 11/12/2017.
- */
-
-public interface ImageRepository {
+public interface RemoteImagesDataSource {
     Single<ImageItem[]> requestImages();
 }

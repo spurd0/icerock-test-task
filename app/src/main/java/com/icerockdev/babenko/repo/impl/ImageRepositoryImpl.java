@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.repo.impl;
 
-import com.icerockdev.babenko.core.NetworkApi;
+import com.icerockdev.babenko.data_source.RemoteImagesDataSource;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.repo.ImageRepository;
 
@@ -12,14 +12,14 @@ import io.reactivex.Single;
  */
 
 public class ImageRepositoryImpl implements ImageRepository {
-    private NetworkApi mDataFieldsApi;
+    private final RemoteImagesDataSource remoteDataSource;
 
-    public ImageRepositoryImpl(NetworkApi networkApi) {
-        mDataFieldsApi = networkApi;
+    public ImageRepositoryImpl(RemoteImagesDataSource remoteDataSource) {
+        this.remoteDataSource = remoteDataSource;
     }
 
     @Override
-    public Single<ImageItem[]> requestImages(String imagesUrl) {
-        return mDataFieldsApi.requestImages(imagesUrl);
+    public Single<ImageItem[]> requestImages() {
+        return remoteDataSource.requestImages();
     }
 }
