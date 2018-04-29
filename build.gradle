@@ -46,6 +46,7 @@ ext {
     picasso = '2.71828'
     okhttp = '2.5.0'
     butterknife = '8.8.1'
+    leakcanary = '1.5.4'
 
     //dev
     timber = '4.7.0'

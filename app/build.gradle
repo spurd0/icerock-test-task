@@ -71,6 +71,9 @@ dependencies {
     implementation "com.jakewharton:butterknife:$rootProject.butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
 
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanary"
+
     androidTestImplementation('com.android.support.test:runner:0.5') {
         exclude group: 'com.android.support'
     }

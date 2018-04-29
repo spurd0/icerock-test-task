@@ -6,6 +6,7 @@ import com.icerockdev.babenko.core.dagger.AppComponent;
 import com.icerockdev.babenko.core.dagger.DaggerAppComponent;
 import com.icerockdev.babenko.core.dagger.modules.ContextModule;
 import com.icerockdev.babenko.core.dagger.modules.PicassoModule;
+import com.squareup.leakcanary.LeakCanary;
 
 import timber.log.Timber;
 
@@ -27,6 +28,14 @@ public class IceRockApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
         sAppComponent = initComponent();
+        initLeakCanary();
+    }
+
+    private void initLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     private AppComponent initComponent() {
