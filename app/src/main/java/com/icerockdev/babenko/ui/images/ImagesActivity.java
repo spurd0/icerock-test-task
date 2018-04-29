@@ -89,7 +89,6 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     @Override
     public void showImagesList(final List<ImageItem> images) {
         ImagesAdapter adapter = new ImagesAdapter(images, imageUrl -> {
-
             Timber.tag(TAG).d("Image for view is:%s", imageUrl);
             FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
         });
