@@ -66,6 +66,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImagesItem
                     .placeholder(R.drawable.question_mark).into(pictureElementImageView);
             pictureElementId.setText(String.valueOf(item.getId()));
             pictureElementTitle.setText(item.getTitle());
+            pictureElementImageView.getRootView().setOnClickListener(v -> mCallback.itemClicked(item.getUrl()));
         }
 
     }
