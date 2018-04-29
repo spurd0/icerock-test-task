@@ -30,7 +30,7 @@ public class ImagesPresenter extends BasePresenter<ImagesView> {
                 .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
                 .doFinally(() -> getViewState().dismissProgressDialog())
                 .subscribe(imageItems -> {
-                    Timber.tag(TAG).d("Images list length is " + imageItems.size());
+                    Timber.tag(TAG).d("Images list length is:%s", imageItems.size());
                     if (imageItems.size() == 0) {
                         getViewState().showListIsEmptyError();
                         return;
