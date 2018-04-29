@@ -38,7 +38,7 @@ public class DataFieldsAdapter extends BaseListAdapter<DataField> {
         DataField dataElement = getItem(position);
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View convertView = inflater.inflate(R.layout.data_field_element, parent, false);
+        View convertView = inflater.inflate(R.layout.item_data_field, parent, false);
         TextInputEditText mFieldValue = (TextInputEditText) convertView.findViewById(R.id.dataFieldValue);
         mDefaultBackground = mFieldValue.getBackground();
 

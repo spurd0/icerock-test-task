@@ -18,9 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
     signingConfigs {
         release {
             storeFile file(property('prodStoreFile'))
@@ -70,6 +67,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxJavaAndroid"
 
     implementation "com.jakewharton.timber:timber:$rootProject.timber"
+
+    implementation "com.jakewharton:butterknife:$rootProject.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
 
     androidTestImplementation('com.android.support.test:runner:0.5') {
         exclude group: 'com.android.support'

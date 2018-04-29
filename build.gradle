@@ -45,6 +45,7 @@ ext {
     multidex = '1.0.3'
     picasso = '2.71828'
     okhttp = '2.5.0'
+    butterknife = '8.8.1'
 
     //dev
     timber = '4.7.0'

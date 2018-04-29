@@ -5,7 +5,11 @@ package com.icerockdev.babenko.managers;
  */
 
 public interface SharedPreferencesManager {
-    Integer getErrorCode(String key);
+    int getErrorCode();
 
-    void saveErrorCode(String key, int code);
+    void saveErrorCode(int code);
+
+    boolean isUserLogged();
+
+    void setUserLogged(boolean logged);
 }

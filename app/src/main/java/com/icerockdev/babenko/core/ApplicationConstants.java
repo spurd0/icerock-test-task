@@ -10,5 +10,4 @@ public class ApplicationConstants {
     public static final String PHONE = "PHONE";
     public static final String NUMBER = "NUMBER";
     public static final String URL = "URL";
-    public static final int ANIMATION_DURATION = 500;
 }

@@ -2,7 +2,6 @@ package com.icerockdev.babenko.ui.full_screen_image;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -14,8 +13,10 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.databinding.ActivityFullScreenImageBinding;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Roman Babenko on 5/11/2017.
@@ -26,9 +27,13 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
+
     @InjectPresenter
     FullScreenImagePresenter mPresenter;
-    private ActivityFullScreenImageBinding mBinding;
+
+    @BindView(R.id.fullScreenImageView)
+    ImageView fullScreenImageView;
+
     private Matrix mMatrix = new Matrix();
     private Matrix mSavedMatrix = new Matrix();
     private int mMode = NONE;
@@ -45,7 +50,9 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_screen_image);
+        setContentView(R.layout.activity_full_screen_image);
+        ButterKnife.bind(this);
+
         initViews();
     }
 
@@ -61,8 +68,8 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
     }
 
     private void initViews() {
-        mBinding.fullScreenImageView.setOnTouchListener(this);
-        mPresenter.requestImage(mBinding.fullScreenImageView);
+        fullScreenImageView.setOnTouchListener(this);
+        mPresenter.requestImage(fullScreenImageView);
     }
 
     @Override
@@ -121,6 +128,6 @@ public class FullScreenImageActivity extends BaseProgressActivity implements Ful
 
     @Override
     public void makeImageVisible() {
-        mBinding.fullScreenImageView.setVisibility(View.VISIBLE);
+        fullScreenImageView.setVisibility(View.VISIBLE);
     }
 }

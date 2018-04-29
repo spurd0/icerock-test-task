@@ -11,6 +11,8 @@ import com.icerockdev.babenko.managers.SharedPreferencesManager;
  */
 
 public class SharedPreferencesManagerImpl implements SharedPreferencesManager {
+    private static final String ERROR_CODE_KEY = "SharedPreferencesManagerImpl.ERROR_CODE_KEY";
+    private static final String IS_USER_LOGGED_KEY = "SharedPreferencesManagerImpl.IS_USER_LOGGED_KEY";
     private SharedPreferences mManager;
 
     public SharedPreferencesManagerImpl(Context context) {
@@ -18,13 +20,23 @@ public class SharedPreferencesManagerImpl implements SharedPreferencesManager {
     }
 
     @Override
-    public Integer getErrorCode(String key) {
-        return mManager.getInt(key, 0);
+    public int getErrorCode() {
+        return mManager.getInt(ERROR_CODE_KEY, 0);
     }
 
     @Override
-    public void saveErrorCode(String key, int code) {
-        mManager.edit().putInt(key, code).apply();
+    public void saveErrorCode(int code) {
+        mManager.edit().putInt(ERROR_CODE_KEY, code).apply();
+    }
+
+    @Override
+    public boolean isUserLogged() {
+        return mManager.getBoolean(IS_USER_LOGGED_KEY, false);
+    }
+
+    @Override
+    public void setUserLogged(boolean logged) {
+        mManager.edit().putBoolean(IS_USER_LOGGED_KEY, logged).apply();
     }
 
 

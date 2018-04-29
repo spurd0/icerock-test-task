@@ -1,34 +1,35 @@
 package com.icerockdev.babenko.ui.home;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.databinding.DataBindingUtil;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.BuildConfig;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.core.ApplicationConstants;
-import com.icerockdev.babenko.databinding.ActivityHomeBinding;
 import com.icerockdev.babenko.model.entities.DataField;
 import com.icerockdev.babenko.repo.DataFieldsRepository;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
 import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment;
 import com.icerockdev.babenko.ui.data_fields.DataFieldsActivity;
 import com.icerockdev.babenko.utils.ErrorCleaningWatcher;
-import com.icerockdev.babenko.utils.UtilsHelper;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
 
 public class HomeActivity extends BaseProgressActivity implements HomeView {
+    public static final String FIELDS_LINK = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c";
     private static final String SERVER_ERROR_DIALOG_TAG = "HomeActivity.SERVER_ERROR_DIALOG_TAG";
     private static final String TAG = "HomeActivity";
     @InjectPresenter
@@ -37,39 +38,25 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     @Inject
     DataFieldsRepository dataFieldsRepository;
 
-    private ActivityHomeBinding mBinding;
+    @BindView(R.id.fields_request_url_edit_text)
+    EditText fieldsRequestUrlEditText;
+    @BindView(R.id.fields_request_url_input)
+
+    TextInputLayout fieldsRequestUrlInput;
     private TextWatcher mDataFieldsUrlTextWatcher;
+
+    public static Intent getLaunchingIntent(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-        mBinding.getRoot().postDelayed(() -> {
-            final AnimatorSet animatorSet = UtilsHelper.getMoveScalingAnimator(mBinding.container, mBinding.splashImageView, mBinding.getRoot(),
-                    0, 0, 300, 0);
-            animatorSet.start();
-            animatorSet.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-                }
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
 
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mBinding.setIsAnimationLoaded(true);
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-        }, ApplicationConstants.ANIMATION_DURATION);
         initViews();
     }
 
@@ -85,17 +72,17 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     private void initViews() {
-        mBinding.fieldsRequestUrlEditText.setText(getString(R.string.url_start));
-        mBinding.fieldsRequestUrlEditText.setSelection(mBinding.fieldsRequestUrlEditText.getText().length());
+        fieldsRequestUrlEditText.setText(getString(R.string.url_start));
+        fieldsRequestUrlEditText.setSelection(fieldsRequestUrlEditText.getText().length());
         if (BuildConfig.DEBUG) {
-            mBinding.fieldsRequestUrlEditText.setText("http://www.mocky.io/v2/58fa10ce110000b81ad2106c");
+            fieldsRequestUrlEditText.setText(FIELDS_LINK);
         }
         initWatchers();
     }
 
     private void initWatchers() {
-        mDataFieldsUrlTextWatcher = new ErrorCleaningWatcher(mBinding.fieldsRequestUrlInput);
-        mBinding.fieldsRequestUrlEditText.addTextChangedListener(mDataFieldsUrlTextWatcher);
+        mDataFieldsUrlTextWatcher = new ErrorCleaningWatcher(fieldsRequestUrlInput);
+        fieldsRequestUrlEditText.addTextChangedListener(mDataFieldsUrlTextWatcher);
     }
 
     @Override
@@ -105,12 +92,12 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     private void releaseWatchers() {
-        mBinding.fieldsRequestUrlEditText.removeTextChangedListener(mDataFieldsUrlTextWatcher);
+        fieldsRequestUrlEditText.removeTextChangedListener(mDataFieldsUrlTextWatcher);
         mDataFieldsUrlTextWatcher = null;
     }
 
     public void requestDataFieldsButtonClicked(View v) {
-        mPresenter.requestDataClicked(mBinding.fieldsRequestUrlEditText.getText().toString());
+        mPresenter.requestDataClicked(fieldsRequestUrlEditText.getText().toString());
     }
 
     public void showErrorDialog() {
@@ -122,13 +109,12 @@ public class HomeActivity extends BaseProgressActivity implements HomeView {
     }
 
     public void gotDataFields(DataField[] data) {
-        Timber.tag(TAG).d("Data field count is " + data.length);
+        Timber.tag(TAG).d("Data field count is:%s", data.length);
         DataFieldsActivity.startActivity(this, data);
     }
 
     @Override
     public void showUrlError() {
-        mBinding.fieldsRequestUrlEditText.setError(getString(R.string.url_error));
+        fieldsRequestUrlEditText.setError(getString(R.string.url_error));
     }
-
 }

@@ -2,17 +2,17 @@ package com.icerockdev.babenko.ui.images;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
-import com.icerockdev.babenko.databinding.ActivityImagesBinding;
 import com.icerockdev.babenko.model.entities.ImageItem;
 import com.icerockdev.babenko.repo.ImageRepository;
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity;
@@ -23,6 +23,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 import static com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment.DIALOG_MESSAGE_KEY;
@@ -36,20 +38,25 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
     private static final String TAG = "ImagesActivity";
     @InjectPresenter
     ImagesPresenter mPresenter;
+
     @Inject
     ImageRepository imageRepository;
 
-    private ActivityImagesBinding mBinding;
+    @BindView(R.id.imagesListEmptyTv)
+    TextView imagesListEmptyTv;
+    @BindView(R.id.imagesRecyclerView)
+    RecyclerView imagesRecyclerView;
 
-    public static void start(Context context) {
+    public static Intent getLaunchingIntent(Context context) {
         Intent intent = new Intent(context, ImagesActivity.class);
-        context.startActivity(intent);
+        return intent;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_images);
+        setContentView(R.layout.activity_images);
+        ButterKnife.bind(this);
     }
 
     @ProvidePresenter
@@ -60,7 +67,7 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
 
     @Override
     protected void setDialogFragmentTag() {
-        mDialogTag =  "ImagesActivity.PROGRESS_DIALOG_TAG";
+        mDialogTag = "ImagesActivity.PROGRESS_DIALOG_TAG";
     }
 
     @Override
@@ -75,8 +82,8 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
 
     @Override
     public void showListIsEmptyError() {
-        mBinding.imagesListEmptyTv.setVisibility(View.VISIBLE);
-        mBinding.imagesRecyclerView.setVisibility(View.GONE);
+        imagesListEmptyTv.setVisibility(View.VISIBLE);
+        imagesRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -86,9 +93,9 @@ public class ImagesActivity extends BaseProgressActivity implements ImagesView {
             Timber.tag(TAG).d("Image for view is:%s", imageUrl);
             FullScreenImageActivity.startActivity(ImagesActivity.this, imageUrl);
         });
-        mBinding.imagesListEmptyTv.setVisibility(View.GONE);
-        mBinding.imagesRecyclerView.setVisibility(View.VISIBLE);
-        mBinding.imagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mBinding.imagesRecyclerView.setAdapter(adapter);
+        imagesListEmptyTv.setVisibility(View.GONE);
+        imagesRecyclerView.setVisibility(View.VISIBLE);
+        imagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        imagesRecyclerView.setAdapter(adapter);
     }
 }

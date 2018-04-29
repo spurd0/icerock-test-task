@@ -9,6 +9,7 @@ import com.icerockdev.babenko.core.dagger.modules.SharedPreferencesModule;
 import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageInteractorImpl;
 import com.icerockdev.babenko.ui.home.HomeActivity;
 import com.icerockdev.babenko.ui.images.ImagesActivity;
+import com.icerockdev.babenko.ui.splash.SplashActivity;
 
 import javax.inject.Singleton;
 
@@ -26,4 +27,6 @@ public interface AppComponent {
     void inject(HomeActivity homeActivity);
 
     void inject(ImagesActivity imagesActivity);
+
+    void inject(SplashActivity splashActivity);
 }
