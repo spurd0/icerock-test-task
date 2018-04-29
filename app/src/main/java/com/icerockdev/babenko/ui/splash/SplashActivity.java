@@ -1,8 +1,9 @@
 package com.icerockdev.babenko.ui.splash;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -12,7 +13,6 @@ import com.icerockdev.babenko.IceRockApplication;
 import com.icerockdev.babenko.R;
 import com.icerockdev.babenko.managers.SharedPreferencesManager;
 import com.icerockdev.babenko.ui.base.activities.BaseActivity;
-import com.icerockdev.babenko.utils.UtilsHelper;
 
 import javax.inject.Inject;
 
@@ -20,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity implements SplashView {
-    public static final int ANIMATION_DURATION = 500;
     @InjectPresenter
     SplashPresenter presenter;
 
@@ -31,6 +30,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     ImageView splashImageView;
     @BindView(R.id.container)
     FrameLayout container;
+    private Animation animation;
 
     @ProvidePresenter
     SplashPresenter provideSplashPresenter() {
@@ -44,35 +44,33 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
         setContentView(R.layout.activity_splash_screen);
         ButterKnife.bind(this);
+    }
 
-
-        splashImageView.postDelayed(() -> {
-            final AnimatorSet animatorSet = UtilsHelper.getMoveScalingAnimator(container,
-                    splashImageView, splashImageView.getRootView(),
-                    0, 0, 300, 0);
-            animatorSet.start();
-            animatorSet.addListener(new Animator.AnimatorListener() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animation == null) {
+            animation = AnimationUtils.loadAnimation(
+                    getApplicationContext(), R.anim.center_to_top_move_animation);
+            animation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void onAnimationStart(Animator animation) {
+                public void onAnimationStart(Animation animation) {
+
                 }
 
                 @Override
-                public void onAnimationEnd(Animator animation) {
+                public void onAnimationEnd(Animation a) {
                     presenter.animationFinished();
+                    splashImageView.setVisibility(View.GONE);
                 }
 
                 @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
+                public void onAnimationRepeat(Animation animation) {
 
                 }
             });
-        }, ANIMATION_DURATION);
-
+            splashImageView.startAnimation(animation);
+        }
     }
 
     @Override

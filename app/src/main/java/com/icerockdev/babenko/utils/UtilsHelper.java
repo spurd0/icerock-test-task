@@ -1,14 +1,9 @@
 package com.icerockdev.babenko.utils;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Rect;
 import android.text.InputType;
 import android.util.TypedValue;
-import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 
 import com.icerockdev.babenko.R;
 
@@ -64,42 +59,5 @@ public class UtilsHelper {
             default:
                 throw new IllegalArgumentException("Unknown type");
         }
-    }
-
-    public static AnimatorSet getMoveAnimator(View parentView, View viewToAnimate, View toView,
-                                              int paddingLeft, int paddingTop, long duration, long startDelay) {
-        final Rect parentViewRect = new Rect();
-        parentView.getGlobalVisibleRect(parentViewRect);
-
-        final Rect toViewRect = new Rect();
-        toView.getGlobalVisibleRect(toViewRect);
-
-
-        final Rect viewToAnimateRect = new Rect();
-        viewToAnimate.getGlobalVisibleRect(viewToAnimateRect);
-
-        ObjectAnimator translateAnimatorX = ObjectAnimator.ofFloat(viewToAnimate, "translationX", toViewRect.left - viewToAnimateRect.left - paddingLeft);
-        ObjectAnimator translateAnimatorY = ObjectAnimator.ofFloat(viewToAnimate, "translationY", toViewRect.top - viewToAnimateRect.top - paddingTop);
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setInterpolator(new DecelerateInterpolator(1f));
-        animatorSet.setDuration(duration);
-        animatorSet.setStartDelay(startDelay);
-
-
-        animatorSet.playTogether(translateAnimatorX, translateAnimatorY);
-
-        return animatorSet;
-    }
-
-    public static AnimatorSet getMoveScalingAnimator(View parentView, View viewToAnimate, View toView,
-                                                     int paddingLeft, int paddingTop, long duration, long startDelay) {
-        AnimatorSet animatorSet = getMoveAnimator(parentView, viewToAnimate, toView, viewToAnimate.getWidth() / 4 - paddingLeft, viewToAnimate.getHeight() / 4 - paddingTop, duration, startDelay);
-
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(viewToAnimate, "scaleX", 0.5f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(viewToAnimate, "scaleY", 0.5f);
-
-        animatorSet.playTogether(scaleX, scaleY);
-        return animatorSet;
     }
 }
