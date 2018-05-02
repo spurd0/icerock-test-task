@@ -15,6 +15,6 @@ class ApiModule {
     @Provides
     @Singleton
     internal fun provideDataFieldsApi(retrofit: Retrofit): NetworkApi {
-        return retrofit.create(NetworkApi::class.java!!)
+        return retrofit.create(NetworkApi::class.java)
     }
 }

@@ -55,7 +55,6 @@ class RetrofitModule {
     private class CustomFieldNamingPolicy : FieldNamingStrategy {
         override fun translateName(field: Field): String {
             var name = FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES.translateName(field)
-            name = name.substring(2, name.length).toLowerCase()
             if (name == "value")
                 return "default_value"
             if (name == "album_id")
