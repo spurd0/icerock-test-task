@@ -28,9 +28,9 @@ Project features :
 * Dagger Flow
 	* Application scope
 	* Modules & dependencies
-* Support Russian & English languages
-* Support phones & tablets
-* Support both orientations
+* Supports Russian & English languages
+* Supports phones & tablets
+* Supports both orientations
 * Proguard
 * Simple tests
 	
