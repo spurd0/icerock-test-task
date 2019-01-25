@@ -26,8 +26,8 @@ task clean(type: Delete) {
 }
 ext {
     appId = "com.icerockdev.babenko"
-    compileSdkVersion = 27
-    buildToolsVersion = '27.0.3'
+    compileSdkVersion = 28
+    buildToolsVersion = '28.0.3'
     minSdkVersion = 16
     targetSdkVersion = 25
 

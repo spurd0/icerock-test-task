@@ -11,7 +11,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.icerockdev.babenko.BuildConfig
 import com.icerockdev.babenko.IceRockApplication
 import com.icerockdev.babenko.R
 import com.icerockdev.babenko.model.entities.DataField
@@ -52,11 +51,9 @@ class HomeActivity : BaseProgressActivity(), HomeView {
     }
 
     private fun initViews() {
-        fieldsRequestUrlEditText.setText(getString(R.string.url_start))
+        //fieldsRequestUrlEditText.setText(getString(R.string.url_start))
+        fieldsRequestUrlEditText.setText(DEBUG_FIELDS_LINK)
         fieldsRequestUrlEditText.setSelection(fieldsRequestUrlEditText.text.length)
-        if (BuildConfig.DEBUG) {
-            fieldsRequestUrlEditText.setText(FIELDS_LINK)
-        }
         initWatchers()
     }
 
@@ -106,7 +103,7 @@ class HomeActivity : BaseProgressActivity(), HomeView {
     }
 
     companion object {
-        private const val FIELDS_LINK = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"
+        private const val DEBUG_FIELDS_LINK = "http://www.mocky.io/v2/58fa10ce110000b81ad2106c"
         private const val SERVER_ERROR_DIALOG_TAG = "HomeActivity.SERVER_ERROR_DIALOG_TAG"
         private const val TAG = "HomeActivity"
 
