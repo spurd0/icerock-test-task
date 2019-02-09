@@ -10,6 +10,8 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ContextModule(@get:Singleton
-                    @get:Provides
-                    internal val context: Context)
+class ContextModule(
+    @get:Singleton
+    @get:Provides
+    internal val context: Context
+)

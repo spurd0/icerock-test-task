@@ -19,8 +19,12 @@ class ImagesDataSourceModule {
     @Provides
     @Singleton
     internal fun provideImageRepository(networkApi: NetworkApi, context: Context): ImageRepository {
-        return ImageRepositoryImpl(RemoteImagesDataSourceImpl(networkApi,
-                context.getString(R.string.request_images_url)))
+        return ImageRepositoryImpl(
+            RemoteImagesDataSourceImpl(
+                networkApi,
+                context.getString(R.string.request_images_url)
+            )
+        )
     }
 
 

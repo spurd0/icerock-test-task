@@ -47,8 +47,8 @@ class DataFieldsActivity : BaseActivity(), DataFieldsView {
     @ProvidePresenter
     internal fun provideDataFieldsPresenter(): DataFieldsPresenter {
         val dataFields = intent.getParcelableArrayExtra(DATA_FIELDS_KEY)
-                .filterIsInstance<DataField>()
-                .toTypedArray()
+            .filterIsInstance<DataField>()
+            .toTypedArray()
         return DataFieldsPresenter(DataFieldsInteractorImpl(dataFields))
     }
 

@@ -8,7 +8,9 @@ import android.widget.ImageView
 
 interface FullScreenImageInteractor {
 
-    fun requestImage(targetIv: ImageView, imageUrl: String,
-                     imageCallback: com.squareup.picasso.Callback)
+    fun requestImage(
+        targetIv: ImageView, imageUrl: String,
+        imageCallback: com.squareup.picasso.Callback
+    )
 
 }

@@ -123,7 +123,10 @@ object TextInputLayoutUtils {
         editText?.setOnClickListener(listener)
     }
 
-    fun setOnEditorActionListener(textInputLayout: TextInputLayout, onEditorActionListener: TextView.OnEditorActionListener) {
+    fun setOnEditorActionListener(
+        textInputLayout: TextInputLayout,
+        onEditorActionListener: TextView.OnEditorActionListener
+    ) {
         val editText = textInputLayout.editText
         editText?.setOnEditorActionListener(onEditorActionListener)
     }
@@ -152,4 +155,4 @@ object TextInputLayoutUtils {
         }
 
     }
-}// there should be no instances of an util class
+}

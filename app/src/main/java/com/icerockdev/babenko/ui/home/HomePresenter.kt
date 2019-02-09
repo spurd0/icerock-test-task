@@ -17,18 +17,18 @@ class HomePresenter(private val mHomeInteractor: HomeInteractor) : BasePresenter
     fun requestDataClicked(url: String) {
         viewState.showProgressDialog()
         mHomeInteractor.requestDataFields(url)
-                .compose<Array<DataField>>(RxUtils.applyIoMainThreadSchedulersToSingle<Array<DataField>>())
-                .doFinally { viewState.dismissProgressDialog() }
-                .subscribe({ dataFields -> viewState.gotDataFields(dataFields) }
-                ) { throwable ->
-                    if (throwable is IncorrectEmailException) {
-                        viewState.showUrlError()
-                    } else if (throwable is TimeoutException) {
-                        viewState.showTimeoutError()
-                    } else {
-                        viewState.showErrorDialog()
-                    }
+            .compose<Array<DataField>>(RxUtils.applyIoMainThreadSchedulersToSingle<Array<DataField>>())
+            .doFinally { viewState.dismissProgressDialog() }
+            .subscribe({ dataFields -> viewState.gotDataFields(dataFields) }
+            ) { throwable ->
+                if (throwable is IncorrectEmailException) {
+                    viewState.showUrlError()
+                } else if (throwable is TimeoutException) {
+                    viewState.showTimeoutError()
+                } else {
+                    viewState.showErrorDialog()
                 }
+            }
     }
 
 }

@@ -16,7 +16,8 @@ abstract class BaseProgressActivity : BaseActivity(), ProgressBaseView {
         if (!allowToShowDialog) {
             return
         }
-        var progressDialogFragment: ProgressDialogFragment? = supportFragmentManager.findFragmentByTag(mDialogTag) as? ProgressDialogFragment
+        var progressDialogFragment: ProgressDialogFragment? =
+            supportFragmentManager.findFragmentByTag(mDialogTag) as? ProgressDialogFragment
         if (progressDialogFragment != null) {
             return
         }
@@ -30,7 +31,7 @@ abstract class BaseProgressActivity : BaseActivity(), ProgressBaseView {
             return
         }
         val progressDialogFragment: ProgressDialogFragment? = supportFragmentManager
-                .findFragmentByTag(mDialogTag) as ProgressDialogFragment?
+            .findFragmentByTag(mDialogTag) as ProgressDialogFragment?
         progressDialogFragment?.dismiss()
     }
 

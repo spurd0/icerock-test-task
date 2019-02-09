@@ -29,8 +29,8 @@ class RetrofitModule {
     @Singleton
     internal fun provideRetrofitBuilder(factory: Converter.Factory): Retrofit.Builder {
         return Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(factory)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(factory)
 
     }
 
@@ -44,12 +44,12 @@ class RetrofitModule {
     @Singleton
     internal fun provideGson(): Gson {
         return GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .setFieldNamingStrategy(CustomFieldNamingPolicy())
-                .setPrettyPrinting()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .serializeNulls()
-                .create()
+            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+            .setFieldNamingStrategy(CustomFieldNamingPolicy())
+            .setPrettyPrinting()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            .serializeNulls()
+            .create()
     }
 
     private class CustomFieldNamingPolicy : FieldNamingStrategy {

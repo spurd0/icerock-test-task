@@ -10,8 +10,8 @@ class RemoteFieldsDataSourceImpl(private val networkApi: NetworkApi) : RemoteFie
 
     override fun requestDataFields(url: String): Single<Array<DataField>> {
         return networkApi
-                .requestDataFields(url)
-                .timeout(REQUEST_FIELDS_TIMEOUT_SEC, TimeUnit.SECONDS)
+            .requestDataFields(url)
+            .timeout(REQUEST_FIELDS_TIMEOUT_SEC, TimeUnit.SECONDS)
     }
 
     companion object {

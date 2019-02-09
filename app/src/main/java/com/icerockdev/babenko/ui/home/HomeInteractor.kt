@@ -9,7 +9,5 @@ import io.reactivex.Single
  */
 
 interface HomeInteractor {
-
     fun requestDataFields(url: String): Single<Array<DataField>>
-
 }

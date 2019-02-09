@@ -19,7 +19,7 @@ class ServerErrorDialogFragment : DialogFragment() {
         }
         val builder = AlertDialog.Builder(context!!)
         builder.setTitle(getString(R.string.error_title))
-                .setMessage(message)
+            .setMessage(message)
         builder.setPositiveButton(android.R.string.ok, null)
         return builder.create()
     }

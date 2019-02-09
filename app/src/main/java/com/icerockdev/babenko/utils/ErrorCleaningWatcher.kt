@@ -7,11 +7,7 @@ import android.text.TextWatcher
 import java.lang.ref.WeakReference
 
 class ErrorCleaningWatcher(textInputLayout: TextInputLayout) : TextWatcher {
-    private val mLayoutWeakReference: WeakReference<TextInputLayout>
-
-    init {
-        mLayoutWeakReference = WeakReference(textInputLayout)
-    }
+    private val mLayoutWeakReference = WeakReference(textInputLayout)
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 

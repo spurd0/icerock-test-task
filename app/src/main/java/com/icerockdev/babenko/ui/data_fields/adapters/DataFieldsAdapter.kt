@@ -20,7 +20,8 @@ import com.icerockdev.babenko.utils.UtilsHelper
  * Created by Roman Babenko on 01/05/17.
  */
 
-class DataFieldsAdapter(context: Context, dataFields: List<DataField>) : BaseListAdapter<DataField>(context, dataFields) {
+class DataFieldsAdapter(context: Context, dataFields: List<DataField>) :
+    BaseListAdapter<DataField>(context, dataFields) {
 
     // TODO: 5/22/2017 how to get all values?
     val fieldValues = SparseArrayCompat<EditText>()
@@ -29,7 +30,7 @@ class DataFieldsAdapter(context: Context, dataFields: List<DataField>) : BaseLis
     public override fun getView(position: Int, parent: ViewGroup): View {
         val dataElement = getItem(position)
         val inflater = mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val convertView = inflater.inflate(R.layout.item_data_field, parent, false)
         val mFieldValue = convertView.findViewById<View>(R.id.dataFieldValue) as TextInputEditText
         mDefaultBackground = mFieldValue.background
@@ -58,9 +59,10 @@ class DataFieldsAdapter(context: Context, dataFields: List<DataField>) : BaseLis
         for (i in errorList)
             for (j in 0 until fieldValues.size())
                 if (fieldValues.get(fieldValues.keyAt(j)).tag as Int == i) {
-                    fieldValues.get(fieldValues.keyAt(j)).error = mContext.getString(R.string.data_field_incorrect_format)
+                    fieldValues.get(fieldValues.keyAt(j)).error =
+                            mContext.getString(R.string.data_field_incorrect_format)
                     fieldValues.get(fieldValues.keyAt(j))
-                            .setBackgroundColor(ContextCompat.getColor(mContext, R.color.errorTextColor))
+                        .setBackgroundColor(ContextCompat.getColor(mContext, R.color.errorTextColor))
                 }
     }
 

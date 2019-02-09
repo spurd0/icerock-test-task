@@ -19,9 +19,9 @@ object UtilsHelper {
     fun convertDpToPx(context: Context, dpValue: Float): Int {
         val r = context.resources
         return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                dpValue,
-                r.displayMetrics
+            TypedValue.COMPLEX_UNIT_DIP,
+            dpValue,
+            r.displayMetrics
         ).toInt()
     }
 

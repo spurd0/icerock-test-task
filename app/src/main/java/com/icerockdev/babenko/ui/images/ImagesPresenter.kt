@@ -21,16 +21,16 @@ class ImagesPresenter(private val mManager: ImagesInteractor) : BasePresenter<Im
     private fun requestPictures() {
         viewState.showProgressDialog()
         mManager.requestPicturesList()
-                .compose<List<ImageItem>>(RxUtils.applyIoMainThreadSchedulersToSingle<List<ImageItem>>())
-                .doFinally { viewState.dismissProgressDialog() }
-                .subscribe({ imageItems ->
-                    Timber.tag(TAG).d("Images list length is:%s", imageItems.size)
-                    if (imageItems.size == 0) {
-                        viewState.showListIsEmptyError()
-                    } else {
-                        viewState.showImagesList(imageItems)
-                    }
-                }) { throwable -> viewState.showErrorDialog() }
+            .compose<List<ImageItem>>(RxUtils.applyIoMainThreadSchedulersToSingle<List<ImageItem>>())
+            .doFinally { viewState.dismissProgressDialog() }
+            .subscribe({ imageItems ->
+                Timber.tag(TAG).d("Images list length is:%s", imageItems.size)
+                if (imageItems.size == 0) {
+                    viewState.showListIsEmptyError()
+                } else {
+                    viewState.showImagesList(imageItems)
+                }
+            }) { throwable -> viewState.showErrorDialog() }
     }
 
     companion object {

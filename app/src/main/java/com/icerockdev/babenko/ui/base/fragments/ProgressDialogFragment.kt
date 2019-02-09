@@ -24,8 +24,12 @@ class ProgressDialogFragment : DialogFragment() {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
         dialog.setContentView(R.layout.progress_dialog)
         val progressBar = dialog.findViewById<View>(R.id.progress_bar) as ProgressBar
-        progressBar.indeterminateDrawable.setColorFilter(ContextCompat.getColor(context!!,
-                R.color.progressDialogColor), android.graphics.PorterDuff.Mode.MULTIPLY)
+        progressBar.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(
+                context!!,
+                R.color.progressDialogColor
+            ), android.graphics.PorterDuff.Mode.MULTIPLY
+        )
         isCancelable = false
         return dialog
     }

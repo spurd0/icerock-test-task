@@ -32,9 +32,9 @@ class IceRockApplication : Application() {
 
     private fun initComponent(): AppComponent {
         return DaggerAppComponent.builder()
-                .contextModule(ContextModule(applicationContext))
-                .picassoModule(PicassoModule(applicationContext))
-                .build()
+            .contextModule(ContextModule(applicationContext))
+            .picassoModule(PicassoModule(applicationContext))
+            .build()
     }
 
     companion object {

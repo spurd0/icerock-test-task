@@ -12,9 +12,7 @@ import io.reactivex.Single
  */
 
 interface DataFieldsInteractor {
-
     fun checkFields(fieldValues: SparseArrayCompat<EditText>): Single<List<Int>>
 
     fun requestDataFields(): Single<List<DataField>>
-
 }

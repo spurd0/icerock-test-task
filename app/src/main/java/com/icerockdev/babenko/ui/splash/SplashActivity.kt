@@ -47,7 +47,8 @@ class SplashActivity : BaseActivity(), SplashView {
         super.onResume()
         if (animation == null) {
             animation = AnimationUtils.loadAnimation(
-                    applicationContext, R.anim.center_to_top_move_animation)
+                applicationContext, R.anim.center_to_top_move_animation
+            )
             animation!!.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {
 

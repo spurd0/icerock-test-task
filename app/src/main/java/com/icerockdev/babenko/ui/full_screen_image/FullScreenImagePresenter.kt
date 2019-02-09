@@ -10,7 +10,8 @@ import com.squareup.picasso.Callback
  * Created by Roman Babenko on 14/05/17.
  */
 @InjectViewState
-class FullScreenImagePresenter(private val mImageUrl: String?, private val mManager: FullScreenImageInteractor) : BasePresenter<FullScreenImageView>() {
+class FullScreenImagePresenter(private val mImageUrl: String?, private val mManager: FullScreenImageInteractor) :
+    BasePresenter<FullScreenImageView>() {
 
     fun requestImage(targetIv: ImageView) {
         if (mImageUrl == null) {

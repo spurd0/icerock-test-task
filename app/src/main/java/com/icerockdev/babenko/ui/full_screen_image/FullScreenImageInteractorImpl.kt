@@ -19,8 +19,10 @@ class FullScreenImageInteractorImpl : FullScreenImageInteractor {
         IceRockApplication.appComponent.inject(this)
     }
 
-    override fun requestImage(targetIv: ImageView, imageUrl: String,
-                              imageCallback: com.squareup.picasso.Callback) {
+    override fun requestImage(
+        targetIv: ImageView, imageUrl: String,
+        imageCallback: com.squareup.picasso.Callback
+    ) {
         mPicasso.manager.load(imageUrl).into(targetIv, imageCallback)
     }
 

@@ -12,9 +12,13 @@ import javax.inject.Singleton
  * Created by Roman Babenko on 04/06/17.
  */
 @Singleton
-@Component(modules = arrayOf(RetrofitModule::class, ContextModule::class, PicassoModule::class,
+@Component(
+    modules = arrayOf(
+        RetrofitModule::class, ContextModule::class, PicassoModule::class,
         ImagesDataSourceModule::class, SharedPreferencesModule::class,
-        FieldsDataSourceModule::class))
+        FieldsDataSourceModule::class
+    )
+)
 interface AppComponent {
     fun inject(fullScreenImageManagerImpl: FullScreenImageInteractorImpl)
 

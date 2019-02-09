@@ -44,8 +44,10 @@ class FullScreenImageActivity : BaseProgressActivity(), FullScreenImageView, Vie
 
     @ProvidePresenter
     internal fun provideFullScreenImagePresenter(): FullScreenImagePresenter {
-        return FullScreenImagePresenter(intent.getStringExtra(IMAGE_URL_KEY),
-                FullScreenImageInteractorImpl())
+        return FullScreenImagePresenter(
+            intent.getStringExtra(IMAGE_URL_KEY),
+            FullScreenImageInteractorImpl()
+        )
     }
 
     private fun initViews() {

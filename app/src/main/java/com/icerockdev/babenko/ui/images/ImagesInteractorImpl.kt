@@ -12,8 +12,8 @@ class ImagesInteractorImpl(private val mImageRepository: ImageRepository) : Imag
 
     override fun requestPicturesList(): Single<List<ImageItem>> {
         return mImageRepository
-                .requestImages()
-                .map { array -> array.toMutableList() }
+            .requestImages()
+            .map { array -> array.toMutableList() }
     }
 
     companion object {

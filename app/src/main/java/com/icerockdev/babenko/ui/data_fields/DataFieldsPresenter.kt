@@ -22,21 +22,21 @@ class DataFieldsPresenter(private val mDataFieldsInteractor: DataFieldsInteracto
 
     private fun requestFieldsData() {
         mDataFieldsInteractor.requestDataFields()
-                .compose<List<DataField>>(RxUtils.applyIoMainThreadSchedulersToSingle<List<DataField>>())
-                .subscribe { dataFields -> viewState.showDataFields(dataFields) }
+            .compose<List<DataField>>(RxUtils.applyIoMainThreadSchedulersToSingle<List<DataField>>())
+            .subscribe { dataFields -> viewState.showDataFields(dataFields) }
     }
 
     fun submitButtonPressed(fieldValues: SparseArrayCompat<EditText>) {
         // TODO: 11/12/2017 show progress dialog
         mDataFieldsInteractor.checkFields(fieldValues)
-                .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
-                .subscribe { integers ->
-                    if (integers.isEmpty()) {
-                        fieldsAreCorrect()
-                    } else {
-                        viewState.displayFieldsError(integers)
-                    }
+            .compose(RxUtils.applyIoMainThreadSchedulersToSingle())
+            .subscribe { integers ->
+                if (integers.isEmpty()) {
+                    fieldsAreCorrect()
+                } else {
+                    viewState.displayFieldsError(integers)
                 }
+            }
     }
 
     private fun fieldsAreCorrect() {
