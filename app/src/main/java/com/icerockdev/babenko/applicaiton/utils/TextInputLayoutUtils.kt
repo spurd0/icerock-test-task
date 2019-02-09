@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.utils
+package com.icerockdev.babenko.applicaiton.utils
 
 import android.graphics.Typeface
 import android.support.design.widget.TextInputLayout
@@ -11,7 +11,7 @@ import timber.log.Timber
 import java.lang.reflect.Field
 
 object TextInputLayoutUtils {
-    private val TAG = TextInputLayoutUtils::class.java.getSimpleName()
+    private val TAG = "TextInputLayoutUtils"
 
     private val FIELD_INDICATOR_AREA: Field?
 
@@ -145,9 +145,9 @@ object TextInputLayoutUtils {
         if (FIELD_INDICATOR_AREA == null) return
 
         try {
-            val `object` = FIELD_INDICATOR_AREA.get(textInputLayout) as? ViewGroup ?: return
+            val viewArea = FIELD_INDICATOR_AREA.get(textInputLayout) as? ViewGroup ?: return
 
-            if (`object`.childCount == 0) {
+            if (viewArea.childCount == 0) {
                 FIELD_INDICATOR_AREA.set(textInputLayout, null)
             }
         } catch (e: IllegalAccessException) {

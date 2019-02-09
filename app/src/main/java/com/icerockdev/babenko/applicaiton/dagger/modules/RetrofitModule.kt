@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.FieldNamingStrategy

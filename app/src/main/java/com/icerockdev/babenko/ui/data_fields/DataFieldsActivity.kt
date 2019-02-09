@@ -13,11 +13,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.icerockdev.babenko.BuildConfig
 import com.icerockdev.babenko.R
-import com.icerockdev.babenko.core.ApplicationConstants.EMAIL
-import com.icerockdev.babenko.core.ApplicationConstants.NUMBER
-import com.icerockdev.babenko.core.ApplicationConstants.PHONE
-import com.icerockdev.babenko.core.ApplicationConstants.TEXT
-import com.icerockdev.babenko.core.ApplicationConstants.URL
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.EMAIL
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.NUMBER
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.PHONE
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.TEXT
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.URL
 import com.icerockdev.babenko.model.entities.DataField
 import com.icerockdev.babenko.ui.base.activities.BaseActivity
 import com.icerockdev.babenko.ui.data_fields.adapters.DataFieldsAdapter

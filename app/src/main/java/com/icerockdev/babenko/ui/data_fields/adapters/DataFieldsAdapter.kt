@@ -13,8 +13,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 
 import com.icerockdev.babenko.R
+import com.icerockdev.babenko.applicaiton.utils.getInputHint
+import com.icerockdev.babenko.applicaiton.utils.getInputType
 import com.icerockdev.babenko.model.entities.DataField
-import com.icerockdev.babenko.utils.UtilsHelper
 
 /**
  * Created by Roman Babenko on 01/05/17.
@@ -43,8 +44,8 @@ class DataFieldsAdapter(context: Context, dataFields: List<DataField>) :
         val value = dataElement.value
 
         mFieldValue.setText(value)
-        mFieldValue.hint = UtilsHelper.getInputHint(dataElement.type!!, mContext)
-        mFieldValue.inputType = UtilsHelper.getInputType(dataElement.type!!)
+        mFieldValue.hint = getInputHint(dataElement.type!!, mContext)
+        mFieldValue.inputType = getInputType(dataElement.type!!)
 
         fieldValues.put(mFieldValue.tag as Int, mFieldValue)
 

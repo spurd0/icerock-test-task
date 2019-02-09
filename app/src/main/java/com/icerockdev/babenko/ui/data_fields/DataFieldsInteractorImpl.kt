@@ -3,11 +3,11 @@ package com.icerockdev.babenko.ui.data_fields
 import android.support.v4.util.SparseArrayCompat
 import android.util.Patterns
 import android.widget.EditText
-import com.icerockdev.babenko.core.ApplicationConstants.EMAIL
-import com.icerockdev.babenko.core.ApplicationConstants.NUMBER
-import com.icerockdev.babenko.core.ApplicationConstants.PHONE
-import com.icerockdev.babenko.core.ApplicationConstants.TEXT
-import com.icerockdev.babenko.core.ApplicationConstants.URL
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.EMAIL
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.NUMBER
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.PHONE
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.TEXT
+import com.icerockdev.babenko.applicaiton.ApplicationConstants.URL
 import com.icerockdev.babenko.model.entities.DataField
 import io.reactivex.Single
 import java.util.*

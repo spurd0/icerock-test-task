@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.repo.impl
 
-import com.icerockdev.babenko.data_source.RemoteFieldsDataSource
+import com.icerockdev.babenko.model.datasource.rest.RemoteFieldsDataSource
 import com.icerockdev.babenko.model.entities.DataField
 import com.icerockdev.babenko.repo.DataFieldsRepository
 

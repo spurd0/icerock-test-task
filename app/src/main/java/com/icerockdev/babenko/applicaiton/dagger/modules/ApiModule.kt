@@ -1,6 +1,6 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
-import com.icerockdev.babenko.core.NetworkApi
+import com.icerockdev.babenko.model.datasource.rest.NetworkApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

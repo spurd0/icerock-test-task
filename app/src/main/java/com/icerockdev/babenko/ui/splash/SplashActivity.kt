@@ -10,7 +10,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.icerockdev.babenko.IceRockApplication
+import com.icerockdev.babenko.applicaiton.IceRockApplication
 import com.icerockdev.babenko.R
 import com.icerockdev.babenko.managers.SharedPreferencesManager
 import com.icerockdev.babenko.ui.base.activities.BaseActivity

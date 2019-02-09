@@ -1,10 +1,10 @@
 package com.icerockdev.babenko.ui.home
 
 import com.arellomobile.mvp.InjectViewState
+import com.icerockdev.babenko.applicaiton.utils.applyIoMainThreadSchedulersToSingle
 import com.icerockdev.babenko.model.entities.DataField
 import com.icerockdev.babenko.model.errors.IncorrectEmailException
 import com.icerockdev.babenko.ui.base.BasePresenter
-import com.icerockdev.babenko.utils.RxUtils
 
 import java.util.concurrent.TimeoutException
 
@@ -17,7 +17,7 @@ class HomePresenter(private val mHomeInteractor: HomeInteractor) : BasePresenter
     fun requestDataClicked(url: String) {
         viewState.showProgressDialog()
         mHomeInteractor.requestDataFields(url)
-            .compose<Array<DataField>>(RxUtils.applyIoMainThreadSchedulersToSingle<Array<DataField>>())
+            .compose<Array<DataField>>(applyIoMainThreadSchedulersToSingle<Array<DataField>>())
             .doFinally { viewState.dismissProgressDialog() }
             .subscribe({ dataFields -> viewState.gotDataFields(dataFields) }
             ) { throwable ->

@@ -1,10 +1,11 @@
-package com.icerockdev.babenko
+package com.icerockdev.babenko.applicaiton
 
 import android.app.Application
-import com.icerockdev.babenko.core.dagger.AppComponent
-import com.icerockdev.babenko.core.dagger.DaggerAppComponent
-import com.icerockdev.babenko.core.dagger.modules.ContextModule
-import com.icerockdev.babenko.core.dagger.modules.PicassoModule
+import com.icerockdev.babenko.BuildConfig
+import com.icerockdev.babenko.applicaiton.dagger.AppComponent
+import com.icerockdev.babenko.applicaiton.dagger.DaggerAppComponent
+import com.icerockdev.babenko.applicaiton.dagger.modules.ContextModule
+import com.icerockdev.babenko.applicaiton.dagger.modules.PicassoModule
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 

@@ -1,7 +1,7 @@
-package com.icerockdev.babenko.data_source.impl
+package com.icerockdev.babenko.model.datasource.rest.impl
 
-import com.icerockdev.babenko.core.NetworkApi
-import com.icerockdev.babenko.data_source.RemoteImagesDataSource
+import com.icerockdev.babenko.model.datasource.rest.NetworkApi
+import com.icerockdev.babenko.model.datasource.rest.RemoteImagesDataSource
 import com.icerockdev.babenko.model.entities.ImageItem
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit

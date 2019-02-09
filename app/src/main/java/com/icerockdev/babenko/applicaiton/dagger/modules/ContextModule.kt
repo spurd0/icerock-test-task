@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
 /**
  * Created by Roman Babenko on 04/06/17.

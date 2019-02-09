@@ -1,9 +1,9 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
 import android.content.Context
 import com.icerockdev.babenko.R
-import com.icerockdev.babenko.core.NetworkApi
-import com.icerockdev.babenko.data_source.impl.RemoteImagesDataSourceImpl
+import com.icerockdev.babenko.model.datasource.rest.NetworkApi
+import com.icerockdev.babenko.model.datasource.rest.impl.RemoteImagesDataSourceImpl
 import com.icerockdev.babenko.repo.ImageRepository
 import com.icerockdev.babenko.repo.impl.ImageRepositoryImpl
 import dagger.Module

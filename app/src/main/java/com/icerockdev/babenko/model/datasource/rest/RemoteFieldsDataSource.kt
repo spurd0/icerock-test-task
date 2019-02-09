@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.data_source
+package com.icerockdev.babenko.model.datasource.rest
 
 import com.icerockdev.babenko.model.entities.DataField
 

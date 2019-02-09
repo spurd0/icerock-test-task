@@ -1,6 +1,6 @@
-package com.icerockdev.babenko.core.dagger
+package com.icerockdev.babenko.applicaiton.dagger
 
-import com.icerockdev.babenko.core.dagger.modules.*
+import com.icerockdev.babenko.applicaiton.dagger.modules.*
 import com.icerockdev.babenko.ui.full_screen_image.FullScreenImageInteractorImpl
 import com.icerockdev.babenko.ui.home.HomeActivity
 import com.icerockdev.babenko.ui.images.ImagesActivity

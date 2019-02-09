@@ -1,7 +1,7 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
-import com.icerockdev.babenko.core.NetworkApi
-import com.icerockdev.babenko.data_source.impl.RemoteFieldsDataSourceImpl
+import com.icerockdev.babenko.model.datasource.rest.NetworkApi
+import com.icerockdev.babenko.model.datasource.rest.impl.RemoteFieldsDataSourceImpl
 import com.icerockdev.babenko.repo.DataFieldsRepository
 import com.icerockdev.babenko.repo.impl.DataFieldsRepositoryImpl
 import dagger.Module
@@ -13,6 +13,10 @@ class FieldsDataSourceModule {
     @Provides
     @Singleton
     internal fun provideDataFieldsRepository(networkApi: NetworkApi): DataFieldsRepository {
-        return DataFieldsRepositoryImpl(RemoteFieldsDataSourceImpl(networkApi))
+        return DataFieldsRepositoryImpl(
+            RemoteFieldsDataSourceImpl(
+                networkApi
+            )
+        )
     }
 }

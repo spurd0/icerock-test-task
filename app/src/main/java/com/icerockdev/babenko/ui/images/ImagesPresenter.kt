@@ -1,10 +1,9 @@
 package com.icerockdev.babenko.ui.images
 
 import com.arellomobile.mvp.InjectViewState
+import com.icerockdev.babenko.applicaiton.utils.applyIoMainThreadSchedulersToSingle
 import com.icerockdev.babenko.model.entities.ImageItem
 import com.icerockdev.babenko.ui.base.BasePresenter
-import com.icerockdev.babenko.utils.RxUtils
-
 import timber.log.Timber
 
 /**
@@ -21,7 +20,7 @@ class ImagesPresenter(private val mManager: ImagesInteractor) : BasePresenter<Im
     private fun requestPictures() {
         viewState.showProgressDialog()
         mManager.requestPicturesList()
-            .compose<List<ImageItem>>(RxUtils.applyIoMainThreadSchedulersToSingle<List<ImageItem>>())
+            .compose<List<ImageItem>>(applyIoMainThreadSchedulersToSingle<List<ImageItem>>())
             .doFinally { viewState.dismissProgressDialog() }
             .subscribe({ imageItems ->
                 Timber.tag(TAG).d("Images list length is:%s", imageItems.size)

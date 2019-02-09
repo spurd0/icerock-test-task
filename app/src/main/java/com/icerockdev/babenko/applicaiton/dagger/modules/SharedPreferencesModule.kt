@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core.dagger.modules
+package com.icerockdev.babenko.applicaiton.dagger.modules
 
 import android.content.Context
 import com.icerockdev.babenko.managers.SharedPreferencesManager

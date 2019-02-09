@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.utils
+package com.icerockdev.babenko.applicaiton.utils
 
 import android.support.design.widget.TextInputLayout
 import android.text.Editable

@@ -11,14 +11,14 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.icerockdev.babenko.IceRockApplication
 import com.icerockdev.babenko.R
+import com.icerockdev.babenko.applicaiton.IceRockApplication
+import com.icerockdev.babenko.applicaiton.utils.ErrorCleaningWatcher
+import com.icerockdev.babenko.applicaiton.utils.isNetworkAvailable
 import com.icerockdev.babenko.model.entities.DataField
 import com.icerockdev.babenko.repo.DataFieldsRepository
 import com.icerockdev.babenko.ui.base.activities.BaseProgressActivity
 import com.icerockdev.babenko.ui.base.fragments.ServerErrorDialogFragment
-import com.icerockdev.babenko.utils.ErrorCleaningWatcher
-import com.icerockdev.babenko.utils.UtilsHelper
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -73,7 +73,7 @@ class HomeActivity : BaseProgressActivity(), HomeView {
     }
 
     fun requestDataFieldsButtonClicked(v: View) {
-        if (UtilsHelper.isNetworkAvailable(this)) {
+        if (isNetworkAvailable(this)) {
             mPresenter.requestDataClicked(fieldsRequestUrlEditText.text.toString())
         } else {
             showErrorDialog(getString(R.string.error_no_network))

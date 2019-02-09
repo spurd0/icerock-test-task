@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core
+package com.icerockdev.babenko.applicaiton
 
 /**
  * Created by Roman Babenko on 30/04/17.

@@ -1,6 +1,6 @@
 package com.icerockdev.babenko.repo.impl
 
-import com.icerockdev.babenko.data_source.RemoteImagesDataSource
+import com.icerockdev.babenko.model.datasource.rest.RemoteImagesDataSource
 import com.icerockdev.babenko.model.entities.ImageItem
 import com.icerockdev.babenko.repo.ImageRepository
 

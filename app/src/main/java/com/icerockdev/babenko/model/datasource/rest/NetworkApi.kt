@@ -1,4 +1,4 @@
-package com.icerockdev.babenko.core
+package com.icerockdev.babenko.model.datasource.rest
 
 import com.icerockdev.babenko.model.entities.DataField
 import com.icerockdev.babenko.model.entities.ImageItem

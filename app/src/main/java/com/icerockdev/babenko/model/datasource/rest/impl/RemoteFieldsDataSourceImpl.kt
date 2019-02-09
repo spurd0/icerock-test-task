@@ -1,12 +1,13 @@
-package com.icerockdev.babenko.data_source.impl
+package com.icerockdev.babenko.model.datasource.rest.impl
 
-import com.icerockdev.babenko.core.NetworkApi
-import com.icerockdev.babenko.data_source.RemoteFieldsDataSource
+import com.icerockdev.babenko.model.datasource.rest.NetworkApi
+import com.icerockdev.babenko.model.datasource.rest.RemoteFieldsDataSource
 import com.icerockdev.babenko.model.entities.DataField
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
-class RemoteFieldsDataSourceImpl(private val networkApi: NetworkApi) : RemoteFieldsDataSource {
+class RemoteFieldsDataSourceImpl(private val networkApi: NetworkApi) :
+    RemoteFieldsDataSource {
 
     override fun requestDataFields(url: String): Single<Array<DataField>> {
         return networkApi
