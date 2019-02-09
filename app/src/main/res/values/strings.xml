@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">IceRockDev Test Task</string>
 
+    <string name="error_title">Error</string>
+    <string name="error_other">Server error occurred, please try again later</string>
+    <string name="error_timeout">Request timeout, please try again later</string>
+    <string name="error_no_network">Please check internet connection</string>
+
     <!--Home screen actions-->
     <string name="request_fields_button_text">Request data</string>
     <string name="request_fields_edittext_url_hint">Enter URL</string>
     <string name="url_error">Please check URL</string>
-    <string name="request_data_fields_error">Network error</string>
-    <string name="request_data_fields_error_other">Server error occurred, try again later</string>
+
 
     <!--Fields list actions-->
     <string name="submit_fields_button_text">Submit</string>
@@ -22,5 +26,5 @@
     <!--Images list screen-->
     <string name="images_list_is_empty">Images list is empty</string>
     <string name="request_images_list_error_null">Server returned null</string>
-    <string name="request_images_list_error_other">@string/request_data_fields_error_other</string>
+    <string name="request_images_list_error_other">@string/error_other</string>
 </resources>

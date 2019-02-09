@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">IceRockDev Тестовое Задание</string>
+
+    <string name="error_title">Ошибка</string>
+    <string name="error_other">Ошибка соединения, попробуйте позже</string>
+    <string name="error_timeout">Превышено время ожидания, попробуйте позже</string>
+    <string name="error_no_network">Проверьте соединение</string>
+
+    <!--Home screen actions-->
+    <string name="request_fields_button_text">Выполнить запрос</string>
+    <string name="request_fields_edittext_url_hint">Введите URL</string>
+    <string name="url_error">Проверьте URL</string>
+
+
+    <!--Fields list actions-->
+    <string name="submit_fields_button_text">Подтвердить</string>
+    <string name="data_field_incorrect_format">Проверьте значения</string>
+
+    <!--Data fields edit text hints-->
+    <string name="data_field_text_hint">Введите текст</string>
+    <string name="data_field_email_hint">Введите email</string>
+    <string name="data_field_phone_hint">Введите телефон</string>
+    <string name="data_field_number_hint">Введите номер</string>
+    <string name="data_field_url_hint">Введите URL</string>
+
+    <!--Images list screen-->
+    <string name="images_list_is_empty">Список изображения пуст</string>
+    <string name="request_images_list_error_null">@string/images_list_is_empty</string>
+    <string name="request_images_list_error_other">@string/error_other</string>
+</resources>
