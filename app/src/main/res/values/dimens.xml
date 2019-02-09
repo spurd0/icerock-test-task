@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="defaultMargin">8dp</dimen>
+
     <dimen name="request_fields_button_margin_top">10dp</dimen>
     <dimen name="data_field_element_value_margin_horizontal">5dp</dimen>
     <dimen name="data_field_element_value_margin_vertical">10dp</dimen>

@@ -25,8 +25,6 @@ class SplashActivity : BaseActivity(), SplashView {
 
     @BindView(R.id.splash_image_view)
     lateinit var splashImageView: ImageView
-    @BindView(R.id.container)
-    lateinit var container: FrameLayout
 
     private var animation: Animation? = null
 

@@ -8,5 +8,5 @@ import com.icerockdev.babenko.ui.navigation.Navigator
  */
 
 abstract class BaseActivity : MvpAppCompatActivity() {
-    protected var navigator: Navigator = Navigator()
+    protected val navigator: Navigator = Navigator()
 }
