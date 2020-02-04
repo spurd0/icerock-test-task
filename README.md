@@ -35,7 +35,7 @@ Project features :
 * Simple tests
 	
 --
-![screenshots](https://raw.githubusercontent.com/spurd0/icerock-test-task/master/icerock.jpg "Screenshots")
+![screenshots](https://github.com/spurd0/icerock-test-task/blob/dev/icerock.jpg "Screenshots")
 --
 
 ### ToDo
